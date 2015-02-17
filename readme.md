@@ -3,19 +3,12 @@
 ###Features
 
 Dependency Injection
-
 Dependency Injection CACHE
-
 Dependency Injection Singleton
-
 EventManager
-
 Loader
-
 Collection
-
 Output
-
 Session
 
 Memcache
