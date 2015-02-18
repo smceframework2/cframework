@@ -47,11 +47,3 @@ class Di  extends PHPUnit_Framework_TestCase
     }
 }
 
-class Foo{
-
-	public function get()
-	{
-
-		return true;
-	}
-}

@@ -1,6 +1,7 @@
 <testsuites>
   <testsuite name="test">
 
+  	<file>load/index.php</file>
   	<file>di/index.php</file>
   	<file>eventmanager/index.php</file>
 
