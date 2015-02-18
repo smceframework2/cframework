@@ -50,7 +50,7 @@ class Eventmanager extends PHPUnit_Framework_TestCase
 
 
 		//remove
-		$this->assertInternalType( Smce\Core\EventManager::remove("sum") );
+		$this->assertTrue( Smce\Core\EventManager::remove("sum") );
 
 
 		//push
