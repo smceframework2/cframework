@@ -9,7 +9,7 @@ class Di  extends PHPUnit_Framework_TestCase
 
 		$di->bind("foo",function(){
 
-		    $foo=new Foo;
+		    return new Foo;
 
 		});
 
