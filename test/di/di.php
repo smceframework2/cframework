@@ -42,10 +42,6 @@ class Di  extends PHPUnit_Framework_TestCase
 
 			$this->assertTrue(true);
 
-		}else{
-
-			$this->assertTrue(false);
-
 		}
 
     }
