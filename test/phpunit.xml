@@ -1,0 +1,6 @@
+<testsuites>
+  <testsuite name="test">
+  	<file>di/di.php</file>
+  </testsuite>
+  
+</testsuites>

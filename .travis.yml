@@ -13,7 +13,9 @@ before_script:
 - ./install 
 - echo "extension = smce.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 - sudo service apache2 restart
+- cd test
 
+script:  phpunit --configuration phpunit.xml --process-isolation
 
 
 notifications:
