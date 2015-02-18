@@ -56,7 +56,7 @@ class Eventmanager extends PHPUnit_Framework_TestCase
 		//push
 		$event->bind("foo",function(){
 
-			return new Foo;
+			return new EFoo;
 
 		});
 
@@ -79,7 +79,7 @@ class Eventmanager extends PHPUnit_Framework_TestCase
 }
 
 
-class Foo{
+class EFoo{
 
 	public function get()
 	{

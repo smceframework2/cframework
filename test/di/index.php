@@ -12,7 +12,7 @@ class Di  extends PHPUnit_Framework_TestCase
     	//bind
 		$di->bind("foo",function(){
 
-		    return new Foo;
+		    return new DFoo;
 
 		});
 
@@ -49,7 +49,7 @@ class Di  extends PHPUnit_Framework_TestCase
 
 
 
-class Foo{
+class DFoo{
 
 	public function get()
 	{
