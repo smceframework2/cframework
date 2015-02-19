@@ -4,6 +4,7 @@
   	<file>di/index.php</file>
   	<file>eventmanager/index.php</file>
   	<file>loader/index.php</file>
+  	<file>loader2/index.php</file>
 
   </testsuite>
   
