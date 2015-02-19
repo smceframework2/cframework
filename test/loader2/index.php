@@ -47,7 +47,7 @@ class Loader2 extends PHPUnit_Framework_TestCase
 
 			return new Loader3;
 
-		})->resolveWhen("Loader1Interface");
+		})->resolveWhen("Loader3Interface");
 
 
 		$di->singleton("loader4",function(){
