@@ -1,7 +1,7 @@
 <?php
 
 
-class Loader2
+class Lo
 {
 
 	public function get()

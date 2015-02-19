@@ -50,10 +50,10 @@ class Loader extends PHPUnit_Framework_TestCase
 		$this->assertTrue( $loader1->get() );
 
 		//loader2
-		$loader2=new Loader2;
+		$lo=new Lo;
 
 		//get
-		$this->assertTrue( $loader2->get() );
+		$this->assertTrue( $lo->get() );
 
 
 		try{
