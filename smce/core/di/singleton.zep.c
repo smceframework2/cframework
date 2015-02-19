@@ -232,7 +232,7 @@ PHP_METHOD(Smce_Core_Di_Singleton, controllerConstructorParamerters) {
 					ZEPHIR_INIT_NVAR(_0);
 					object_init_ex(_0, zend_exception_get_default(TSRMLS_C));
 					ZEPHIR_INIT_LNVAR(_14);
-					ZEPHIR_CONCAT_VS(_14, value, " class not found");
+					ZEPHIR_CONCAT_VS(_14, value, " class not found1");
 					ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, _14);
 					zephir_check_call_status();
 					zephir_throw_exception_debug(_0, "smce/core/di/singleton.zep", 131 TSRMLS_CC);
@@ -301,7 +301,7 @@ PHP_METHOD(Smce_Core_Di_Singleton, controllerMethodParamerters) {
 					ZEPHIR_INIT_NVAR(_0);
 					object_init_ex(_0, zend_exception_get_default(TSRMLS_C));
 					ZEPHIR_INIT_LNVAR(_14);
-					ZEPHIR_CONCAT_VS(_14, value, " class not found");
+					ZEPHIR_CONCAT_VS(_14, value, " class not found2");
 					ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, _14);
 					zephir_check_call_status();
 					zephir_throw_exception_debug(_0, "smce/core/di/singleton.zep", 173 TSRMLS_CC);
