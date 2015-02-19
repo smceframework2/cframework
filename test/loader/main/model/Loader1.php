@@ -4,7 +4,7 @@
 class Loader1
 {
 
-	public funcioton get()
+	public function get()
 	{
 		
 		return true;
