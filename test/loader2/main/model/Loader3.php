@@ -1,14 +1,13 @@
 <?php
 
 
-class Loader1
+class Loader3
 {
 
 	public function get()
 	{
-		
+
 		return true;
-
+		
 	}
-
 }

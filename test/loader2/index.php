@@ -1,7 +1,7 @@
 <?php
 
 
-class Loader extends PHPUnit_Framework_TestCase
+class Loader2 extends PHPUnit_Framework_TestCase
 {
 	public function test1()
     {	
@@ -42,19 +42,19 @@ class Loader extends PHPUnit_Framework_TestCase
 
 
 		
-		//loader1
-		$loader1=new Loader1;
 
-		//get
-		$this->assertTrue( $loader1->get() );
+		$di->singleton("loader3",function(){
 
-		//loader1
-		$loader2=new Loader2;
+			return new Loader3;
 
-		//get
-		$this->assertTrue( $loader2->get() );
+		})->resolveWhen("Loader1Interface");
 
 
+		$di->singleton("loader4",function(){
+
+			return new Loader4;
+
+		})->resolveWhen("Loader4Interface");
 
 		try{
 

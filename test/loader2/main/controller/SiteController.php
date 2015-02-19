@@ -4,39 +4,46 @@
 class SiteController
 {
 
-	public function  __construct(Loader1Interface $loader1, Loader2Interface $loader2)
+	public function  __construct(Loader3Interface $loader3, Loader4Interface $loader4)
 	{
 
-		if($loader1->get()!=true){
+		if($loader3->get()!=true){
 
-			throw Exception("__construct: was not installed loader1")
+			throw Exception("__construct: was not installed loader3")
 
 		}
 
-		if($loader2->get()!=true){
+		if($loader4->get()!=true){
 
-			throw Exception("__construct: was not installed loader2")
+			throw Exception("__construct: was not installed loader4")
 
 		}
 
 	}
 
 
-	public function actionIndex(Loader1Interface $loader1, Loader2Interface $loader2)
+	public function actionIndex(Loader3Interface $loader3, Loader4Interface $loader4)
 	{
 
-		if($loader1->get()!=true){
+		if($loader3->get()!=true){
 
-			throw Exception("actionIndex: was not installed loader1")
+			throw Exception("actionIndex: was not installed loader3")
+
+		}
+
+		if($loader4->get()!=true){
+
+			throw Exception("actionIndex: was not installed loader4")
 
 		}
 
-		if($loader2->get()!=true){
+		$loader3=Smce\Core\DI::resolve("loader3");
 
-			throw Exception("actionIndex: was not installed loader2")
+		if($loader3->get()!=true){
+
+			throw Exception("resolve: was not installed loader3")
 
 		}
-		
 	}
 
 
