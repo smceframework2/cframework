@@ -1,5 +1,4 @@
 <?php
-<?php
 
 
 class Loader extends PHPUnit_Framework_TestCase
