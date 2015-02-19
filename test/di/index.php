@@ -35,6 +35,8 @@ class Di  extends PHPUnit_Framework_TestCase
 		//getCount
 		$this->assertInternalType("int", Smce\Core\DI::getCount() );
 
+		//remove
+		$this->assertTrue(Smce\Core\DI::remove("foo"));
 
 		//reset
 		if(Smce\Core\DI::reset())
