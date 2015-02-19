@@ -3,7 +3,6 @@
 
 class Loader extends PHPUnit_Framework_TestCase
 {
-
 	public function test1()
     {	
     	//di
@@ -42,18 +41,18 @@ class Loader extends PHPUnit_Framework_TestCase
 		});
 
 
-		$di->singleton("loader1",function(){
+		
+		//loader1
+		$loader1=new Loader1;
 
-			return new Loader1;
+		//get
+		$this->assertTrue( $loader1->get() );
 
-		})->resolveWhen("Loader1Interface");
+		//loader1
+		$loader2=new Loader2;
 
-
-		$di->singleton("loader2",function(){
-
-			return new Loader2;
-
-		})->resolveWhen("Loader2Interface");
+		//get
+		$this->assertTrue( $loader2->get() );
 
 
 
