@@ -19,6 +19,7 @@
 #include "kernel/operators.h"
 #include "kernel/exception.h"
 #include "kernel/string.h"
+#include "ext/spl/spl_exceptions.h"
 #include "kernel/hash.h"
 #include "kernel/concat.h"
 
@@ -72,16 +73,14 @@ ZEPHIR_INIT_CLASS(Smce_Mvc_Router) {
 }
 
 /**
- * Test\Router constructor
- *
- * @param boolean defaultRoutes
+ * Smce\Mvc\Router constructor
  */
 PHP_METHOD(Smce_Mvc_Router, __construct) {
 
 	zephir_fcall_cache_entry *_3 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_1, *_4;
-	zval *defaultRoutes_param = NULL, *routes, *_0 = NULL, *_2 = NULL, *_5;
+	zval *routes, *_1, *_4;
+	zval *defaultRoutes_param = NULL, *_0 = NULL, *_2 = NULL, *_5;
 	zend_bool defaultRoutes;
 
 	ZEPHIR_MM_GROW();
@@ -92,11 +91,11 @@ PHP_METHOD(Smce_Mvc_Router, __construct) {
 	} else {
 		defaultRoutes = zephir_get_boolval(defaultRoutes_param);
 	}
-
-
 	ZEPHIR_INIT_VAR(routes);
 	array_init(routes);
-	if (defaultRoutes == 1) {
+
+
+	if (defaultRoutes) {
 		ZEPHIR_INIT_VAR(_0);
 		object_init_ex(_0, smce_mvc_router_route_ce);
 		ZEPHIR_INIT_VAR(_1);
@@ -107,7 +106,7 @@ PHP_METHOD(Smce_Mvc_Router, __construct) {
 		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_3, _2, _1);
 		zephir_check_temp_parameter(_2);
 		zephir_check_call_status();
-		zephir_array_append(&routes, _0, PH_SEPARATE, "smce/mvc/router.zep", 64);
+		zephir_array_append(&routes, _0, PH_SEPARATE, "smce/mvc/router.zep", 65);
 		ZEPHIR_INIT_NVAR(_2);
 		object_init_ex(_2, smce_mvc_router_route_ce);
 		ZEPHIR_INIT_VAR(_4);
@@ -120,11 +119,14 @@ PHP_METHOD(Smce_Mvc_Router, __construct) {
 		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", &_3, _5, _4);
 		zephir_check_temp_parameter(_5);
 		zephir_check_call_status();
-		zephir_array_append(&routes, _2, PH_SEPARATE, "smce/mvc/router.zep", 70);
+		zephir_array_append(&routes, _2, PH_SEPARATE, "smce/mvc/router.zep", 71);
 	}
 	ZEPHIR_INIT_NVAR(_0);
 	array_init(_0);
 	zephir_update_property_this(this_ptr, SL("_params"), _0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(_2);
+	array_init(_2);
+	zephir_update_property_this(this_ptr, SL("_defaultParams"), _2 TSRMLS_CC);
 	zephir_update_property_this(this_ptr, SL("_routes"), routes TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 
@@ -132,8 +134,6 @@ PHP_METHOD(Smce_Mvc_Router, __construct) {
 
 /**
  * Sets the dependency injector
- *
- * @param Test\DiInterface dependencyInjector
  */
 PHP_METHOD(Smce_Mvc_Router, setDI) {
 
@@ -153,8 +153,6 @@ PHP_METHOD(Smce_Mvc_Router, setDI) {
 
 /**
  * Returns the internal dependency injector
- *
- * @return Test\DiInterface
  */
 PHP_METHOD(Smce_Mvc_Router, getDI) {
 
@@ -164,9 +162,7 @@ PHP_METHOD(Smce_Mvc_Router, getDI) {
 }
 
 /**
- * Get rewrite info. This info is read from $_GET['_url']. This returns '/' if the rewrite information cannot be read
- *
- * @return string
+ * Get rewrite info. This info is read from $_GET['route']. This returns '/' if the rewrite information cannot be read
  */
 PHP_METHOD(Smce_Mvc_Router, getRewriteUri) {
 
@@ -178,8 +174,8 @@ PHP_METHOD(Smce_Mvc_Router, getRewriteUri) {
 	if (!(zephir_is_true(_0))) {
 		ZEPHIR_OBS_VAR(url);
 		zephir_get_global(&_GET, SS("_GET") TSRMLS_CC);
-		if (zephir_array_isset_string_fetch(&url, _GET, SS("_url"), 0 TSRMLS_CC)) {
-			if (!(zephir_is_true(url))) {
+		if (zephir_array_isset_string_fetch(&url, _GET, SS("route"), 0 TSRMLS_CC)) {
+			if (!(ZEPHIR_IS_EMPTY(url))) {
 				RETURN_CCTOR(url);
 			}
 		}
@@ -190,7 +186,7 @@ PHP_METHOD(Smce_Mvc_Router, getRewriteUri) {
 			ZEPHIR_INIT_VAR(urlParts);
 			zephir_fast_explode_str(urlParts, SL("?"), url, LONG_MAX TSRMLS_CC);
 			zephir_array_fetch_long(&realUri, urlParts, 0, PH_NOISY | PH_READONLY, "smce/mvc/router.zep", 117 TSRMLS_CC);
-			if (!(zephir_is_true(realUri))) {
+			if (!(ZEPHIR_IS_EMPTY(realUri))) {
 				RETURN_CTOR(realUri);
 			}
 		}
@@ -207,7 +203,6 @@ PHP_METHOD(Smce_Mvc_Router, getRewriteUri) {
  *</code>
  *
  * @param string uriSource
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setUriSource) {
 
@@ -224,96 +219,135 @@ PHP_METHOD(Smce_Mvc_Router, setUriSource) {
 
 /**
  * Set whether router must remove the extra slashes in the handled routes
- *
- * @param boolean remove
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, removeExtraSlashes) {
 
-	zval *remove;
+	zval *remove_param = NULL;
+	zend_bool remove;
 
-	zephir_fetch_params(0, 1, 0, &remove);
+	zephir_fetch_params(0, 1, 0, &remove_param);
+
+	remove = zephir_get_boolval(remove_param);
 
 
-
-	zephir_update_property_this(this_ptr, SL("_removeExtraSlashes"), remove TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("_removeExtraSlashes"), remove ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
 	RETURN_THISW();
 
 }
 
 /**
  * Sets the name of the default namespace
- *
- * @param string namespaceName
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setDefaultNamespace) {
 
-	zval *namespaceName;
+	zval *namespaceName_param = NULL;
+	zval *namespaceName = NULL;
 
-	zephir_fetch_params(0, 1, 0, &namespaceName);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &namespaceName_param);
 
+	if (unlikely(Z_TYPE_P(namespaceName_param) != IS_STRING && Z_TYPE_P(namespaceName_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'namespaceName' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(namespaceName_param) == IS_STRING)) {
+		zephir_get_strval(namespaceName, namespaceName_param);
+	} else {
+		ZEPHIR_INIT_VAR(namespaceName);
+		ZVAL_EMPTY_STRING(namespaceName);
+	}
 
 
 	zephir_update_property_this(this_ptr, SL("_defaultNamespace"), namespaceName TSRMLS_CC);
-	RETURN_THISW();
+	RETURN_THIS();
 
 }
 
 /**
  * Sets the name of the default module
- *
- * @param string moduleName
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setDefaultModule) {
 
-	zval *moduleName;
+	zval *moduleName_param = NULL;
+	zval *moduleName = NULL;
 
-	zephir_fetch_params(0, 1, 0, &moduleName);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &moduleName_param);
 
+	if (unlikely(Z_TYPE_P(moduleName_param) != IS_STRING && Z_TYPE_P(moduleName_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'moduleName' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(moduleName_param) == IS_STRING)) {
+		zephir_get_strval(moduleName, moduleName_param);
+	} else {
+		ZEPHIR_INIT_VAR(moduleName);
+		ZVAL_EMPTY_STRING(moduleName);
+	}
 
 
 	zephir_update_property_this(this_ptr, SL("_defaultModule"), moduleName TSRMLS_CC);
-	RETURN_THISW();
+	RETURN_THIS();
 
 }
 
 /**
  * Sets the default controller name
- *
- * @param string controllerName
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setDefaultController) {
 
-	zval *controllerName;
+	zval *controllerName_param = NULL;
+	zval *controllerName = NULL;
 
-	zephir_fetch_params(0, 1, 0, &controllerName);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &controllerName_param);
 
+	if (unlikely(Z_TYPE_P(controllerName_param) != IS_STRING && Z_TYPE_P(controllerName_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'controllerName' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(controllerName_param) == IS_STRING)) {
+		zephir_get_strval(controllerName, controllerName_param);
+	} else {
+		ZEPHIR_INIT_VAR(controllerName);
+		ZVAL_EMPTY_STRING(controllerName);
+	}
 
 
 	zephir_update_property_this(this_ptr, SL("_defaultController"), controllerName TSRMLS_CC);
-	RETURN_THISW();
+	RETURN_THIS();
 
 }
 
 /**
  * Sets the default action name
- *
- * @param string actionName
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setDefaultAction) {
 
-	zval *actionName;
+	zval *actionName_param = NULL;
+	zval *actionName = NULL;
 
-	zephir_fetch_params(0, 1, 0, &actionName);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &actionName_param);
 
+	if (unlikely(Z_TYPE_P(actionName_param) != IS_STRING && Z_TYPE_P(actionName_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'actionName' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(actionName_param) == IS_STRING)) {
+		zephir_get_strval(actionName, actionName_param);
+	} else {
+		ZEPHIR_INIT_VAR(actionName);
+		ZVAL_EMPTY_STRING(actionName);
+	}
 
 
 	zephir_update_property_this(this_ptr, SL("_defaultAction"), actionName TSRMLS_CC);
-	RETURN_THISW();
+	RETURN_THIS();
 
 }
 
@@ -327,22 +361,18 @@ PHP_METHOD(Smce_Mvc_Router, setDefaultAction) {
  *		'action' => 'index'
  * ));
  *</code>
- *
- * @param array defaults
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, setDefaults) {
 
-	zval *defaults, *namespaceName, *module, *controller, *action, *params;
+	zval *defaults_param = NULL, *namespaceName, *module, *controller, *action, *params;
+	zval *defaults = NULL;
 
-	zephir_fetch_params(0, 1, 0, &defaults);
+	zephir_fetch_params(0, 1, 0, &defaults_param);
+
+	defaults = defaults_param;
 
 
 
-	if (Z_TYPE_P(defaults) != IS_ARRAY) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(smce_mvc_router_exception_ce, "Defaults must be an array", "smce/mvc/router.zep", 221);
-		return;
-	}
 	if (zephir_array_isset_string_fetch(&namespaceName, defaults, SS("namespace"), 1 TSRMLS_CC)) {
 		zephir_update_property_this(this_ptr, SL("_defaultNamespace"), namespaceName TSRMLS_CC);
 	}
@@ -363,22 +393,6 @@ PHP_METHOD(Smce_Mvc_Router, setDefaults) {
 }
 
 /**
- * x
- */
-PHP_METHOD(Smce_Mvc_Router, doRemoveExtraSlashes) {
-
-	zval *route;
-
-	zephir_fetch_params(0, 1, 0, &route);
-
-
-
-	RETVAL_ZVAL(route, 1, 0);
-	return;
-
-}
-
-/**
  * Handles routing information received from the rewrite engine
  *
  *<code>
@@ -388,26 +402,29 @@ PHP_METHOD(Smce_Mvc_Router, doRemoveExtraSlashes) {
  * //Manually passing an URL
  * $router->handle('/posts/edit/1');
  *</code>
- *
- * @param string uri
  */
 PHP_METHOD(Smce_Mvc_Router, handle) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_8 = NULL, *_13 = NULL;
-	HashTable *_3, *_10;
-	HashPosition _2, _9;
+	zval *_10 = NULL, *_15 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_9 = NULL, *_16 = NULL;
+	HashTable *_4, *_12;
+	HashPosition _3, _11;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *uri = NULL, *realUri = NULL, *request = NULL, *currentHostName = NULL, *routeFound = NULL, *parts = NULL, *params = NULL, *matches, *notFoundPaths, *vnamespace, *module, *controller, *action, *paramsStr, *strParams = NULL, *paramsMerge = NULL, *route = NULL, *methods = NULL, *dependencyInjector = NULL, *hostname = NULL, *regexHostName = NULL, *matched = NULL, *pattern = NULL, *handledUri = NULL, *beforeMatch = NULL, *paths = NULL, *converters = NULL, *part = NULL, *position = NULL, *matchPosition = NULL, *_0, *_1, **_4, *_5, *_6 = NULL, *_7 = NULL, **_11, _12, *_14, *_15, *_16, *_17;
+	zval *uri_param = NULL, *realUri = NULL, *request = NULL, *currentHostName = NULL, *routeFound = NULL, *parts = NULL, *params = NULL, *matches, *notFoundPaths, *vnamespace, *module, *controller, *action, *paramsStr, *strParams = NULL, *route = NULL, *methods = NULL, *dependencyInjector = NULL, *hostname = NULL, *regexHostName = NULL, *matched = NULL, *pattern = NULL, *handledUri = NULL, *beforeMatch = NULL, *paths = NULL, *converters = NULL, *part = NULL, *position = NULL, *matchPosition = NULL, *converter = NULL, *_0, _1 = zval_used_for_init, *_2, **_5, *_6, *_7 = NULL, *_8 = NULL, **_13, *_14 = NULL, *_17, *_18, *_19, *_20;
+	zval *uri = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &uri);
+	zephir_fetch_params(1, 0, 1, &uri_param);
 
-	if (!uri) {
-		uri = ZEPHIR_GLOBAL(global_null);
+	if (!uri_param) {
+		ZEPHIR_INIT_VAR(uri);
+		ZVAL_EMPTY_STRING(uri);
+	} else {
+		zephir_get_strval(uri, uri_param);
 	}
 
 
-	if (!(zephir_is_true(uri))) {
+	if (!(uri && Z_STRLEN_P(uri))) {
 		ZEPHIR_CALL_METHOD(&realUri, this_ptr, "getrewriteuri", NULL);
 		zephir_check_call_status();
 	} else {
@@ -415,8 +432,14 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 	}
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("_removeExtraSlashes"), PH_NOISY_CC);
 	if (zephir_is_true(_0)) {
-		ZEPHIR_CALL_METHOD(&handledUri, this_ptr, "doremoveextraslashes", NULL, realUri);
-		zephir_check_call_status();
+		if (!ZEPHIR_IS_STRING(realUri, "/")) {
+			ZEPHIR_INIT_VAR(handledUri);
+			ZEPHIR_SINIT_VAR(_1);
+			ZVAL_STRING(&_1, "/", 0);
+			zephir_fast_trim(handledUri, realUri, &_1, ZEPHIR_TRIM_RIGHT TSRMLS_CC);
+		} else {
+			ZEPHIR_CPY_WRT(handledUri, realUri);
+		}
 	} else {
 		ZEPHIR_CPY_WRT(handledUri, realUri);
 	}
@@ -434,28 +457,29 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 	ZVAL_NULL(matches);
 	zephir_update_property_this(this_ptr, SL("_wasMatched"), (0) ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
 	zephir_update_property_this(this_ptr, SL("_matchedRoute"), ZEPHIR_GLOBAL(global_null) TSRMLS_CC);
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("_routes"), PH_NOISY_CC);
-	zephir_is_iterable(_1, &_3, &_2, 0, 1, "smce/mvc/router.zep", 449);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("_routes"), PH_NOISY_CC);
+	zephir_is_iterable(_2, &_4, &_3, 0, 1, "smce/mvc/router.zep", 460);
 	for (
-	  ; zephir_hash_get_current_data_ex(_3, (void**) &_4, &_2) == SUCCESS
-	  ; zephir_hash_move_backwards_ex(_3, &_2)
+	  ; zephir_hash_get_current_data_ex(_4, (void**) &_5, &_3) == SUCCESS
+	  ; zephir_hash_move_backwards_ex(_4, &_3)
 	) {
-		ZEPHIR_GET_HVALUE(route, _4);
+		ZEPHIR_GET_HVALUE(route, _5);
 		ZEPHIR_CALL_METHOD(&methods, route, "gethttpmethods", NULL);
 		zephir_check_call_status();
 		if (Z_TYPE_P(methods) != IS_NULL) {
 			if (Z_TYPE_P(request) == IS_NULL) {
-				_5 = zephir_fetch_nproperty_this(this_ptr, SL("_dependencyInjector"), PH_NOISY_CC);
-				ZEPHIR_CPY_WRT(dependencyInjector, _5);
+				_6 = zephir_fetch_nproperty_this(this_ptr, SL("_dependencyInjector"), PH_NOISY_CC);
+				ZEPHIR_CPY_WRT(dependencyInjector, _6);
 				if (Z_TYPE_P(dependencyInjector) != IS_OBJECT) {
-					ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "A dependency injection container is required to access the 'request' service", "smce/mvc/router.zep", 317);
+					ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "A dependency injection container is required to access the 'request' service", "smce/mvc/router.zep", 298);
 					return;
 				}
-				ZEPHIR_INIT_NVAR(_6);
-				ZVAL_STRING(_6, "request", ZEPHIR_TEMP_PARAM_COPY);
-				ZEPHIR_CALL_METHOD(&request, dependencyInjector, "getshared", NULL, _6);
-				zephir_check_temp_parameter(_6);
+				ZEPHIR_INIT_NVAR(_8);
+				ZVAL_STRING(_8, "request", ZEPHIR_TEMP_PARAM_COPY);
+				ZEPHIR_CALL_METHOD(&_7, dependencyInjector, "getshared", NULL, _8);
+				zephir_check_temp_parameter(_8);
 				zephir_check_call_status();
+				ZEPHIR_CPY_WRT(request, _7);
 			}
 			ZEPHIR_CALL_METHOD(&_7, request, "ismethod", NULL, methods);
 			zephir_check_call_status();
@@ -467,33 +491,34 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 		zephir_check_call_status();
 		if (Z_TYPE_P(hostname) != IS_NULL) {
 			if (Z_TYPE_P(request) == IS_NULL) {
-				ZEPHIR_OBS_NVAR(dependencyInjector);
-				zephir_read_property_this(&dependencyInjector, this_ptr, SL("_dependencyInjector"), PH_NOISY_CC);
+				_6 = zephir_fetch_nproperty_this(this_ptr, SL("_dependencyInjector"), PH_NOISY_CC);
+				ZEPHIR_CPY_WRT(dependencyInjector, _6);
 				if (Z_TYPE_P(dependencyInjector) != IS_OBJECT) {
-					ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "A dependency injection container is required to access the 'request' service", "smce/mvc/router.zep", 338);
+					ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "A dependency injection container is required to access the 'request' service", "smce/mvc/router.zep", 325);
 					return;
 				}
-				ZEPHIR_INIT_NVAR(_6);
-				ZVAL_STRING(_6, "request", ZEPHIR_TEMP_PARAM_COPY);
-				ZEPHIR_CALL_METHOD(&request, dependencyInjector, "getshared", NULL, _6);
-				zephir_check_temp_parameter(_6);
+				ZEPHIR_INIT_NVAR(_8);
+				ZVAL_STRING(_8, "request", ZEPHIR_TEMP_PARAM_COPY);
+				ZEPHIR_CALL_METHOD(&_7, dependencyInjector, "getshared", NULL, _8);
+				zephir_check_temp_parameter(_8);
 				zephir_check_call_status();
+				ZEPHIR_CPY_WRT(request, _7);
 			}
 			if (Z_TYPE_P(currentHostName) != IS_OBJECT) {
 				ZEPHIR_CALL_METHOD(&currentHostName, request, "gethttphost", NULL);
 				zephir_check_call_status();
 			}
-			if (Z_TYPE_P(currentHostName) != IS_NULL) {
+			if (Z_TYPE_P(currentHostName) == IS_NULL) {
 				continue;
 			}
-			if (zephir_memnstr_str(hostname, SL("("), "smce/mvc/router.zep", 355)) {
-				if (zephir_memnstr_str(hostname, SL("#"), "smce/mvc/router.zep", 356)) {
+			if (zephir_memnstr_str(hostname, SL("("), "smce/mvc/router.zep", 348)) {
+				if (!(zephir_memnstr_str(hostname, SL("#"), "smce/mvc/router.zep", 349))) {
 					ZEPHIR_INIT_NVAR(regexHostName);
 					ZEPHIR_CONCAT_SVS(regexHostName, "#^", hostname, "$#");
 				} else {
 					ZEPHIR_CPY_WRT(regexHostName, hostname);
 				}
-				ZEPHIR_CALL_FUNCTION(&matched, "preg_match", &_8, regexHostName, currentHostName);
+				ZEPHIR_CALL_FUNCTION(&matched, "preg_match", &_9, regexHostName, currentHostName);
 				zephir_check_call_status();
 			} else {
 				ZEPHIR_INIT_NVAR(matched);
@@ -505,9 +530,9 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 		}
 		ZEPHIR_CALL_METHOD(&pattern, route, "getcompiledpattern", NULL);
 		zephir_check_call_status();
-		if (zephir_memnstr_str(pattern, SL("^"), "smce/mvc/router.zep", 374)) {
+		if (zephir_memnstr_str(pattern, SL("^"), "smce/mvc/router.zep", 370)) {
 			Z_SET_ISREF_P(matches);
-			ZEPHIR_CALL_FUNCTION(&routeFound, "preg_match", &_8, pattern, handledUri, matches);
+			ZEPHIR_CALL_FUNCTION(&routeFound, "preg_match", &_9, pattern, handledUri, matches);
 			Z_UNSET_ISREF_P(matches);
 			zephir_check_call_status();
 		} else {
@@ -518,10 +543,18 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			ZEPHIR_CALL_METHOD(&beforeMatch, route, "getbeforematch", NULL);
 			zephir_check_call_status();
 			if (Z_TYPE_P(beforeMatch) != IS_NULL) {
-				if (zephir_is_callable(beforeMatch TSRMLS_CC)) {
+				if (!(zephir_is_callable(beforeMatch TSRMLS_CC))) {
 					ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "Before-Match callback is not callable in matched route", "smce/mvc/router.zep", 388);
 					return;
 				}
+				ZEPHIR_INIT_NVAR(routeFound);
+				ZEPHIR_INIT_NVAR(_10);
+				array_init_size(_10, 4);
+				zephir_array_fast_append(_10, handledUri);
+				zephir_array_fast_append(_10, route);
+				zephir_array_fast_append(_10, this_ptr);
+				ZEPHIR_CALL_USER_FUNC_ARRAY(routeFound, beforeMatch, _10);
+				zephir_check_call_status();
 			}
 		}
 		if (zephir_is_true(routeFound)) {
@@ -531,24 +564,40 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			if (Z_TYPE_P(matches) == IS_ARRAY) {
 				ZEPHIR_CALL_METHOD(&converters, route, "getconverters", NULL);
 				zephir_check_call_status();
-				zephir_is_iterable(paths, &_10, &_9, 0, 0, "smce/mvc/router.zep", 440);
+				zephir_is_iterable(paths, &_12, &_11, 0, 0, "smce/mvc/router.zep", 449);
 				for (
-				  ; zephir_hash_get_current_data_ex(_10, (void**) &_11, &_9) == SUCCESS
-				  ; zephir_hash_move_forward_ex(_10, &_9)
+				  ; zephir_hash_get_current_data_ex(_12, (void**) &_13, &_11) == SUCCESS
+				  ; zephir_hash_move_forward_ex(_12, &_11)
 				) {
-					ZEPHIR_GET_HMKEY(part, _10, _9);
-					ZEPHIR_GET_HVALUE(position, _11);
+					ZEPHIR_GET_HMKEY(part, _12, _11);
+					ZEPHIR_GET_HVALUE(position, _13);
 					ZEPHIR_OBS_NVAR(matchPosition);
 					if (zephir_array_isset_fetch(&matchPosition, matches, position, 0 TSRMLS_CC)) {
 						if (Z_TYPE_P(converters) == IS_ARRAY) {
-							if (zephir_array_isset(converters, part)) {
+							ZEPHIR_OBS_NVAR(converter);
+							if (zephir_array_isset_fetch(&converter, converters, part, 0 TSRMLS_CC)) {
+								ZEPHIR_INIT_NVAR(_8);
+								ZEPHIR_INIT_NVAR(_10);
+								array_init_size(_10, 2);
+								zephir_array_fast_append(_10, matchPosition);
+								ZEPHIR_CALL_USER_FUNC_ARRAY(_8, converter, _10);
+								zephir_check_call_status();
+								zephir_array_update_zval(&parts, part, &_8, PH_COPY | PH_SEPARATE);
 								continue;
 							}
 						}
 						zephir_array_update_zval(&parts, part, &matchPosition, PH_COPY | PH_SEPARATE);
 					} else {
 						if (Z_TYPE_P(converters) == IS_ARRAY) {
-							if (zephir_array_isset(converters, part)) {
+							ZEPHIR_OBS_NVAR(converter);
+							if (zephir_array_isset_fetch(&converter, converters, part, 0 TSRMLS_CC)) {
+								ZEPHIR_INIT_NVAR(_14);
+								ZEPHIR_INIT_NVAR(_15);
+								array_init_size(_15, 2);
+								zephir_array_fast_append(_15, position);
+								ZEPHIR_CALL_USER_FUNC_ARRAY(_14, converter, _15);
+								zephir_check_call_status();
+								zephir_array_update_zval(&parts, part, &_14, PH_COPY | PH_SEPARATE);
 							}
 						}
 					}
@@ -581,8 +630,8 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			}
 			zephir_array_unset_string(&parts, SS("namespace"), PH_SEPARATE);
 		} else {
-			_5 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultNamespace"), PH_NOISY_CC);
-			zephir_update_property_this(this_ptr, SL("_namespace"), _5 TSRMLS_CC);
+			_6 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultNamespace"), PH_NOISY_CC);
+			zephir_update_property_this(this_ptr, SL("_namespace"), _6 TSRMLS_CC);
 		}
 		ZEPHIR_OBS_VAR(module);
 		if (zephir_array_isset_string_fetch(&module, parts, SS("module"), 0 TSRMLS_CC)) {
@@ -591,8 +640,8 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			}
 			zephir_array_unset_string(&parts, SS("module"), PH_SEPARATE);
 		} else {
-			_5 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultModule"), PH_NOISY_CC);
-			zephir_update_property_this(this_ptr, SL("_module"), _5 TSRMLS_CC);
+			_6 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultModule"), PH_NOISY_CC);
+			zephir_update_property_this(this_ptr, SL("_module"), _6 TSRMLS_CC);
 		}
 		ZEPHIR_OBS_VAR(controller);
 		if (zephir_array_isset_string_fetch(&controller, parts, SS("controller"), 0 TSRMLS_CC)) {
@@ -601,8 +650,8 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			}
 			zephir_array_unset_string(&parts, SS("controller"), PH_SEPARATE);
 		} else {
-			_5 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultController"), PH_NOISY_CC);
-			zephir_update_property_this(this_ptr, SL("_controller"), _5 TSRMLS_CC);
+			_6 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultController"), PH_NOISY_CC);
+			zephir_update_property_this(this_ptr, SL("_controller"), _6 TSRMLS_CC);
 		}
 		ZEPHIR_OBS_VAR(action);
 		if (zephir_array_isset_string_fetch(&action, parts, SS("action"), 0 TSRMLS_CC)) {
@@ -611,14 +660,14 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			}
 			zephir_array_unset_string(&parts, SS("action"), PH_SEPARATE);
 		} else {
-			_5 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultAction"), PH_NOISY_CC);
-			zephir_update_property_this(this_ptr, SL("_action"), _5 TSRMLS_CC);
+			_6 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultAction"), PH_NOISY_CC);
+			zephir_update_property_this(this_ptr, SL("_action"), _6 TSRMLS_CC);
 		}
 		ZEPHIR_OBS_VAR(paramsStr);
 		if (zephir_array_isset_string_fetch(&paramsStr, parts, SS("params"), 0 TSRMLS_CC)) {
-			ZEPHIR_SINIT_VAR(_12);
-			ZVAL_LONG(&_12, 1);
-			ZEPHIR_CALL_FUNCTION(&strParams, "substr", &_13, paramsStr, &_12);
+			ZEPHIR_SINIT_NVAR(_1);
+			ZVAL_LONG(&_1, 1);
+			ZEPHIR_CALL_FUNCTION(&strParams, "substr", &_16, paramsStr, &_1);
 			zephir_check_call_status();
 			if (zephir_is_true(strParams)) {
 				ZEPHIR_INIT_NVAR(params);
@@ -627,23 +676,23 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
 			zephir_array_unset_string(&parts, SS("params"), PH_SEPARATE);
 		}
 		if (zephir_fast_count_int(params TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(paramsMerge);
-			zephir_fast_array_merge(paramsMerge, &(params), &(parts) TSRMLS_CC);
+			ZEPHIR_INIT_NVAR(_8);
+			zephir_fast_array_merge(_8, &(params), &(parts) TSRMLS_CC);
+			zephir_update_property_this(this_ptr, SL("_params"), _8 TSRMLS_CC);
 		} else {
-			ZEPHIR_CPY_WRT(paramsMerge, parts);
+			zephir_update_property_this(this_ptr, SL("_params"), parts TSRMLS_CC);
 		}
-		zephir_update_property_this(this_ptr, SL("_params"), paramsMerge TSRMLS_CC);
 	} else {
-		_5 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultNamespace"), PH_NOISY_CC);
-		zephir_update_property_this(this_ptr, SL("_namespace"), _5 TSRMLS_CC);
-		_14 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultModule"), PH_NOISY_CC);
-		zephir_update_property_this(this_ptr, SL("_module"), _14 TSRMLS_CC);
-		_15 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultController"), PH_NOISY_CC);
-		zephir_update_property_this(this_ptr, SL("_controller"), _15 TSRMLS_CC);
-		_16 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultAction"), PH_NOISY_CC);
-		zephir_update_property_this(this_ptr, SL("_action"), _16 TSRMLS_CC);
-		_17 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultParams"), PH_NOISY_CC);
-		zephir_update_property_this(this_ptr, SL("_params"), _17 TSRMLS_CC);
+		_6 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultNamespace"), PH_NOISY_CC);
+		zephir_update_property_this(this_ptr, SL("_namespace"), _6 TSRMLS_CC);
+		_17 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultModule"), PH_NOISY_CC);
+		zephir_update_property_this(this_ptr, SL("_module"), _17 TSRMLS_CC);
+		_18 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultController"), PH_NOISY_CC);
+		zephir_update_property_this(this_ptr, SL("_controller"), _18 TSRMLS_CC);
+		_19 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultAction"), PH_NOISY_CC);
+		zephir_update_property_this(this_ptr, SL("_action"), _19 TSRMLS_CC);
+		_20 = zephir_fetch_nproperty_this(this_ptr, SL("_defaultParams"), PH_NOISY_CC);
+		zephir_update_property_this(this_ptr, SL("_params"), _20 TSRMLS_CC);
 	}
 	ZEPHIR_MM_RESTORE();
 
@@ -656,19 +705,30 @@ PHP_METHOD(Smce_Mvc_Router, handle) {
  * $router->add('/about', 'About::index');
  *</code>
  *
- * @param string pattern
  * @param string/array paths
  * @param string httpMethods
- * @return Test\Router\Route
+ * @return Smce\Mvc\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, add) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *httpMethods = NULL, *route;
+	zval *pattern_param = NULL, *paths = NULL, *httpMethods = NULL, *route;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &pattern, &paths, &httpMethods);
+	zephir_fetch_params(1, 1, 2, &pattern_param, &paths, &httpMethods);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -689,18 +749,28 @@ PHP_METHOD(Smce_Mvc_Router, add) {
 /**
  * Adds a route to the router that only match if the HTTP method is GET
  *
- * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addGet) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -718,18 +788,28 @@ PHP_METHOD(Smce_Mvc_Router, addGet) {
 /**
  * Adds a route to the router that only match if the HTTP method is POST
  *
- * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addPost) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -747,18 +827,28 @@ PHP_METHOD(Smce_Mvc_Router, addPost) {
 /**
  * Adds a route to the router that only match if the HTTP method is PUT
  *
- * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addPut) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -778,16 +868,28 @@ PHP_METHOD(Smce_Mvc_Router, addPut) {
  *
  * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
+ * @return Smce\Mvc\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addPatch) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -807,16 +909,28 @@ PHP_METHOD(Smce_Mvc_Router, addPatch) {
  *
  * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
+ * @return Smce\Mvc\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addDelete) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -836,16 +950,28 @@ PHP_METHOD(Smce_Mvc_Router, addDelete) {
  *
  * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
+ * @return Smce\Mvc\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addOptions) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -865,16 +991,28 @@ PHP_METHOD(Smce_Mvc_Router, addOptions) {
  *
  * @param string pattern
  * @param string/array paths
- * @return Test\Router\Route
+ * @return Smce\Mvc\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, addHead) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *pattern, *paths = NULL, *_0;
+	zval *pattern_param = NULL, *paths = NULL, *_0;
+	zval *pattern = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &pattern, &paths);
+	zephir_fetch_params(1, 1, 1, &pattern_param, &paths);
 
+	if (unlikely(Z_TYPE_P(pattern_param) != IS_STRING && Z_TYPE_P(pattern_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'pattern' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(pattern_param) == IS_STRING)) {
+		zephir_get_strval(pattern, pattern_param);
+	} else {
+		ZEPHIR_INIT_VAR(pattern);
+		ZVAL_EMPTY_STRING(pattern);
+	}
 	if (!paths) {
 		paths = ZEPHIR_GLOBAL(global_null);
 	}
@@ -892,8 +1030,8 @@ PHP_METHOD(Smce_Mvc_Router, addHead) {
 /**
  * Mounts a group of routes in the router
  *
- * @param Test\Router\Group route
- * @return Test\Router
+ * @param Smce\Mvc\Router\Group route
+ * @return Smce\Mvc\Router
  */
 PHP_METHOD(Smce_Mvc_Router, mount) {
 
@@ -907,20 +1045,24 @@ PHP_METHOD(Smce_Mvc_Router, mount) {
 
 
 
+	if (!(zephir_is_instance_of(group, SL("Smce\\Mvc\\Router\\Group") TSRMLS_CC))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'group' must be an instance of 'Smce\\Mvc\\Router\\Group'", "", 0);
+		return;
+	}
 	if (Z_TYPE_P(group) != IS_OBJECT) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "The group of routes is not valid", "smce/mvc/router.zep", 652);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "The group of routes is not valid", "smce/mvc/router.zep", 670);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&groupRoutes, group, "getroutes", NULL);
 	zephir_check_call_status();
 	if (!(zephir_fast_count_int(groupRoutes TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "The group of routes does not contain any routes", "smce/mvc/router.zep", 657);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(smce_mvc_router_exception_ce, "The group of routes does not contain any routes", "smce/mvc/router.zep", 675);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&beforeMatch, group, "getbeforematch", NULL);
 	zephir_check_call_status();
 	if (Z_TYPE_P(beforeMatch) != IS_NULL) {
-		zephir_is_iterable(groupRoutes, &_1, &_0, 0, 0, "smce/mvc/router.zep", 667);
+		zephir_is_iterable(groupRoutes, &_1, &_0, 0, 0, "smce/mvc/router.zep", 687);
 		for (
 		  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -933,7 +1075,7 @@ PHP_METHOD(Smce_Mvc_Router, mount) {
 	ZEPHIR_CALL_METHOD(&hostname, group, "gethostname", NULL);
 	zephir_check_call_status();
 	if (Z_TYPE_P(hostname) != IS_NULL) {
-		zephir_is_iterable(groupRoutes, &_4, &_3, 0, 0, "smce/mvc/router.zep", 676);
+		zephir_is_iterable(groupRoutes, &_4, &_3, 0, 0, "smce/mvc/router.zep", 696);
 		for (
 		  ; zephir_hash_get_current_data_ex(_4, (void**) &_5, &_3) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_4, &_3)
@@ -960,21 +1102,23 @@ PHP_METHOD(Smce_Mvc_Router, mount) {
  * Set a group of paths to be returned when none of the defined routes are matched
  *
  * @param array paths
- * @return Test\Router
  */
 PHP_METHOD(Smce_Mvc_Router, notFound) {
 
+	zend_bool _0;
 	zval *paths;
 
 	zephir_fetch_params(0, 1, 0, &paths);
 
 
 
-	if (Z_TYPE_P(paths) != IS_ARRAY) {
-		if (Z_TYPE_P(paths) != IS_STRING) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(smce_mvc_router_exception_ce, "The not-found paths must be an array or string", "smce/mvc/router.zep", 699);
-			return;
-		}
+	_0 = Z_TYPE_P(paths) != IS_ARRAY;
+	if (_0) {
+		_0 = Z_TYPE_P(paths) != IS_STRING;
+	}
+	if (_0) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(smce_mvc_router_exception_ce, "The not-found paths must be an array or string", "smce/mvc/router.zep", 717);
+		return;
 	}
 	zephir_update_property_this(this_ptr, SL("_notFoundPaths"), paths TSRMLS_CC);
 	RETURN_THISW();
@@ -999,8 +1143,6 @@ PHP_METHOD(Smce_Mvc_Router, clear) {
 
 /**
  * Returns the processed namespace name
- *
- * @return string
  */
 PHP_METHOD(Smce_Mvc_Router, getNamespaceName) {
 
@@ -1011,8 +1153,6 @@ PHP_METHOD(Smce_Mvc_Router, getNamespaceName) {
 
 /**
  * Returns the processed module name
- *
- * @return string
  */
 PHP_METHOD(Smce_Mvc_Router, getModuleName) {
 
@@ -1023,8 +1163,6 @@ PHP_METHOD(Smce_Mvc_Router, getModuleName) {
 
 /**
  * Returns the processed controller name
- *
- * @return string
  */
 PHP_METHOD(Smce_Mvc_Router, getControllerName) {
 
@@ -1035,8 +1173,6 @@ PHP_METHOD(Smce_Mvc_Router, getControllerName) {
 
 /**
  * Returns the processed action name
- *
- * @return string
  */
 PHP_METHOD(Smce_Mvc_Router, getActionName) {
 
@@ -1047,8 +1183,6 @@ PHP_METHOD(Smce_Mvc_Router, getActionName) {
 
 /**
  * Returns the processed parameters
- *
- * @return array
  */
 PHP_METHOD(Smce_Mvc_Router, getParams) {
 
@@ -1059,8 +1193,6 @@ PHP_METHOD(Smce_Mvc_Router, getParams) {
 
 /**
  * Returns the route that matchs the handled URI
- *
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, getMatchedRoute) {
 
@@ -1071,8 +1203,6 @@ PHP_METHOD(Smce_Mvc_Router, getMatchedRoute) {
 
 /**
  * Returns the sub expressions in the regular expression matched
- *
- * @return array
  */
 PHP_METHOD(Smce_Mvc_Router, getMatches) {
 
@@ -1083,8 +1213,6 @@ PHP_METHOD(Smce_Mvc_Router, getMatches) {
 
 /**
  * Checks if the router macthes any of the defined routes
- *
- * @return bool
  */
 PHP_METHOD(Smce_Mvc_Router, wasMatched) {
 
@@ -1096,7 +1224,7 @@ PHP_METHOD(Smce_Mvc_Router, wasMatched) {
 /**
  * Returns all the routes defined in the router
  *
- * @return Test\Router\Route[]
+ * @return Smce\Mvc\Router\Route[]
  */
 PHP_METHOD(Smce_Mvc_Router, getRoutes) {
 
@@ -1107,9 +1235,6 @@ PHP_METHOD(Smce_Mvc_Router, getRoutes) {
 
 /**
  * Returns a route object by its id
- *
- * @param string id
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, getRouteById) {
 
@@ -1124,7 +1249,7 @@ PHP_METHOD(Smce_Mvc_Router, getRouteById) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("_routes"), PH_NOISY_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/mvc/router.zep", 819);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/mvc/router.zep", 818);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -1142,24 +1267,33 @@ PHP_METHOD(Smce_Mvc_Router, getRouteById) {
 
 /**
  * Returns a route object by its name
- *
- * @param string name
- * @return Test\Router\Route
  */
 PHP_METHOD(Smce_Mvc_Router, getRouteByName) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	HashTable *_2;
 	HashPosition _1;
-	zval *name, *route = NULL, *_0, **_3, *_4 = NULL;
+	zval *name_param = NULL, *route = NULL, *_0, **_3, *_4 = NULL;
+	zval *name = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
+	if (unlikely(Z_TYPE_P(name_param) != IS_STRING && Z_TYPE_P(name_param) != IS_NULL)) {
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'name' must be a string") TSRMLS_CC);
+		RETURN_MM_NULL();
+	}
+
+	if (likely(Z_TYPE_P(name_param) == IS_STRING)) {
+		zephir_get_strval(name, name_param);
+	} else {
+		ZEPHIR_INIT_VAR(name);
+		ZVAL_EMPTY_STRING(name);
+	}
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("_routes"), PH_NOISY_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/mvc/router.zep", 837);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/mvc/router.zep", 833);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -1172,6 +1306,16 @@ PHP_METHOD(Smce_Mvc_Router, getRouteByName) {
 		}
 	}
 	RETURN_MM_BOOL(0);
+
+}
+
+/**
+ * Returns whether controller name should not be mangled
+ */
+PHP_METHOD(Smce_Mvc_Router, isExactControllerName) {
+
+
+	RETURN_BOOL(1);
 
 }
 

@@ -14,7 +14,6 @@ PHP_METHOD(Smce_Mvc_Router, setDefaultModule);
 PHP_METHOD(Smce_Mvc_Router, setDefaultController);
 PHP_METHOD(Smce_Mvc_Router, setDefaultAction);
 PHP_METHOD(Smce_Mvc_Router, setDefaults);
-PHP_METHOD(Smce_Mvc_Router, doRemoveExtraSlashes);
 PHP_METHOD(Smce_Mvc_Router, handle);
 PHP_METHOD(Smce_Mvc_Router, add);
 PHP_METHOD(Smce_Mvc_Router, addGet);
@@ -38,6 +37,7 @@ PHP_METHOD(Smce_Mvc_Router, wasMatched);
 PHP_METHOD(Smce_Mvc_Router, getRoutes);
 PHP_METHOD(Smce_Mvc_Router, getRouteById);
 PHP_METHOD(Smce_Mvc_Router, getRouteByName);
+PHP_METHOD(Smce_Mvc_Router, isExactControllerName);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router___construct, 0, 0, 0)
 	ZEND_ARG_INFO(0, defaultRoutes)
@@ -72,11 +72,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_setdefaultaction, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_setdefaults, 0, 0, 1)
-	ZEND_ARG_INFO(0, defaults)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_doremoveextraslashes, 0, 0, 1)
-	ZEND_ARG_INFO(0, route)
+	ZEND_ARG_ARRAY_INFO(0, defaults, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_handle, 0, 0, 0)
@@ -125,7 +121,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_addhead, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_mount, 0, 0, 1)
-	ZEND_ARG_INFO(0, group)
+	ZEND_ARG_OBJ_INFO(0, group, Smce\\Mvc\\Router\\Group, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_router_notfound, 0, 0, 1)
@@ -152,7 +148,6 @@ ZEPHIR_INIT_FUNCS(smce_mvc_router_method_entry) {
 	PHP_ME(Smce_Mvc_Router, setDefaultController, arginfo_smce_mvc_router_setdefaultcontroller, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, setDefaultAction, arginfo_smce_mvc_router_setdefaultaction, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, setDefaults, arginfo_smce_mvc_router_setdefaults, ZEND_ACC_PUBLIC)
-	PHP_ME(Smce_Mvc_Router, doRemoveExtraSlashes, arginfo_smce_mvc_router_doremoveextraslashes, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, handle, arginfo_smce_mvc_router_handle, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, add, arginfo_smce_mvc_router_add, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, addGet, arginfo_smce_mvc_router_addget, ZEND_ACC_PUBLIC)
@@ -176,5 +171,6 @@ ZEPHIR_INIT_FUNCS(smce_mvc_router_method_entry) {
 	PHP_ME(Smce_Mvc_Router, getRoutes, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, getRouteById, arginfo_smce_mvc_router_getroutebyid, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Router, getRouteByName, arginfo_smce_mvc_router_getroutebyname, ZEND_ACC_PUBLIC)
+	PHP_ME(Smce_Mvc_Router, isExactControllerName, NULL, ZEND_ACC_PUBLIC)
   PHP_FE_END
 };
