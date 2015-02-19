@@ -28,9 +28,9 @@ class Loader extends PHPUnit_Framework_TestCase
 		$loader->register();
 
 
-
+		$baseUrl=$this->baseUrl();
 		//bind
-		$di->bind("router",function()use($this->baseUrl()){
+		$di->bind("router",function($baseUrl)use(){
 
 			//router
 		    $router = new Smce\Mvc\Router;
