@@ -28,7 +28,6 @@ class Loader extends PHPUnit_Framework_TestCase
 		$loader->register();
 
 
-		$baseUrl=$this->baseUrl();
 		//bind
 		$di->bind("router",function(){
 
