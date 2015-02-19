@@ -52,7 +52,7 @@ PHP_METHOD(Smce_Http_Response, __construct) {
 	ZVAL_LONG(_1, httpCode);
 	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, _1, msg);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_0, "smce/http/response.zep", 25 TSRMLS_CC);
+	zephir_throw_exception_debug(_0, "smce/http/response.zep", 24 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

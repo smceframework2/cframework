@@ -42,17 +42,17 @@ ZEPHIR_INIT_CLASS(Smce_Core_SmceFramework) {
 PHP_METHOD(Smce_Core_SmceFramework, make) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_1 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_1 = NULL, *_2 = NULL, *_3 = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "router", NULL);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "router", &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "command", NULL);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "command", &_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_flush", &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_flush", &_3);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -116,24 +116,25 @@ PHP_METHOD(Smce_Core_SmceFramework, router) {
 
 PHP_METHOD(Smce_Core_SmceFramework, command) {
 
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0 = NULL, *_1, *_2, *_3;
+	zval *_0 = NULL, *_2, *_3, *_4;
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "iscontroller", NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "iscontroller", &_1);
 	zephir_check_call_status();
 	if (!(zephir_is_true(_0))) {
-		ZEPHIR_INIT_VAR(_1);
-		object_init_ex(_1, smce_http_httpexception_ce);
 		ZEPHIR_INIT_VAR(_2);
-		ZVAL_LONG(_2, 404);
+		object_init_ex(_2, smce_http_httpexception_ce);
 		ZEPHIR_INIT_VAR(_3);
-		ZVAL_STRING(_3, "Controller Not Found", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _2, _3);
-		zephir_check_temp_parameter(_3);
+		ZVAL_LONG(_3, 404);
+		ZEPHIR_INIT_VAR(_4);
+		ZVAL_STRING(_4, "Controller Not Found", ZEPHIR_TEMP_PARAM_COPY);
+		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _3, _4);
+		zephir_check_temp_parameter(_4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_1, "smce/core/smceframework.zep", 60 TSRMLS_CC);
+		zephir_throw_exception_debug(_2, "smce/core/smceframework.zep", 60 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -201,23 +202,6 @@ PHP_METHOD(Smce_Core_SmceFramework, runAction) {
 	ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_singleton_ce, "make", &_0, _1, _2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
-
-}
-
-PHP_METHOD(Smce_Core_SmceFramework, isSessionStart) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0 = NULL;
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL);
-	zephir_check_call_status();
-	if (ZEPHIR_IS_LONG(_0, 1)) {
-		RETURN_MM_BOOL(0);
-	} else {
-		RETURN_MM_BOOL(1);
-	}
 
 }
 

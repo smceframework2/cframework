@@ -11,6 +11,7 @@ PHP_METHOD(Smce_Components_Session, reset);
 PHP_METHOD(Smce_Components_Session, remove);
 PHP_METHOD(Smce_Components_Session, login);
 PHP_METHOD(Smce_Components_Session, getLoginStatus);
+PHP_METHOD(Smce_Components_Session, isSessionStart);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_components_session_setsecurity, 0, 0, 1)
 	ZEND_ARG_INFO(0, security)
@@ -43,5 +44,6 @@ ZEPHIR_INIT_FUNCS(smce_components_session_method_entry) {
 	PHP_ME(Smce_Components_Session, remove, arginfo_smce_components_session_remove, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, login, arginfo_smce_components_session_login, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, getLoginStatus, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Smce_Components_Session, isSessionStart, NULL, ZEND_ACC_PUBLIC)
   PHP_FE_END
 };

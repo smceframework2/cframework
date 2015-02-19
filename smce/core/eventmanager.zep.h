@@ -27,7 +27,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_eventmanager_push, 0, 0, 2)
 	ZEND_ARG_INFO(0, key)
-	ZEND_ARG_INFO(0, class)
+	ZEND_ARG_OBJ_INFO(0, class, Closure, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_eventmanager_pull, 0, 0, 1)

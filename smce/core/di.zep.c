@@ -34,12 +34,19 @@ ZEPHIR_INIT_CLASS(Smce_Core_Di) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core, Di, smce, core_di, smce_core_di_method_entry, 0);
 
-	zend_declare_property_null(smce_core_di_ce, SL("dis"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+	/**
+	 * @var dis
+	 */
+	zend_declare_property_null(smce_core_di_ce, SL("dis"), ZEND_ACC_PRIVATE|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
 
 }
 
+/**
+ *@param adapter
+ *@return void
+ */
 PHP_METHOD(Smce_Core_Di, __construct) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -62,6 +69,12 @@ PHP_METHOD(Smce_Core_Di, __construct) {
 
 }
 
+/**
+ *@param string
+ *@param Closure
+ *
+ *@return void|DiCache
+ */
 PHP_METHOD(Smce_Core_Di, bind) {
 
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
@@ -96,11 +109,15 @@ PHP_METHOD(Smce_Core_Di, bind) {
 
 }
 
+/**
+ *@param string
+ *@return value|false
+ */
 PHP_METHOD(Smce_Core_Di, resolve) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_6 = NULL;
-	zval *key_param = NULL, *_0, *_1, *_2, *_3, *_4, *_5 = NULL, *diCache, *get = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
+	zval *key_param = NULL, *_0 = NULL, *diCache, *get = NULL, *_2, *_3, *_4, *_5, *_6;
 	zval *key = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -109,19 +126,9 @@ PHP_METHOD(Smce_Core_Di, resolve) {
 	zephir_get_strval(key, key_param);
 
 
-	_0 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
-	ZEPHIR_INIT_VAR(_1);
-	zephir_fast_strtolower(_1, key);
-	if (zephir_array_isset(_0, _1)) {
-		_2 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_4);
-		zephir_fast_strtolower(_4, key);
-		zephir_array_fetch(&_3, _2, _4, PH_NOISY | PH_READONLY, "smce/core/di.zep", 59 TSRMLS_CC);
-		RETURN_CTOR(_3);
-	}
-	ZEPHIR_CALL_CE_STATIC(&_5, smce_core_di_diadapter_ce, "isadapter", &_6);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1);
 	zephir_check_call_status();
-	if (ZEPHIR_IS_TRUE(_5)) {
+	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
 		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
@@ -132,10 +139,26 @@ PHP_METHOD(Smce_Core_Di, resolve) {
 			RETURN_CCTOR(get);
 		}
 	}
+	_2 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
+	ZEPHIR_INIT_VAR(_3);
+	zephir_fast_strtolower(_3, key);
+	if (zephir_array_isset(_2, _3)) {
+		_4 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_6);
+		zephir_fast_strtolower(_6, key);
+		zephir_array_fetch(&_5, _4, _6, PH_NOISY | PH_READONLY, "smce/core/di.zep", 89 TSRMLS_CC);
+		RETURN_CTOR(_5);
+	}
 	RETURN_MM_BOOL(0);
 
 }
 
+/**
+ *@param string
+ *@param Closure
+ *
+ *@return new Di\Singleton
+ */
 PHP_METHOD(Smce_Core_Di, singleton) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -166,9 +189,17 @@ PHP_METHOD(Smce_Core_Di, singleton) {
 
 }
 
+/**
+ *@param string
+ *
+ *@return bool
+ */
 PHP_METHOD(Smce_Core_Di, remove) {
 
-	zval *key_param = NULL, *_0, *_1, *_2, *_3;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL;
+	zend_bool bl = 0;
+	zval *key_param = NULL, *_0, *_1, *_2, *_3, *_4 = NULL, *diCache, *_6 = NULL;
 	zval *key = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -190,17 +221,38 @@ PHP_METHOD(Smce_Core_Di, remove) {
 		ZEPHIR_INIT_VAR(_3);
 		zephir_fast_strtolower(_3, key);
 		zephir_array_unset(&_2, _3, PH_SEPARATE);
+		bl = 1;
+	}
+	ZEPHIR_CALL_CE_STATIC(&_4, smce_core_di_diadapter_ce, "isadapter", &_5);
+	zephir_check_call_status();
+	if (ZEPHIR_IS_TRUE(_4)) {
+		ZEPHIR_INIT_VAR(diCache);
+		object_init_ex(diCache, smce_core_di_dicache_ce);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(&_6, diCache, "remove", NULL);
+		zephir_check_call_status();
+		if (zephir_is_true(_6)) {
+			bl = 1;
+		}
+	}
+	if (bl == 1) {
 		RETURN_MM_BOOL(1);
 	}
 	RETURN_MM_BOOL(0);
 
 }
 
+/**
+ *@param string
+ *
+ *@return bool
+ */
 PHP_METHOD(Smce_Core_Di, has) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	zval *key_param = NULL, *_0, *_1, *_2 = NULL, *diCache, *get = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
+	zval *key_param = NULL, *_0 = NULL, *diCache, *get = NULL, *_2, *_3;
 	zval *key = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -214,15 +266,9 @@ PHP_METHOD(Smce_Core_Di, has) {
 	}
 
 
-	_0 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
-	ZEPHIR_INIT_VAR(_1);
-	zephir_fast_strtolower(_1, key);
-	if (zephir_array_isset(_0, _1)) {
-		RETURN_MM_BOOL(1);
-	}
-	ZEPHIR_CALL_CE_STATIC(&_2, smce_core_di_diadapter_ce, "isadapter", &_3);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1);
 	zephir_check_call_status();
-	if (ZEPHIR_IS_TRUE(_2)) {
+	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
 		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
@@ -233,20 +279,32 @@ PHP_METHOD(Smce_Core_Di, has) {
 			RETURN_MM_BOOL(1);
 		}
 	}
+	_2 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
+	ZEPHIR_INIT_VAR(_3);
+	zephir_fast_strtolower(_3, key);
+	if (zephir_array_isset(_2, _3)) {
+		RETURN_MM_BOOL(1);
+	}
 	RETURN_MM_BOOL(0);
 
 }
 
+/**
+ *
+ *@return void
+ */
 PHP_METHOD(Smce_Core_Di, reset) {
 
+	int ZEPHIR_LAST_CALL_STATUS;
+	zephir_fcall_cache_entry *_6 = NULL, *_7 = NULL, *_8 = NULL;
 	HashTable *_2;
 	HashPosition _1;
-	zval *key = NULL, *value = NULL, *_0, **_3, *_4;
+	zval *key = NULL, *value = NULL, *_0, **_3, *_4, *_5 = NULL, *diCache = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/core/di.zep", 159);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/core/di.zep", 225);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -255,11 +313,25 @@ PHP_METHOD(Smce_Core_Di, reset) {
 		ZEPHIR_GET_HVALUE(value, _3);
 		_4 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
 		zephir_array_unset(&_4, key, PH_SEPARATE);
+		ZEPHIR_CALL_CE_STATIC(&_5, smce_core_di_diadapter_ce, "isadapter", &_6);
+		zephir_check_call_status();
+		if (ZEPHIR_IS_TRUE(_5)) {
+			ZEPHIR_INIT_NVAR(diCache);
+			object_init_ex(diCache, smce_core_di_dicache_ce);
+			ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", &_7, key);
+			zephir_check_call_status();
+			ZEPHIR_CALL_METHOD(NULL, diCache, "remove", &_8);
+			zephir_check_call_status();
+		}
 	}
 	ZEPHIR_MM_RESTORE();
 
 }
 
+/**
+ *
+ *@return array
+ */
 PHP_METHOD(Smce_Core_Di, getKeys) {
 
 	HashTable *_2;
@@ -272,20 +344,24 @@ PHP_METHOD(Smce_Core_Di, getKeys) {
 	array_init(arr);
 
 	_0 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/core/di.zep", 173);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/core/di.zep", 243);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
 		ZEPHIR_GET_HMKEY(key, _2, _1);
 		ZEPHIR_GET_HVALUE(value, _3);
-		zephir_array_update_long(&arr, i, &key, PH_COPY | PH_SEPARATE, "smce/core/di.zep", 169);
+		zephir_array_update_long(&arr, i, &key, PH_COPY | PH_SEPARATE, "smce/core/di.zep", 239);
 		i++;
 	}
 	RETURN_CCTOR(arr);
 
 }
 
+/**
+ *
+ *@return array
+ */
 PHP_METHOD(Smce_Core_Di, getAll) {
 
 	zval *_0;
@@ -296,6 +372,10 @@ PHP_METHOD(Smce_Core_Di, getAll) {
 
 }
 
+/**
+ *
+ *@return int
+ */
 PHP_METHOD(Smce_Core_Di, getCount) {
 
 	zval *_0, *_1;

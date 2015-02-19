@@ -69,6 +69,7 @@ static PHP_MINIT_FUNCTION(smce)
 #endif
 
 	ZEPHIR_INIT(Smce_Http_HttpException);
+	ZEPHIR_INIT(Smce_App);
 	ZEPHIR_INIT(Smce_Components_Collection);
 	ZEPHIR_INIT(Smce_Components_Output);
 	ZEPHIR_INIT(Smce_Components_Session);
@@ -88,7 +89,6 @@ static PHP_MINIT_FUNCTION(smce)
 	ZEPHIR_INIT(Smce_Mvc_Router_Route);
 	ZEPHIR_INIT(Smce_Mvc_Url);
 	ZEPHIR_INIT(Smce_Sm);
-	ZEPHIR_INIT(Smce_app);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);

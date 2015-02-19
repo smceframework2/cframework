@@ -20,23 +20,23 @@
 #include "kernel/hash.h"
 #include "kernel/array.h"
 
-ZEPHIR_INIT_CLASS(Smce_app) {
+ZEPHIR_INIT_CLASS(Smce_App) {
 
-	ZEPHIR_REGISTER_CLASS(Smce, app, smce, app, smce_app_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS(Smce, App, smce, app, smce_app_method_entry, 0);
 
-	zend_declare_property_null(smce_app_ce, SL("data"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_app_ce, SL("data"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	return SUCCESS;
 
 }
 
-PHP_METHOD(Smce_app, __construct) {
+PHP_METHOD(Smce_App, __construct) {
 
-	HashTable *_17;
-	HashPosition _16;
-	zephir_nts_static zephir_fcall_cache_entry *_15 = NULL;
+	HashTable *_18;
+	HashPosition _17;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_16 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0, *config = NULL, *key = NULL, *value = NULL, *_1 = NULL, *_2, *_3, *_4 = NULL, *_5, *_6, _7, _8, *_9, *_10, *_11, _12, _13, *_14, **_18;
+	zval *_0, *config = NULL, *key = NULL, *value = NULL, *_1 = NULL, *_2, *_4, *_5 = NULL, *_6, *_7, _8, _9, *_10, *_11, *_12, _13, _14, *_15, **_19;
 
 	ZEPHIR_MM_GROW();
 
@@ -48,50 +48,50 @@ PHP_METHOD(Smce_app, __construct) {
 	ZEPHIR_INIT_VAR(_2);
 	ZVAL_STRING(_2, "baseurl", 1);
 	zephir_update_property_array(this_ptr, SL("data"), _2, _1 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getip", NULL);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getip", &_3);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(_3);
-	ZVAL_STRING(_3, "ip", 1);
-	zephir_update_property_array(this_ptr, SL("data"), _3, _1 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_4);
+	ZVAL_STRING(_4, "ip", 1);
+	zephir_update_property_array(this_ptr, SL("data"), _4, _1 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_5);
-	ZEPHIR_OBS_VAR(_6);
-	zephir_read_static_property_ce(&_6, smce_core_smceframework_ce, SL("controller") TSRMLS_CC);
-	zephir_fast_strtolower(_5, _6);
-	ZEPHIR_SINIT_VAR(_7);
-	ZVAL_STRING(&_7, "controller", 0);
+	ZEPHIR_INIT_VAR(_6);
+	ZEPHIR_OBS_VAR(_7);
+	zephir_read_static_property_ce(&_7, smce_core_smceframework_ce, SL("controller") TSRMLS_CC);
+	zephir_fast_strtolower(_6, _7);
 	ZEPHIR_SINIT_VAR(_8);
-	ZVAL_STRING(&_8, "", 0);
-	zephir_fast_str_replace(_4, &_7, &_8, _5 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(_9);
-	ZVAL_STRING(_9, "controller", 1);
-	zephir_update_property_array(this_ptr, SL("data"), _9, _4 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(_4);
+	ZVAL_STRING(&_8, "controller", 0);
+	ZEPHIR_SINIT_VAR(_9);
+	ZVAL_STRING(&_9, "", 0);
+	zephir_fast_str_replace(_5, &_8, &_9, _6 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_10);
-	ZEPHIR_OBS_VAR(_11);
-	zephir_read_static_property_ce(&_11, smce_core_smceframework_ce, SL("action") TSRMLS_CC);
-	zephir_fast_strtolower(_10, _11);
-	ZEPHIR_SINIT_VAR(_12);
-	ZVAL_STRING(&_12, "action", 0);
+	ZVAL_STRING(_10, "controller", 1);
+	zephir_update_property_array(this_ptr, SL("data"), _10, _5 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(_5);
+	ZEPHIR_INIT_VAR(_11);
+	ZEPHIR_OBS_VAR(_12);
+	zephir_read_static_property_ce(&_12, smce_core_smceframework_ce, SL("action") TSRMLS_CC);
+	zephir_fast_strtolower(_11, _12);
 	ZEPHIR_SINIT_VAR(_13);
-	ZVAL_STRING(&_13, "", 0);
-	zephir_fast_str_replace(_4, &_12, &_13, _10 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(_14);
-	ZVAL_STRING(_14, "action", 1);
-	zephir_update_property_array(this_ptr, SL("data"), _14, _4 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(_4);
-	ZVAL_STRING(_4, "config", ZEPHIR_TEMP_PARAM_COPY);
-	ZEPHIR_CALL_CE_STATIC(&config, smce_core_eventmanager_ce, "pull", &_15, _4);
-	zephir_check_temp_parameter(_4);
+	ZVAL_STRING(&_13, "action", 0);
+	ZEPHIR_SINIT_VAR(_14);
+	ZVAL_STRING(&_14, "", 0);
+	zephir_fast_str_replace(_5, &_13, &_14, _11 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(_15);
+	ZVAL_STRING(_15, "action", 1);
+	zephir_update_property_array(this_ptr, SL("data"), _15, _5 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(_5);
+	ZVAL_STRING(_5, "config", ZEPHIR_TEMP_PARAM_COPY);
+	ZEPHIR_CALL_CE_STATIC(&config, smce_core_eventmanager_ce, "pull", &_16, _5);
+	zephir_check_temp_parameter(_5);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_FALSE(config)) {
-		zephir_is_iterable(config, &_17, &_16, 0, 0, "smce/app.zep", 27);
+		zephir_is_iterable(config, &_18, &_17, 0, 0, "smce/app.zep", 27);
 		for (
-		  ; zephir_hash_get_current_data_ex(_17, (void**) &_18, &_16) == SUCCESS
-		  ; zephir_hash_move_forward_ex(_17, &_16)
+		  ; zephir_hash_get_current_data_ex(_18, (void**) &_19, &_17) == SUCCESS
+		  ; zephir_hash_move_forward_ex(_18, &_17)
 		) {
-			ZEPHIR_GET_HMKEY(key, _17, _16);
-			ZEPHIR_GET_HVALUE(value, _18);
+			ZEPHIR_GET_HMKEY(key, _18, _17);
+			ZEPHIR_GET_HVALUE(value, _19);
 			zephir_update_property_array(this_ptr, SL("data"), key, value TSRMLS_CC);
 		}
 	}
@@ -99,7 +99,7 @@ PHP_METHOD(Smce_app, __construct) {
 
 }
 
-PHP_METHOD(Smce_app, __get) {
+PHP_METHOD(Smce_App, __get) {
 
 	zval *name, *_0, *_1, *_2, *_3, *_4;
 
@@ -126,7 +126,7 @@ PHP_METHOD(Smce_app, __get) {
  *
  * @return ip addres
  */
-PHP_METHOD(Smce_app, getIP) {
+PHP_METHOD(Smce_App, getIP) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_5 = NULL;
@@ -175,7 +175,7 @@ PHP_METHOD(Smce_app, getIP) {
 
 }
 
-PHP_METHOD(Smce_app, baseUrl) {
+PHP_METHOD(Smce_App, baseUrl) {
 
 	zval *_SERVER, *_0, _1, _2;
 

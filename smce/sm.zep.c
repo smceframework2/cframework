@@ -22,7 +22,7 @@ ZEPHIR_INIT_CLASS(Smce_Sm) {
 
 	ZEPHIR_REGISTER_CLASS(Smce, Sm, smce, sm, smce_sm_method_entry, 0);
 
-	zend_declare_property_null(smce_sm_ce, SL("app"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+	zend_declare_property_null(smce_sm_ce, SL("app"), ZEND_ACC_PRIVATE|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
 

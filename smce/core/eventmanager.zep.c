@@ -34,7 +34,7 @@ ZEPHIR_INIT_CLASS(Smce_Core_EventManager) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core, EventManager, smce, core_eventmanager, smce_core_eventmanager_method_entry, 0);
 
-	zend_declare_property_null(smce_core_eventmanager_ce, SL("evts"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+	zend_declare_property_null(smce_core_eventmanager_ce, SL("evts"), ZEND_ACC_PRIVATE|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -157,6 +157,10 @@ PHP_METHOD(Smce_Core_EventManager, push) {
 
 
 
+	if (!(zephir_instance_of_ev(class, zend_ce_closure TSRMLS_CC))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'class' must be an instance of 'Closure'", "", 0);
+		return;
+	}
 	ZEPHIR_INIT_VAR(_0);
 	zephir_fast_strtolower(_0, key);
 	zephir_update_static_property_array_multi_ce(smce_core_eventmanager_ce, SL("evts"), &class TSRMLS_CC, SL("z"), 1, _0);

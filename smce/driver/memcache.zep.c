@@ -27,12 +27,12 @@ ZEPHIR_INIT_CLASS(Smce_Driver_Memcache) {
 	/**
 	 * @var array memcache config
 	 */
-	zend_declare_property_null(smce_driver_memcache_ce, SL("config"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_driver_memcache_ce, SL("config"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	/**
 	 * @var memcache instance
 	 */
-	zend_declare_property_null(smce_driver_memcache_ce, SL("memcache"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_driver_memcache_ce, SL("memcache"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -49,7 +49,7 @@ PHP_METHOD(Smce_Driver_Memcache, getMemcache) {
 }
 
 /*
- * @return memcache connect
+ * @return array
  */
 PHP_METHOD(Smce_Driver_Memcache, setConfig) {
 
@@ -60,7 +60,6 @@ PHP_METHOD(Smce_Driver_Memcache, setConfig) {
 
 
 	zephir_update_property_this(this_ptr, SL("config"), config TSRMLS_CC);
-	RETURN_MEMBER(this_ptr, "config");
 
 }
 
@@ -69,18 +68,13 @@ PHP_METHOD(Smce_Driver_Memcache, setConfig) {
  */
 PHP_METHOD(Smce_Driver_Memcache, getConfig) {
 
-	zval *config;
-
-	zephir_fetch_params(0, 1, 0, &config);
-
-
 
 	RETURN_MEMBER(this_ptr, "config");
 
 }
 
 /**
- * @return array memcache server instance
+ * @return void
  */
 PHP_METHOD(Smce_Driver_Memcache, connect) {
 
@@ -104,18 +98,18 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 			zephir_check_temp_parameter(_2);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(_0, "smce/driver/memcache.zep", 58 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "smce/driver/memcache.zep", 61 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 	ZEPHIR_OBS_VAR(_4);
-	zephir_array_fetch_string(&_4, _3, SL("host"), PH_NOISY, "smce/driver/memcache.zep", 61 TSRMLS_CC);
+	zephir_array_fetch_string(&_4, _3, SL("host"), PH_NOISY, "smce/driver/memcache.zep", 64 TSRMLS_CC);
 	_5 = ZEPHIR_IS_EMPTY(_4);
 	if (_5) {
 		_6 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 		ZEPHIR_OBS_VAR(_7);
-		zephir_array_fetch_string(&_7, _6, SL("port"), PH_NOISY, "smce/driver/memcache.zep", 61 TSRMLS_CC);
+		zephir_array_fetch_string(&_7, _6, SL("port"), PH_NOISY, "smce/driver/memcache.zep", 64 TSRMLS_CC);
 		_5 = !ZEPHIR_IS_EMPTY(_7);
 	}
 	if (_5) {
@@ -131,7 +125,7 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 			zephir_check_temp_parameter(_2);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(_0, "smce/driver/memcache.zep", 64 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "smce/driver/memcache.zep", 67 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -144,9 +138,9 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 	zephir_update_property_this(this_ptr, SL("memcache"), _0 TSRMLS_CC);
 	_9 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	_11 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-	zephir_array_fetch_string(&_12, _11, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 71 TSRMLS_CC);
+	zephir_array_fetch_string(&_12, _11, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 74 TSRMLS_CC);
 	_13 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-	zephir_array_fetch_string(&_14, _13, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 71 TSRMLS_CC);
+	zephir_array_fetch_string(&_14, _13, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 74 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&_10, _9, "connect", NULL, _12, _14);
 	zephir_check_call_status();
 	if (!zephir_is_true(_10)) {
@@ -157,15 +151,15 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 		object_init_ex(_2, _15);
 		if (zephir_has_constructor(_2 TSRMLS_CC)) {
 			_16 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-			zephir_array_fetch_string(&_17, _16, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 73 TSRMLS_CC);
+			zephir_array_fetch_string(&_17, _16, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
 			_18 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-			zephir_array_fetch_string(&_19, _18, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 73 TSRMLS_CC);
+			zephir_array_fetch_string(&_19, _18, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
 			ZEPHIR_INIT_VAR(_20);
 			ZEPHIR_CONCAT_SVSV(_20, "Failed on connecting to memcache server at ", _17, ":", _19);
 			ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _20);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(_2, "smce/driver/memcache.zep", 73 TSRMLS_CC);
+		zephir_throw_exception_debug(_2, "smce/driver/memcache.zep", 76 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -174,9 +168,9 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 }
 
 /**
- * @param $key
+ * @param string
  *
- * @return $get
+ * @return string
  */
 PHP_METHOD(Smce_Driver_Memcache, get) {
 
@@ -198,12 +192,12 @@ PHP_METHOD(Smce_Driver_Memcache, get) {
 }
 
 /**
- * @param $key
- * @param $value
- * @param $bolen
- * @param $duration
+ * @param string
+ * @param string
+ * @param bool
+ * @param int
  *
- * @return $set
+ * @return set
  */
 PHP_METHOD(Smce_Driver_Memcache, set) {
 
@@ -231,12 +225,12 @@ PHP_METHOD(Smce_Driver_Memcache, set) {
 }
 
 /**
- * @param $key
- * @param $value
- * @param $bolen
- * @param $duration
+ * @param string
+ * @param string
+ * @param bool
+ * @param int
  *
- * @return $set
+ * @return add
  */
 PHP_METHOD(Smce_Driver_Memcache, add) {
 
@@ -268,10 +262,10 @@ PHP_METHOD(Smce_Driver_Memcache, add) {
 }
 
 /**
- * @param $host
- * @param $port
+ * @param string
+ * @param string
  *
- * @return $get
+ * @return addServer
  */
 PHP_METHOD(Smce_Driver_Memcache, addServer) {
 
@@ -311,10 +305,8 @@ PHP_METHOD(Smce_Driver_Memcache, close) {
 }
 
 /**
- * @param $key
- * @param $item
+ * @return  close
  *
- * @return $get
  */
 PHP_METHOD(Smce_Driver_Memcache, decrement) {
 
@@ -339,9 +331,9 @@ PHP_METHOD(Smce_Driver_Memcache, decrement) {
 }
 
 /**
- * @param $key
+ * @param string
  *
- * @return $get
+ * @return delete
  */
 PHP_METHOD(Smce_Driver_Memcache, delete) {
 
@@ -363,9 +355,8 @@ PHP_METHOD(Smce_Driver_Memcache, delete) {
 }
 
 /**
- * 
  *
- * @return $get
+ * @return flush
  */
 PHP_METHOD(Smce_Driver_Memcache, flush) {
 
@@ -383,8 +374,7 @@ PHP_METHOD(Smce_Driver_Memcache, flush) {
 
 /**
  * 
- *
- * @return $get
+ * @return getExtendedStats
  */
 PHP_METHOD(Smce_Driver_Memcache, getExtendedStats) {
 
@@ -401,10 +391,10 @@ PHP_METHOD(Smce_Driver_Memcache, getExtendedStats) {
 }
 
 /**
- * @param $host
- * @param $port
+ * @param string
+ * @param string
  *
- * @return $get
+ * @return getServerStatus
  */
 PHP_METHOD(Smce_Driver_Memcache, getServerStatus) {
 
@@ -426,9 +416,8 @@ PHP_METHOD(Smce_Driver_Memcache, getServerStatus) {
 }
 
 /**
- * 
  *
- * @return $get
+ * @return getStats
  */
 PHP_METHOD(Smce_Driver_Memcache, getStats) {
 
@@ -447,7 +436,7 @@ PHP_METHOD(Smce_Driver_Memcache, getStats) {
 /**
  * 
  *
- * @return $get
+ * @return getVersion
  */
 PHP_METHOD(Smce_Driver_Memcache, getVersion) {
 
@@ -464,10 +453,10 @@ PHP_METHOD(Smce_Driver_Memcache, getVersion) {
 }
 
 /**
- * @param $key
- * @param $item
+ * @param string
+ * @param int
  *
- * @return $get
+ * @return increment
  */
 PHP_METHOD(Smce_Driver_Memcache, increment) {
 
@@ -492,10 +481,10 @@ PHP_METHOD(Smce_Driver_Memcache, increment) {
 }
 
 /**
- * @param $host
- * @param $port
+ * @param string
+ * @param string
  *
- * @return $get
+ * @return pconnect
  */
 PHP_METHOD(Smce_Driver_Memcache, pconnect) {
 
@@ -517,12 +506,12 @@ PHP_METHOD(Smce_Driver_Memcache, pconnect) {
 }
 
 /**
- * @param $key
- * @param $value
- * @param $bolen
- * @param $duration
+ * @param string
+ * @param string
+ * @param bool
+ * @param int
  *
- * @return $get
+ * @return replace
  */
 PHP_METHOD(Smce_Driver_Memcache, replace) {
 
@@ -550,10 +539,10 @@ PHP_METHOD(Smce_Driver_Memcache, replace) {
 }
 
 /**
- * @param $i
- * @param $d
+ * @param int
+ * @param float
  *
- * @return $get
+ * @return setCompressThreshold
  */
 PHP_METHOD(Smce_Driver_Memcache, setCompressThreshold) {
 

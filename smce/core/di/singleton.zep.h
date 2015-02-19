@@ -47,8 +47,8 @@ ZEPHIR_INIT_FUNCS(smce_core_di_singleton_method_entry) {
 	PHP_ME(Smce_Core_Di_Singleton, getKeys, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_Singleton, getAll, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_Singleton, getCount, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_ME(Smce_Core_Di_Singleton, controllerConstructorParamerters, arginfo_smce_core_di_singleton_controllerconstructorparamerters, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_ME(Smce_Core_Di_Singleton, controllerMethodParamerters, arginfo_smce_core_di_singleton_controllermethodparamerters, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Smce_Core_Di_Singleton, controllerConstructorParamerters, arginfo_smce_core_di_singleton_controllerconstructorparamerters, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
+	PHP_ME(Smce_Core_Di_Singleton, controllerMethodParamerters, arginfo_smce_core_di_singleton_controllermethodparamerters, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_Singleton, make, arginfo_smce_core_di_singleton_make, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
   PHP_FE_END
 };

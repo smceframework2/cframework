@@ -27,12 +27,12 @@ ZEPHIR_INIT_CLASS(Smce_Driver_Redis) {
 	/**
 	 * @var array redis config
 	 */
-	zend_declare_property_null(smce_driver_redis_ce, SL("config"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_driver_redis_ce, SL("config"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	/**
 	 * @var redis instance
 	 */
-	zend_declare_property_null(smce_driver_redis_ce, SL("redis"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_driver_redis_ce, SL("redis"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -49,7 +49,7 @@ PHP_METHOD(Smce_Driver_Redis, getRedis) {
 }
 
 /*
- * @return redis setconfig
+ * @return void
  */
 PHP_METHOD(Smce_Driver_Redis, setConfig) {
 
@@ -60,19 +60,13 @@ PHP_METHOD(Smce_Driver_Redis, setConfig) {
 
 
 	zephir_update_property_this(this_ptr, SL("config"), config TSRMLS_CC);
-	RETURN_MEMBER(this_ptr, "config");
 
 }
 
 /*
- * @return redis getconfig
+ * @return array
  */
 PHP_METHOD(Smce_Driver_Redis, getConfig) {
-
-	zval *config;
-
-	zephir_fetch_params(0, 1, 0, &config);
-
 
 
 	RETURN_MEMBER(this_ptr, "config");
@@ -80,7 +74,7 @@ PHP_METHOD(Smce_Driver_Redis, getConfig) {
 }
 
 /**
- * @return array redis server instance
+ * @return void
  */
 PHP_METHOD(Smce_Driver_Redis, connect) {
 
@@ -174,9 +168,9 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 }
 
 /**
- * @param $key
+ * @param string
  *
- * @return $get
+ * @return mixed
  */
 PHP_METHOD(Smce_Driver_Redis, get) {
 
@@ -198,11 +192,11 @@ PHP_METHOD(Smce_Driver_Redis, get) {
 }
 
 /**
- * @param $key
- * @param $value
- * @param $duration
+ * @param string
+ * @param mixed
+ * @param int
  *
- * @return $set
+ * @return set
  */
 PHP_METHOD(Smce_Driver_Redis, set) {
 
@@ -228,11 +222,10 @@ PHP_METHOD(Smce_Driver_Redis, set) {
 }
 
 /**
- * @param $key
- * @param $value
- * @param $duration
+ * @param string
+ * @param mixed
  *
- * @return $set
+ * @return lpush
  */
 PHP_METHOD(Smce_Driver_Redis, lpush) {
 
@@ -255,11 +248,11 @@ PHP_METHOD(Smce_Driver_Redis, lpush) {
 }
 
 /**
- * @param $key
- * @param $x
- * @param $y
+ * @param string
+ * @param long
+ * @param long
  *
- * @return $set
+ * @return lrange
  */
 PHP_METHOD(Smce_Driver_Redis, lrange) {
 
@@ -275,6 +268,32 @@ PHP_METHOD(Smce_Driver_Redis, lrange) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
 	ZEPHIR_RETURN_CALL_METHOD(_0, "lrange", NULL, key, x, y);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * @param string
+ * @param string
+ *
+ * @return hdel
+ */
+PHP_METHOD(Smce_Driver_Redis, hdel) {
+
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *key_param = NULL, *key2_param = NULL, *_0;
+	zval *key = NULL, *key2 = NULL;
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &key_param, &key2_param);
+
+	zephir_get_strval(key, key_param);
+	zephir_get_strval(key2, key2_param);
+
+
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "hdel", NULL, key, key2);
 	zephir_check_call_status();
 	RETURN_MM();
 

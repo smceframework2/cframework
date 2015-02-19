@@ -1,9 +1,0 @@
-<testsuites>
-  <testsuite name="test">
-  	
-  	<file>di/index.php</file>
-  	<file>eventmanager/index.php</file>
-
-  </testsuite>
-  
-</testsuites>

@@ -264,3 +264,20 @@ PHP_METHOD(Smce_Components_Session, getLoginStatus) {
 
 }
 
+PHP_METHOD(Smce_Components_Session, isSessionStart) {
+
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *_0 = NULL;
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL);
+	zephir_check_call_status();
+	if (ZEPHIR_IS_LONG(_0, 1)) {
+		RETURN_MM_BOOL(0);
+	} else {
+		RETURN_MM_BOOL(1);
+	}
+
+}
+

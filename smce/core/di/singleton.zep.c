@@ -33,7 +33,7 @@ ZEPHIR_INIT_CLASS(Smce_Core_Di_Singleton) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core\\Di, Singleton, smce, core_di_singleton, smce_core_di_singleton_method_entry, 0);
 
-	zend_declare_property_null(smce_core_di_singleton_ce, SL("disSingleton"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+	zend_declare_property_null(smce_core_di_singleton_ce, SL("disSingleton"), ZEND_ACC_PRIVATE|ZEND_ACC_STATIC TSRMLS_CC);
 
 	zend_declare_property_null(smce_core_di_singleton_ce, SL("cs"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
@@ -314,47 +314,48 @@ PHP_METHOD(Smce_Core_Di_Singleton, controllerMethodParamerters) {
 
 PHP_METHOD(Smce_Core_Di_Singleton, make) {
 
-	zend_bool _0;
+	zend_bool _1;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *controller, *action, *refMethod, *constructorParamerter = NULL, *actionParamerter = NULL, *_1, *_2 = NULL, *_3;
+	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_4 = NULL;
+	zval *controller, *action, *refMethod, *constructorParamerter = NULL, *actionParamerter = NULL, *_2, *_3 = NULL, *_5;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &controller, &action);
 
 
 
-	ZEPHIR_CALL_SELF(&constructorParamerter, "controllerconstructorparamerters", NULL, controller);
+	ZEPHIR_CALL_SELF(&constructorParamerter, "controllerconstructorparamerters", &_0, controller);
 	zephir_check_call_status();
-	_0 = !ZEPHIR_IS_FALSE(constructorParamerter);
-	if (_0) {
-		_0 = zephir_fast_count_int(constructorParamerter TSRMLS_CC) > 0;
+	_1 = !ZEPHIR_IS_FALSE(constructorParamerter);
+	if (_1) {
+		_1 = zephir_fast_count_int(constructorParamerter TSRMLS_CC) > 0;
 	}
-	if (_0) {
-		_1 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("reflection") TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_2, _1, "newinstanceargs", NULL, constructorParamerter);
+	if (_1) {
+		_2 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("reflection") TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&_3, _2, "newinstanceargs", NULL, constructorParamerter);
 		zephir_check_call_status();
-		zephir_update_static_property_ce(smce_core_di_singleton_ce, SL("istance"), &_2 TSRMLS_CC);
+		zephir_update_static_property_ce(smce_core_di_singleton_ce, SL("istance"), &_3 TSRMLS_CC);
 	} else {
-		_1 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("reflection") TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_2, _1, "newinstanceargs", NULL);
+		_2 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("reflection") TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&_3, _2, "newinstanceargs", NULL);
 		zephir_check_call_status();
-		zephir_update_static_property_ce(smce_core_di_singleton_ce, SL("istance"), &_2 TSRMLS_CC);
+		zephir_update_static_property_ce(smce_core_di_singleton_ce, SL("istance"), &_3 TSRMLS_CC);
 	}
-	ZEPHIR_CALL_SELF(&actionParamerter, "controllermethodparamerters", NULL, controller, action);
+	ZEPHIR_CALL_SELF(&actionParamerter, "controllermethodparamerters", &_4, controller, action);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(refMethod);
 	object_init_ex(refMethod, zephir_get_internal_ce(SS("reflectionmethod") TSRMLS_CC));
 	ZEPHIR_CALL_METHOD(NULL, refMethod, "__construct", NULL, controller, action);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_FALSE(actionParamerter)) {
-		_1 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("istance") TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_3);
-		array_init(_3);
-		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, _1, _3);
+		_2 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("istance") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_5);
+		array_init(_5);
+		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, _2, _5);
 		zephir_check_call_status();
 	} else {
-		_1 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("istance") TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, _1, actionParamerter);
+		_2 = zephir_fetch_static_property_ce(smce_core_di_singleton_ce, SL("istance") TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, _2, actionParamerter);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

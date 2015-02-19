@@ -32,8 +32,8 @@ ZEPHIR_INIT_FUNCS(smce_mvc_acl_method_entry) {
 	PHP_ME(Smce_Mvc_Acl, getRules, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Acl, run, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Acl, redirect, arginfo_smce_mvc_acl_redirect, ZEND_ACC_PRIVATE)
-	PHP_ME(Smce_Mvc_Acl, loginControl, arginfo_smce_mvc_acl_logincontrol, ZEND_ACC_PROTECTED)
-	PHP_ME(Smce_Mvc_Acl, expressionControl, arginfo_smce_mvc_acl_expressioncontrol, ZEND_ACC_PROTECTED)
+	PHP_ME(Smce_Mvc_Acl, loginControl, arginfo_smce_mvc_acl_logincontrol, ZEND_ACC_PRIVATE)
+	PHP_ME(Smce_Mvc_Acl, expressionControl, arginfo_smce_mvc_acl_expressioncontrol, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Mvc_Acl, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
   PHP_FE_END
 };

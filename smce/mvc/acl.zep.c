@@ -50,7 +50,7 @@ PHP_METHOD(Smce_Mvc_Acl, setRules) {
 
 
 	zephir_update_property_this(this_ptr, SL("rules"), rules TSRMLS_CC);
-	RETURN_THIS();
+	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -63,12 +63,12 @@ PHP_METHOD(Smce_Mvc_Acl, getRules) {
 
 PHP_METHOD(Smce_Mvc_Acl, run) {
 
-	zephir_fcall_cache_entry *_18 = NULL, *_22 = NULL, *_29 = NULL;
+	zephir_fcall_cache_entry *_18 = NULL;
 	zend_bool _12, _27;
 	HashTable *_9;
 	HashPosition _8;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_26 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_22 = NULL, *_26 = NULL, *_29 = NULL;
 	zval *value = NULL, *ip = NULL, *_0 = NULL, *_2 = NULL, *_3 = NULL, *_4, *_5, *_6, *_7, **_10, *_11, *_13, *_14, *_15 = NULL, *_16 = NULL, *_17 = NULL, *_19 = NULL, *_20, *_21, *_23, *_24, *_25, *_28 = NULL;
 
 	ZEPHIR_MM_GROW();

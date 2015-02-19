@@ -23,6 +23,6 @@ ZEPHIR_INIT_FUNCS(smce_http_httpexception_method_entry) {
 	PHP_ME(Smce_Http_HttpException, getMsg, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Http_HttpException, getHttpCode, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Http_HttpException, htppError, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Smce_Http_HttpException, http_response_code, arginfo_smce_http_httpexception_http_response_code, ZEND_ACC_PROTECTED)
+	PHP_ME(Smce_Http_HttpException, http_response_code, arginfo_smce_http_httpexception_http_response_code, ZEND_ACC_PRIVATE)
   PHP_FE_END
 };

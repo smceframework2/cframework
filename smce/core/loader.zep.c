@@ -34,9 +34,9 @@ ZEPHIR_INIT_CLASS(Smce_Core_Loader) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core, Loader, smce, core_loader, smce_core_loader_method_entry, 0);
 
-	zend_declare_property_null(smce_core_loader_ce, SL("dirs"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+	zend_declare_property_null(smce_core_loader_ce, SL("dirs"), ZEND_ACC_PRIVATE|ZEND_ACC_STATIC TSRMLS_CC);
 
-	zend_declare_property_bool(smce_core_loader_ce, SL("_registered"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_bool(smce_core_loader_ce, SL("_registered"), 0, ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	return SUCCESS;
 

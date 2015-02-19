@@ -31,9 +31,9 @@ ZEPHIR_INIT_CLASS(Smce_Http_HttpException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Smce\\Http, HttpException, smce, http_httpexception, zend_exception_get_default(TSRMLS_C), smce_http_httpexception_method_entry, 0);
 
-	zend_declare_property_null(smce_http_httpexception_ce, SL("httpCode"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_http_httpexception_ce, SL("httpCode"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
-	zend_declare_property_null(smce_http_httpexception_ce, SL("msg"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(smce_http_httpexception_ce, SL("msg"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -41,6 +41,7 @@ ZEPHIR_INIT_CLASS(Smce_Http_HttpException) {
 
 PHP_METHOD(Smce_Http_HttpException, __construct) {
 
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	zval *msg = NULL;
 	zval *httpCode_param = NULL, *msg_param = NULL, *_0;
 	int httpCode, ZEPHIR_LAST_CALL_STATUS;
@@ -57,7 +58,7 @@ PHP_METHOD(Smce_Http_HttpException, __construct) {
 	ZVAL_LONG(_0, httpCode);
 	zephir_update_property_this(this_ptr, SL("httpCode"), _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("httpCode"), PH_NOISY_CC);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", NULL, _0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", &_1, _0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
