@@ -9,13 +9,13 @@ class SiteController
 
 		if($loader3->get()!=true){
 
-			throw Exception("__construct: was not installed loader3")
+			throw Exception("__construct: was not installed loader3");
 
 		}
 
 		if($loader4->get()!=true){
 
-			throw Exception("__construct: was not installed loader4")
+			throw Exception("__construct: was not installed loader4");
 
 		}
 
@@ -27,13 +27,13 @@ class SiteController
 
 		if($loader3->get()!=true){
 
-			throw Exception("actionIndex: was not installed loader3")
+			throw Exception("actionIndex: was not installed loader3");
 
 		}
 
 		if($loader4->get()!=true){
 
-			throw Exception("actionIndex: was not installed loader4")
+			throw Exception("actionIndex: was not installed loader4");
 
 		}
 
@@ -41,7 +41,7 @@ class SiteController
 
 		if($loader3->get()!=true){
 
-			throw Exception("resolve: was not installed loader3")
+			throw Exception("resolve: was not installed loader3");
 
 		}
 	}
