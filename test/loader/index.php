@@ -30,13 +30,13 @@ class Loader extends PHPUnit_Framework_TestCase
 
 		$baseUrl=$this->baseUrl();
 		//bind
-		$di->bind("router",function() use($baseUrl){
+		$di->bind("router",function(){
 
 			//router
 		    $router = new Smce\Mvc\Router;
 		    $router->setDefaultController('site');
 		    $router->setDefaultAction('index');
-		    $router->handle($baseUrl);
+		    $router->handle();
 
 		    return $router;
 		});
@@ -58,13 +58,5 @@ class Loader extends PHPUnit_Framework_TestCase
 
 	}
 
-
-	public function baseUrl()
-	{
-	        
-	    $uri=str_replace("/index.php", "", $_SERVER["SCRIPT_NAME"]);
-	    
-	    return str_replace($uri, "", $_SERVER['REQUEST_URI']);
-	}
 
 }
