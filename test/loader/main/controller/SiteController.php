@@ -1,7 +1,7 @@
 <?php
 
 
-class SiteController
+class SiteController extends PHPUnit_Framework_TestCase
 {
 	
 	
