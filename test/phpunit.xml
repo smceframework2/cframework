@@ -3,6 +3,7 @@
   	
   	<file>di/index.php</file>
   	<file>eventmanager/index.php</file>
+  	<file>loader/index.php</file>
 
   </testsuite>
   
