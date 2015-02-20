@@ -1,4 +1,3 @@
 [submodule "examples"]
-path = examples
-url = git://github.com/smceframework2/examples.git
-branch = master
+	path = examples
+	url = https://github.com/smceframework2/examples
