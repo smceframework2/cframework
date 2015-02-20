@@ -35,7 +35,7 @@ Url
 
 ###Install
 
-$ cd cframework
+$ cd build
 
 $ sudo apt-get install php5-dev libpcre3-dev gcc make
 
