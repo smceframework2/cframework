@@ -1,3 +1,6 @@
 [submodule "examples"]
 	path = examples
 	url = https://github.com/smceframework2/examples
+[submodule "API"]
+	path = API
+	url = https://github.com/smceframework2/API
