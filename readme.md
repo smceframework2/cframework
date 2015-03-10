@@ -8,7 +8,7 @@ Dependency Injection CACHE
 
 Dependency Injection Singleton
 
-Queque
+Queue
 
 EventManager
 
