@@ -28,7 +28,7 @@
  * @author Samed Ceylan
  * @link http://www.samedceylan.com/
  * @copyright 2015 SmceFramework 2
- * @github https://github.com/smceframework
+ * @github https://github.com/smceframework2
  */
 ZEPHIR_INIT_CLASS(Smce_Core_Di) {
 
@@ -180,7 +180,7 @@ PHP_METHOD(Smce_Core_Di, singleton) {
 	ZEPHIR_INIT_VAR(_1);
 	zephir_fast_strtolower(_1, key);
 	zephir_update_static_property_array_multi_ce(smce_core_di_ce, SL("dis"), &_0 TSRMLS_CC, SL("z"), 1, _1);
-	object_init_ex(return_value, smce_core_di_singleton_ce);
+	object_init_ex(return_value, smce_core_di_disingleton_ce);
 	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, key, _0);

@@ -16,18 +16,25 @@ if test "$PHP_SMCE" = "yes"; then
 	smce/core/di.zep.c
 	smce/core/di/diadapter.zep.c
 	smce/core/di/dicache.zep.c
-	smce/core/di/singleton.zep.c
+	smce/core/di/disingleton.zep.c
 	smce/core/eventmanager.zep.c
 	smce/core/loader.zep.c
+	smce/core/queue.zep.c
+	smce/core/queue/queueadapter.zep.c
+	smce/core/queue/queuelisten.zep.c
+	smce/core/queue/queuemodel.zep.c
 	smce/core/smceframework.zep.c
+	smce/driver/adapter.zep.c
 	smce/driver/memcache.zep.c
 	smce/driver/redis.zep.c
 	smce/http/httpexception.zep.c
 	smce/http/response.zep.c
 	smce/mvc/acl.zep.c
+	smce/mvc/layout.zep.c
 	smce/mvc/router.zep.c
 	smce/mvc/router/exception.zep.c
 	smce/mvc/router/route.zep.c
+	smce/mvc/template.zep.c
 	smce/mvc/url.zep.c
 	smce/sm.zep.c "
 	PHP_NEW_EXTENSION(smce, $smce_sources, $ext_shared,, )

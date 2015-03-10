@@ -7,11 +7,12 @@ if (PHP_SMCE != "no") {
   
   ADD_SOURCES(configure_module_dirname + "/smce", "app.zep.c sm.zep.c", "smce");
 	ADD_SOURCES(configure_module_dirname + "/smce/components", "collection.zep.c output.zep.c session.zep.c", "smce");
-	ADD_SOURCES(configure_module_dirname + "/smce/core", "di.zep.c eventmanager.zep.c loader.zep.c smceframework.zep.c", "smce");
-	ADD_SOURCES(configure_module_dirname + "/smce/core/di", "diadapter.zep.c dicache.zep.c singleton.zep.c", "smce");
-	ADD_SOURCES(configure_module_dirname + "/smce/driver", "memcache.zep.c redis.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/core", "di.zep.c eventmanager.zep.c loader.zep.c queue.zep.c smceframework.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/core/di", "diadapter.zep.c dicache.zep.c disingleton.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/core/queue", "queueadapter.zep.c queuelisten.zep.c queuemodel.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/driver", "adapter.zep.c memcache.zep.c redis.zep.c", "smce");
 	ADD_SOURCES(configure_module_dirname + "/smce/http", "httpexception.zep.c response.zep.c", "smce");
-	ADD_SOURCES(configure_module_dirname + "/smce/mvc", "acl.zep.c router.zep.c url.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/mvc", "acl.zep.c layout.zep.c router.zep.c template.zep.c url.zep.c", "smce");
 	ADD_SOURCES(configure_module_dirname + "/smce/mvc/router", "exception.zep.c route.zep.c", "smce");
   ADD_FLAG("CFLAGS_SMCE", "/D ZEPHIR_RELEASE");
 }

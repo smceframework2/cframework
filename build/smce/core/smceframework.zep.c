@@ -25,20 +25,29 @@
  * @author Samed Ceylan
  * @link http://www.samedceylan.com/
  * @copyright 2015 SmceFramework 2
- * @github https://github.com/smceframework
+ * @github https://github.com/smceframework2
  */
 ZEPHIR_INIT_CLASS(Smce_Core_SmceFramework) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core, SmceFramework, smce, core_smceframework, smce_core_smceframework_method_entry, 0);
 
+	/**
+	 * @var controller
+	 */
 	zend_declare_property_null(smce_core_smceframework_ce, SL("controller"), ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
 
+	/**
+	 * @var action
+	 */
 	zend_declare_property_null(smce_core_smceframework_ce, SL("action"), ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
 
 }
 
+/**
+ * @return void
+ */
 PHP_METHOD(Smce_Core_SmceFramework, make) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -58,6 +67,9 @@ PHP_METHOD(Smce_Core_SmceFramework, make) {
 
 }
 
+/**
+ * @return HttpException|void
+ */
 PHP_METHOD(Smce_Core_SmceFramework, router) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -106,7 +118,7 @@ PHP_METHOD(Smce_Core_SmceFramework, router) {
 		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _10, _11);
 		zephir_check_temp_parameter(_11);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_1, "smce/core/smceframework.zep", 47 TSRMLS_CC);
+		zephir_throw_exception_debug(_1, "smce/core/smceframework.zep", 57 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -114,6 +126,10 @@ PHP_METHOD(Smce_Core_SmceFramework, router) {
 
 }
 
+/**
+ * 
+ * @return HttpException|void
+ */
 PHP_METHOD(Smce_Core_SmceFramework, command) {
 
 	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
@@ -134,7 +150,7 @@ PHP_METHOD(Smce_Core_SmceFramework, command) {
 		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _3, _4);
 		zephir_check_temp_parameter(_4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2, "smce/core/smceframework.zep", 60 TSRMLS_CC);
+		zephir_throw_exception_debug(_2, "smce/core/smceframework.zep", 73 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -144,6 +160,10 @@ PHP_METHOD(Smce_Core_SmceFramework, command) {
 
 }
 
+/**
+ * 
+ * @return bool
+ */
 PHP_METHOD(Smce_Core_SmceFramework, isController) {
 
 	zval *_0;
@@ -158,6 +178,10 @@ PHP_METHOD(Smce_Core_SmceFramework, isController) {
 
 }
 
+/**
+ * 
+ * @return HttpException|void
+ */
 PHP_METHOD(Smce_Core_SmceFramework, controllerAction) {
 
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
@@ -181,7 +205,7 @@ PHP_METHOD(Smce_Core_SmceFramework, controllerAction) {
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _4, _5);
 		zephir_check_temp_parameter(_5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_3, "smce/core/smceframework.zep", 93 TSRMLS_CC);
+		zephir_throw_exception_debug(_3, "smce/core/smceframework.zep", 112 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -189,6 +213,10 @@ PHP_METHOD(Smce_Core_SmceFramework, controllerAction) {
 
 }
 
+/**
+ * 
+ * @return void
+ */
 PHP_METHOD(Smce_Core_SmceFramework, runAction) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -199,7 +227,7 @@ PHP_METHOD(Smce_Core_SmceFramework, runAction) {
 
 	_1 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("controller") TSRMLS_CC);
 	_2 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("action") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_singleton_ce, "make", &_0, _1, _2);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_disingleton_ce, "make", &_0, _1, _2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

@@ -42,9 +42,9 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(smce_core_di_method_entry) {
 	PHP_ME(Smce_Core_Di, __construct, arginfo_smce_core_di___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-	PHP_ME(Smce_Core_Di, bind, arginfo_smce_core_di_bind, ZEND_ACC_PUBLIC)
+	PHP_ME(Smce_Core_Di, bind, arginfo_smce_core_di_bind, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, resolve, arginfo_smce_core_di_resolve, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_ME(Smce_Core_Di, singleton, arginfo_smce_core_di_singleton, ZEND_ACC_PUBLIC)
+	PHP_ME(Smce_Core_Di, singleton, arginfo_smce_core_di_singleton, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, remove, arginfo_smce_core_di_remove, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, has, arginfo_smce_core_di_has, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, reset, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
