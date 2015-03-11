@@ -1,4 +1,4 @@
-#Smceframework - sf2
+#Smceframework2 - sf2
 
 ###Features
 
@@ -39,7 +39,7 @@ Url
 
 ###Install
 
-##Ubuntu
+####Ubuntu
 
 $ cd build
 
@@ -55,7 +55,7 @@ $ service apache2 restart
 
 
 
-##CentOS/RedHat/Fedora
+####CentOS/RedHat/Fedora
 
 $ cd build
 
@@ -70,7 +70,7 @@ extension=smce.so
 $ service apache2 restart
 
 
-##Suse
+####Suse
 
 $ cd build
 
