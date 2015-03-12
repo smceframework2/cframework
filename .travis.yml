@@ -11,10 +11,12 @@ php:
 before_script:
 - sudo apt-get update
 - sudo apt-get install apache2 php5-dev libpcre3-dev gcc make
+- cd build
 - ./install 
 - echo "extension = smce.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 - sudo service apache2 restart
 - git clone https://github.com/smceframework2/test
+- cd ..
 - cd test
 
 script:  phpunit --configuration phpunit.xml --process-isolation
