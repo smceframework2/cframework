@@ -16,7 +16,6 @@ before_script:
 - echo "extension = smce.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 - sudo service apache2 restart
 - git clone https://github.com/smceframework2/test
-- cd ..
 - cd test
 
 script:  phpunit --configuration phpunit.xml --process-isolation
