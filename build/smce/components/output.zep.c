@@ -24,7 +24,7 @@
  * @author Samed Ceylan
  * @link http://www.samedceylan.com/
  * @copyright 2015 SmceFramework2
- * @github https://github.com/smceframework2
+ * @github https://github.com/smceframework22
  */
 ZEPHIR_INIT_CLASS(Smce_Components_Output) {
 
