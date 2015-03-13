@@ -190,7 +190,11 @@ PHP_METHOD(Smce_Components_Collection, get) {
 	zephir_check_call_status();
 	if (zephir_is_true(_0)) {
 		_1 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
+<<<<<<< HEAD
 		zephir_array_fetch(&_2, _1, key, PH_NOISY | PH_READONLY, "smce/components/collection.zep", 71 TSRMLS_CC);
+=======
+		zephir_array_fetch(&_2, _1, key, PH_NOISY | PH_READONLY, "smce/components/collection.zep", 80 TSRMLS_CC);
+>>>>>>> 2b6517bec9ee3fdbb5138febaef2f7b0621a0940
 		RETURN_CTOR(_2);
 	}
 	ZEPHIR_MM_RESTORE();
