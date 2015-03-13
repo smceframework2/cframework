@@ -17,8 +17,8 @@
 #include "Zend/zend_closures.h"
 #include "kernel/exception.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
 #include "kernel/array.h"
+#include "kernel/operators.h"
 
 ZEPHIR_INIT_CLASS(Smce_Components_Collection) {
 
@@ -70,28 +70,6 @@ PHP_METHOD(Smce_Components_Collection, each) {
 	ZEPHIR_CALL_FUNCTION(NULL, "array_map", &_1, callback, _0);
 	zephir_check_call_status();
 	RETURN_THIS();
-
-}
-
-PHP_METHOD(Smce_Components_Collection, fetch) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key_param = NULL, *_0, *_1 = NULL;
-	zval *key = NULL;
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &key_param);
-
-	zephir_get_strval(key, key_param);
-
-
-	object_init_ex(return_value, smce_components_collection_ce);
-	_0 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(&_1, "array_fetch", NULL, _0, key);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, _1);
-	zephir_check_call_status();
-	RETURN_MM();
 
 }
 
@@ -148,26 +126,6 @@ PHP_METHOD(Smce_Components_Collection, filter) {
 
 }
 
-PHP_METHOD(Smce_Components_Collection, pull) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key, *dt = NULL, *_0;
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &key, &dt);
-
-	if (!dt) {
-		dt = ZEPHIR_GLOBAL(global_null);
-	}
-
-
-	_0 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_pull", NULL, _0, key, dt);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
 PHP_METHOD(Smce_Components_Collection, pop) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -215,70 +173,6 @@ PHP_METHOD(Smce_Components_Collection, getAll) {
 
 }
 
-PHP_METHOD(Smce_Components_Collection, first) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
-	zend_bool _0;
-	zval *callback = NULL, *dt = NULL, *_1 = NULL, *_2, *_3;
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &callback, &dt);
-
-	if (!callback) {
-		callback = ZEPHIR_GLOBAL(global_null);
-	}
-	if (!dt) {
-		dt = ZEPHIR_GLOBAL(global_null);
-	}
-
-
-	_0 = Z_TYPE_P(callback) != IS_NULL;
-	if (_0) {
-		_0 = !zephir_instance_of_ev(callback, zend_ce_closure TSRMLS_CC);
-	}
-	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'callback' must be an instance of 'Closure'", "", 0);
-		return;
-	}
-	if (Z_TYPE_P(callback) == IS_NULL) {
-		ZEPHIR_INIT_VAR(_1);
-		_2 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-		if (zephir_fast_count_int(_2 TSRMLS_CC) > 0) {
-			_3 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-			Z_SET_ISREF_P(_3);
-			ZEPHIR_CALL_FUNCTION(&_1, "reset", &_4, _3);
-			Z_UNSET_ISREF_P(_3);
-			zephir_check_call_status();
-		} else {
-			ZVAL_NULL(_1);
-		}
-		RETURN_CCTOR(_1);
-	}
-	_2 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_first", NULL, _2, callback, dt);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
-PHP_METHOD(Smce_Components_Collection, flatten) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0, *_1 = NULL;
-
-	ZEPHIR_MM_GROW();
-
-	object_init_ex(return_value, smce_components_collection_ce);
-	_0 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(&_1, "array_flatten", NULL, _0);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, _1);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
 PHP_METHOD(Smce_Components_Collection, get) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -296,12 +190,10 @@ PHP_METHOD(Smce_Components_Collection, get) {
 	zephir_check_call_status();
 	if (zephir_is_true(_0)) {
 		_1 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-		zephir_array_fetch(&_2, _1, key, PH_NOISY | PH_READONLY, "smce/components/collection.zep", 104 TSRMLS_CC);
+		zephir_array_fetch(&_2, _1, key, PH_NOISY | PH_READONLY, "smce/components/collection.zep", 71 TSRMLS_CC);
 		RETURN_CTOR(_2);
 	}
-	ZEPHIR_RETURN_CALL_FUNCTION("value", NULL, dt);
-	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -363,31 +255,6 @@ PHP_METHOD(Smce_Components_Collection, keys) {
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
 	zephir_array_keys(_0, _1 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, _0);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
-PHP_METHOD(Smce_Components_Collection, lists) {
-
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *value_param = NULL, *key_param = NULL, *_0;
-	zval *value = NULL, *key = NULL;
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &value_param, &key_param);
-
-	zephir_get_strval(value, value_param);
-	if (!key_param) {
-		ZEPHIR_INIT_VAR(key);
-		ZVAL_EMPTY_STRING(key);
-	} else {
-		zephir_get_strval(key, key_param);
-	}
-
-
-	_0 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_pluck", NULL, _0, value, key);
 	zephir_check_call_status();
 	RETURN_MM();
 
