@@ -10,12 +10,12 @@
 
 #include "kernel/globals.h"
 
-#define PHP_SMCE_NAME        "Smceframework2 - SF2"
-#define PHP_SMCE_VERSION     "0.3.0.0"
-#define PHP_SMCE_EXTNAME     "smce2"
+#define PHP_SMCE_NAME        "smce"
+#define PHP_SMCE_VERSION     "1.0.0"
+#define PHP_SMCE_EXTNAME     "smce"
 #define PHP_SMCE_AUTHOR      "Zephir Team and contributors"
 #define PHP_SMCE_ZEPVERSION  "0.5.9a"
-#define PHP_SMCE_DESCRIPTION "High performing, Secure, Flexible and Simple PHP Framework Application"
+#define PHP_SMCE_DESCRIPTION "Description test for<br/>Test Extension"
 
 typedef struct _zephir_struct_test { 
 	zend_bool my_setting_1;
