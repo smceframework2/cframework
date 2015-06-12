@@ -6,6 +6,7 @@
 
 #include "smce/app.zep.h"
 #include "smce/components/collection.zep.h"
+#include "smce/components/i18n.zep.h"
 #include "smce/components/output.zep.h"
 #include "smce/components/session.zep.h"
 #include "smce/core/di.zep.h"

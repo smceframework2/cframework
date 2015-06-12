@@ -110,5 +110,5 @@ ZEPHIR_INIT_FUNCS(smce_driver_memcache_method_entry) {
 	PHP_ME(Smce_Driver_Memcache, replace, arginfo_smce_driver_memcache_replace, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Memcache, setCompressThreshold, arginfo_smce_driver_memcache_setcompressthreshold, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Memcache, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

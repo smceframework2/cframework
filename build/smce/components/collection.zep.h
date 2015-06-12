@@ -137,5 +137,5 @@ ZEPHIR_INIT_FUNCS(smce_components_collection_method_entry) {
 	PHP_ME(Smce_Components_Collection, count, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Collection, push, arginfo_smce_components_collection_push, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Collection, offsetSet, arginfo_smce_components_collection_offsetset, ZEND_ACC_PUBLIC)
-  PHP_FE_END
+	PHP_FE_END
 };

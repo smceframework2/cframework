@@ -16,7 +16,6 @@
 #include "kernel/operators.h"
 #include "kernel/memory.h"
 #include "kernel/string.h"
-#include "kernel/fcall.h"
 #include "kernel/concat.h"
 
 
@@ -62,9 +61,8 @@ PHP_METHOD(Smce_Mvc_Url, getBaseUrl) {
 
 PHP_METHOD(Smce_Mvc_Url, get) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL;
-	int len, i = 1, ZEPHIR_LAST_CALL_STATUS;
-	zval *paramerter_param = NULL, *baseUrl = NULL, *_0, *_1, _2, _3, *_4 = NULL, *_6, *_7;
+	int len, i = 1;
+	zval *paramerter_param = NULL, *baseUrl = NULL, *_0, *_1, _2, _3, *_4, *_5, *_6;
 	zval *paramerter = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -80,16 +78,16 @@ PHP_METHOD(Smce_Mvc_Url, get) {
 	ZVAL_LONG(&_2, (len - i));
 	ZEPHIR_SINIT_VAR(_3);
 	ZVAL_LONG(&_3, len);
-	ZEPHIR_CALL_FUNCTION(&_4, "substr", &_5, _1, &_2, &_3);
-	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(_4);
+	zephir_substr(_4, _1, zephir_get_intval(&_2), zephir_get_intval(&_3), 0);
 	if (!ZEPHIR_IS_STRING(_4, "/")) {
-		_6 = zephir_fetch_nproperty_this(this_ptr, SL("baseUrl"), PH_NOISY_CC);
-		ZEPHIR_INIT_VAR(_7);
-		ZEPHIR_CONCAT_VS(_7, _6, "/");
-		ZEPHIR_CPY_WRT(baseUrl, _7);
-	} else {
-		_6 = zephir_fetch_nproperty_this(this_ptr, SL("baseUrl"), PH_NOISY_CC);
+		_5 = zephir_fetch_nproperty_this(this_ptr, SL("baseUrl"), PH_NOISY_CC);
+		ZEPHIR_INIT_VAR(_6);
+		ZEPHIR_CONCAT_VS(_6, _5, "/");
 		ZEPHIR_CPY_WRT(baseUrl, _6);
+	} else {
+		_5 = zephir_fetch_nproperty_this(this_ptr, SL("baseUrl"), PH_NOISY_CC);
+		ZEPHIR_CPY_WRT(baseUrl, _5);
 	}
 	ZEPHIR_CONCAT_VV(return_value, baseUrl, paramerter);
 	RETURN_MM();

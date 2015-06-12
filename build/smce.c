@@ -20,6 +20,7 @@
 #include <Zend/zend_exceptions.h>
 #include <Zend/zend_interfaces.h>
 
+#include "kernel/globals.h"
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
@@ -29,6 +30,7 @@
 zend_class_entry *smce_http_httpexception_ce;
 zend_class_entry *smce_app_ce;
 zend_class_entry *smce_components_collection_ce;
+zend_class_entry *smce_components_i18n_ce;
 zend_class_entry *smce_components_output_ce;
 zend_class_entry *smce_components_session_ce;
 zend_class_entry *smce_core_di_ce;
@@ -78,6 +80,7 @@ static PHP_MINIT_FUNCTION(smce)
 	ZEPHIR_INIT(Smce_Http_HttpException);
 	ZEPHIR_INIT(Smce_App);
 	ZEPHIR_INIT(Smce_Components_Collection);
+	ZEPHIR_INIT(Smce_Components_I18n);
 	ZEPHIR_INIT(Smce_Components_Output);
 	ZEPHIR_INIT(Smce_Components_Session);
 	ZEPHIR_INIT(Smce_Core_Di);
@@ -90,7 +93,7 @@ static PHP_MINIT_FUNCTION(smce)
 	ZEPHIR_INIT(Smce_Core_Queue_QueueAdapter);
 	ZEPHIR_INIT(Smce_Core_Queue_QueueListen);
 	ZEPHIR_INIT(Smce_Core_Queue_QueueModel);
-	ZEPHIR_INIT(Smce_Core_SmceFramework);
+	ZEPHIR_INIT(Smce_Core_Smceframework);
 	ZEPHIR_INIT(Smce_Driver_Adapter);
 	ZEPHIR_INIT(Smce_Driver_Memcache);
 	ZEPHIR_INIT(Smce_Driver_Redis);
@@ -140,6 +143,9 @@ static void php_zephir_init_globals(zend_smce_globals *zephir_globals TSRMLS_DC)
 	/* Recursive Lock */
 	zephir_globals->recursive_lock = 0;
 
+	/* Static cache */
+	memset(zephir_globals->scache, '\0', sizeof(zephir_fcall_cache_entry*) * ZEPHIR_MAX_CACHE_SLOTS);
+
 	zephir_globals->test.my_setting_1 = 1;
 	zephir_globals->test.my_setting_2 = 100;
 	zephir_globals->test.my_setting_3 = 7.5;
@@ -158,6 +164,7 @@ static PHP_RINIT_FUNCTION(smce)
 	//zephir_init_interned_strings(TSRMLS_C);
 
 	zephir_initialize_memory(zephir_globals_ptr TSRMLS_CC);
+
 
 	return SUCCESS;
 }
@@ -207,12 +214,18 @@ static PHP_GSHUTDOWN_FUNCTION(smce)
 
 }
 
+
+zend_function_entry php_smce_functions[] = {
+ZEND_FE_END
+
+};
+
 zend_module_entry smce_module_entry = {
 	STANDARD_MODULE_HEADER_EX,
 	NULL,
 	NULL,
 	PHP_SMCE_EXTNAME,
-	NULL,
+	php_smce_functions,
 	PHP_MINIT(smce),
 #ifndef ZEPHIR_RELEASE
 	PHP_MSHUTDOWN(smce),

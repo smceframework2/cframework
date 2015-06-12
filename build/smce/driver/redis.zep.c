@@ -38,9 +38,6 @@ ZEPHIR_INIT_CLASS(Smce_Driver_Redis) {
 
 }
 
-/*
- * @return redis connect
- */
 PHP_METHOD(Smce_Driver_Redis, getRedis) {
 
 
@@ -48,9 +45,6 @@ PHP_METHOD(Smce_Driver_Redis, getRedis) {
 
 }
 
-/*
- * @return void
- */
 PHP_METHOD(Smce_Driver_Redis, setConfig) {
 
 	zval *config;
@@ -63,9 +57,6 @@ PHP_METHOD(Smce_Driver_Redis, setConfig) {
 
 }
 
-/*
- * @return array
- */
 PHP_METHOD(Smce_Driver_Redis, getConfig) {
 
 
@@ -94,7 +85,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 		if (zephir_has_constructor(_0 TSRMLS_CC)) {
 			ZEPHIR_INIT_VAR(_2);
 			ZVAL_STRING(_2, "redis server configuration must have \"host\" and \"port\" values in array.", ZEPHIR_TEMP_PARAM_COPY);
-			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, _2);
+			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 0, _2);
 			zephir_check_temp_parameter(_2);
 			zephir_check_call_status();
 		}
@@ -110,7 +101,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 		_6 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 		ZEPHIR_OBS_VAR(_7);
 		zephir_array_fetch_string(&_7, _6, SL("port"), PH_NOISY, "smce/driver/redis.zep", 61 TSRMLS_CC);
-		_5 = !ZEPHIR_IS_EMPTY(_7);
+		_5 = !(ZEPHIR_IS_EMPTY(_7));
 	}
 	if (_5) {
 		ZEPHIR_INIT_NVAR(_0);
@@ -121,7 +112,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 		if (zephir_has_constructor(_0 TSRMLS_CC)) {
 			ZEPHIR_INIT_NVAR(_2);
 			ZVAL_STRING(_2, "redis server configuration must have \"host\" and \"port\" not empty", ZEPHIR_TEMP_PARAM_COPY);
-			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, _2);
+			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 0, _2);
 			zephir_check_temp_parameter(_2);
 			zephir_check_call_status();
 		}
@@ -132,7 +123,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 	ZEPHIR_INIT_NVAR(_0);
 	object_init_ex(_0, zephir_get_internal_ce(SS("redis") TSRMLS_CC));
 	if (zephir_has_constructor(_0 TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL);
+		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
 	zephir_update_property_this(this_ptr, SL("redis"), _0 TSRMLS_CC);
@@ -141,7 +132,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 	zephir_array_fetch_string(&_12, _11, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/redis.zep", 70 TSRMLS_CC);
 	_13 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 	zephir_array_fetch_string(&_14, _13, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/redis.zep", 70 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_10, _9, "connect", NULL, _12, _14);
+	ZEPHIR_CALL_METHOD(&_10, _9, "connect", NULL, 0, _12, _14);
 	zephir_check_call_status();
 	if (zephir_is_true(_10)) {
 		ZEPHIR_INIT_NVAR(_2);
@@ -156,7 +147,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 			zephir_array_fetch_string(&_19, _18, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/redis.zep", 73 TSRMLS_CC);
 			ZEPHIR_INIT_VAR(_20);
 			ZEPHIR_CONCAT_SVSV(_20, "Failed on connecting to redis server at ", _17, ":", _19);
-			ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _20);
+			ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, 0, _20);
 			zephir_check_call_status();
 		}
 		zephir_throw_exception_debug(_2, "smce/driver/redis.zep", 73 TSRMLS_CC);
@@ -185,7 +176,7 @@ PHP_METHOD(Smce_Driver_Redis, get) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, key);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, 0, key);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -215,7 +206,7 @@ PHP_METHOD(Smce_Driver_Redis, set) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_LONG(_1, duration);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "set", NULL, key, value, _1);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "set", NULL, 0, key, value, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -241,7 +232,7 @@ PHP_METHOD(Smce_Driver_Redis, lpush) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "lpush", NULL, key, value);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "lpush", NULL, 0, key, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -267,7 +258,7 @@ PHP_METHOD(Smce_Driver_Redis, lrange) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "lrange", NULL, key, x, y);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "lrange", NULL, 0, key, x, y);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -293,7 +284,7 @@ PHP_METHOD(Smce_Driver_Redis, hdel) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("redis"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "hdel", NULL, key, key2);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "hdel", NULL, 0, key, key2);
 	zephir_check_call_status();
 	RETURN_MM();
 

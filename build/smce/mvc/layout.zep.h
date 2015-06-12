@@ -24,5 +24,5 @@ ZEPHIR_INIT_FUNCS(smce_mvc_layout_method_entry) {
 	PHP_ME(Smce_Mvc_Layout, setContent, arginfo_smce_mvc_layout_setcontent, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Layout, run, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Layout, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

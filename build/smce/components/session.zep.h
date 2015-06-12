@@ -12,6 +12,8 @@ PHP_METHOD(Smce_Components_Session, remove);
 PHP_METHOD(Smce_Components_Session, login);
 PHP_METHOD(Smce_Components_Session, getLoginStatus);
 PHP_METHOD(Smce_Components_Session, isSessionStart);
+PHP_METHOD(Smce_Components_Session, encrypt);
+PHP_METHOD(Smce_Components_Session, decrypt);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_components_session_setsecurity, 0, 0, 1)
 	ZEND_ARG_INFO(0, security)
@@ -35,6 +37,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_components_session_login, 0, 0, 2)
 	ZEND_ARG_INFO(0, duration)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_components_session_encrypt, 0, 0, 1)
+	ZEND_ARG_INFO(0, str)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_components_session_decrypt, 0, 0, 1)
+	ZEND_ARG_INFO(0, str)
+ZEND_END_ARG_INFO()
+
 ZEPHIR_INIT_FUNCS(smce_components_session_method_entry) {
 	PHP_ME(Smce_Components_Session, setSecurity, arginfo_smce_components_session_setsecurity, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, register, NULL, ZEND_ACC_PUBLIC)
@@ -45,5 +55,7 @@ ZEPHIR_INIT_FUNCS(smce_components_session_method_entry) {
 	PHP_ME(Smce_Components_Session, login, arginfo_smce_components_session_login, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, getLoginStatus, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, isSessionStart, NULL, ZEND_ACC_PUBLIC)
-  PHP_FE_END
+	PHP_ME(Smce_Components_Session, encrypt, arginfo_smce_components_session_encrypt, ZEND_ACC_PRIVATE)
+	PHP_ME(Smce_Components_Session, decrypt, arginfo_smce_components_session_decrypt, ZEND_ACC_PRIVATE)
+	PHP_FE_END
 };

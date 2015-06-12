@@ -87,5 +87,5 @@ ZEPHIR_INIT_FUNCS(smce_core_queue_queuelisten_method_entry) {
 	PHP_ME(Smce_Core_Queue_QueueListen, getStatus, arginfo_smce_core_queue_queuelisten_getstatus, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Queue_QueueListen, status, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Queue_QueueListen, getAll, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-  PHP_FE_END
+	PHP_FE_END
 };
