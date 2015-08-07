@@ -57,7 +57,7 @@ PHP_METHOD(Smce_Core_Queue, __construct) {
 
 
 	if (Z_TYPE_P(adapter) != IS_NULL) {
-		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_queue_queueadapter_ce, "setadapter", &_0, 58, adapter);
+		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_queue_queueadapter_ce, "setadapter", &_0, 75, adapter);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "Adapter is not empty", "smce/core/queue.zep", 36);
@@ -87,13 +87,13 @@ PHP_METHOD(Smce_Core_Queue, bind) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 59);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 76);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		object_init_ex(return_value, smce_core_queue_queuemodel_ce);
 		ZEPHIR_CALL_ZVAL_FUNCTION(&_2, class, NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 60, queKey, key, _2);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 77, queKey, key, _2);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -119,10 +119,10 @@ PHP_METHOD(Smce_Core_Queue, resolve) {
 	zephir_get_strval(queKey, queKey_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 59);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 76);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
-		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "get", &_2, 61, queKey);
+		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "get", &_2, 78, queKey);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -150,10 +150,10 @@ PHP_METHOD(Smce_Core_Queue, remove) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 59);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 76);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
-		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "remove", &_2, 62, queKey, key);
+		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "remove", &_2, 79, queKey, key);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -180,10 +180,10 @@ PHP_METHOD(Smce_Core_Queue, removeQue) {
 	zephir_get_strval(queKey, queKey_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 59);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 76);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
-		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "removeque", &_2, 63, queKey);
+		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "removeque", &_2, 80, queKey);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

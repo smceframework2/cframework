@@ -106,7 +106,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, set) {
 		zephir_read_static_property_ce(&_6, smce_core_queue_queueadapter_ce, SL("queKey") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_7);
 		ZEPHIR_CONCAT_VV(_7, _5, _6);
-		ZEPHIR_CALL_FUNCTION(&_8, "serialize", NULL, 43, newArr);
+		ZEPHIR_CALL_FUNCTION(&_8, "serialize", NULL, 61, newArr);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(_3);
 		ZVAL_BOOL(_3, 0);
@@ -121,7 +121,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, set) {
 		zephir_read_static_property_ce(&_6, smce_core_queue_queueadapter_ce, SL("queKey") TSRMLS_CC);
 		ZEPHIR_INIT_LNVAR(_7);
 		ZEPHIR_CONCAT_VV(_7, _5, _6);
-		ZEPHIR_CALL_FUNCTION(&_8, "serialize", NULL, 43, newArr);
+		ZEPHIR_CALL_FUNCTION(&_8, "serialize", NULL, 61, newArr);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _4, "set", NULL, 0, _7, _8, duration);
 		zephir_check_call_status();
@@ -154,7 +154,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, replace) {
 		zephir_read_static_property_ce(&_3, smce_core_queue_queueadapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, queKey);
-		ZEPHIR_CALL_FUNCTION(&_5, "serialize", NULL, 43, arr);
+		ZEPHIR_CALL_FUNCTION(&_5, "serialize", NULL, 61, arr);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(_6);
 		ZVAL_BOOL(_6, 0);
@@ -167,7 +167,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, replace) {
 		zephir_read_static_property_ce(&_3, smce_core_queue_queueadapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_LNVAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, queKey);
-		ZEPHIR_CALL_FUNCTION(&_5, "serialize", NULL, 43, arr);
+		ZEPHIR_CALL_FUNCTION(&_5, "serialize", NULL, 61, arr);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, 0, _4, _5, duration);
 		zephir_check_call_status();
@@ -200,7 +200,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, get) {
 	ZEPHIR_CONCAT_VV(_3, _2, queKey);
 	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 44, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 62, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -233,7 +233,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, remove) {
 	ZEPHIR_CONCAT_VV(_3, _2, queKey);
 	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&arr, "unserialize", NULL, 44, _1);
+	ZEPHIR_CALL_FUNCTION(&arr, "unserialize", NULL, 62, _1);
 	zephir_check_call_status();
 	zephir_array_fetch(&_4, arr, key, PH_NOISY | PH_READONLY, "smce/core/queue/queueadapter.zep", 143 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(duration);

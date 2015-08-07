@@ -75,7 +75,7 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_sm_ce, "app", &_1, 87);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_sm_ce, "app", &_1, 104);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(_2);
 	zephir_read_property(&_2, _0, SL("ip"), PH_NOISY_CC);
@@ -87,7 +87,7 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 	  ; zephir_hash_move_forward_ex(_5, &_4)
 	) {
 		ZEPHIR_GET_HVALUE(value, _6);
-		ZEPHIR_CALL_CE_STATIC(&_7, smce_sm_ce, "app", &_1, 87);
+		ZEPHIR_CALL_CE_STATIC(&_7, smce_sm_ce, "app", &_1, 104);
 		zephir_check_call_status();
 		ZEPHIR_OBS_NVAR(_2);
 		zephir_read_property(&_2, _7, SL("action"), PH_NOISY_CC);
@@ -106,7 +106,7 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 				ZVAL_LONG(_12, 404);
 				ZEPHIR_INIT_NVAR(_13);
 				ZVAL_STRING(_13, "You do not have authority to allow", ZEPHIR_TEMP_PARAM_COPY);
-				ZEPHIR_CALL_METHOD(NULL, _11, "__construct", &_14, 25, _12, _13);
+				ZEPHIR_CALL_METHOD(NULL, _11, "__construct", &_14, 43, _12, _13);
 				zephir_check_temp_parameter(_13);
 				zephir_check_call_status();
 				zephir_throw_exception_debug(_11, "smce/mvc/acl.zep", 63 TSRMLS_CC);
@@ -116,20 +116,20 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 			_15 = zephir_array_isset_string(value, SS("expression"));
 			if (_15) {
 				zephir_array_fetch_string(&_17, value, SL("expression"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 70 TSRMLS_CC);
-				ZEPHIR_CALL_METHOD(&_16, this_ptr, "expressioncontrol", &_18, 88, _17);
+				ZEPHIR_CALL_METHOD(&_16, this_ptr, "expressioncontrol", &_18, 105, _17);
 				zephir_check_call_status();
 				_15 = !ZEPHIR_IS_TRUE(_16);
 			}
 			if (_15) {
 				zephir_array_fetch_string(&_19, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 72 TSRMLS_CC);
-				ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 89, _19);
+				ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 106, _19);
 				zephir_check_call_status();
 			}
 		}
 	}
 	if (control == 0) {
 		zephir_array_fetch_string(&_8, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 84 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 89, _8);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 106, _8);
 		zephir_check_call_status();
 	}
 	RETURN_MM_BOOL(1);
@@ -149,7 +149,7 @@ PHP_METHOD(Smce_Mvc_Acl, redirect) {
 	zephir_get_strval(url, url_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_sm_ce, "app", &_1, 87);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_sm_ce, "app", &_1, 104);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(_2);
 	zephir_read_property(&_2, _0, SL("baseUrl"), PH_NOISY_CC);
@@ -163,7 +163,7 @@ PHP_METHOD(Smce_Mvc_Acl, redirect) {
 	ZVAL_LONG(_5, 404);
 	ZEPHIR_INIT_VAR(_6);
 	ZVAL_STRING(_6, "You do not have authority to allow", ZEPHIR_TEMP_PARAM_COPY);
-	ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, 25, _5, _6);
+	ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, 43, _5, _6);
 	zephir_check_temp_parameter(_6);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(_4, "smce/mvc/acl.zep", 99 TSRMLS_CC);

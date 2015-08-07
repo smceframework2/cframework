@@ -114,7 +114,7 @@ PHP_METHOD(Smce_Driver_Redis, connect) {
 		zephir_array_fetch_string(&_16, _15, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/redis.zep", 73 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_17);
 		ZEPHIR_CONCAT_SVSV(_17, "Failed on connecting to redis server at ", _14, ":", _16);
-		ZEPHIR_CALL_METHOD(NULL, _12, "__construct", NULL, 47, _17);
+		ZEPHIR_CALL_METHOD(NULL, _12, "__construct", NULL, 66, _17);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_12, "smce/driver/redis.zep", 73 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

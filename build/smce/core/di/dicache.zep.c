@@ -99,7 +99,7 @@ PHP_METHOD(Smce_Core_Di_DiCache, cache) {
 	_2 = zephir_fetch_static_property_ce(smce_core_di_dicache_ce, SL("thisKey") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZVAL_LONG(_3, duration);
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "set", &_1, 45, _2, _3);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "set", &_1, 63, _2, _3);
 	zephir_check_call_status();
 	if (zephir_is_true(_0)) {
 		RETURN_MM_BOOL(1);
@@ -120,7 +120,7 @@ PHP_METHOD(Smce_Core_Di_DiCache, get) {
 	ZEPHIR_MM_GROW();
 
 	_1 = zephir_fetch_static_property_ce(smce_core_di_dicache_ce, SL("thisKey") TSRMLS_CC);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_di_diadapter_ce, "get", &_0, 46, _1);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_di_diadapter_ce, "get", &_0, 64, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -138,7 +138,7 @@ PHP_METHOD(Smce_Core_Di_DiCache, remove) {
 	ZEPHIR_MM_GROW();
 
 	_1 = zephir_fetch_static_property_ce(smce_core_di_dicache_ce, SL("thisKey") TSRMLS_CC);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_di_diadapter_ce, "remove", &_0, 47, _1);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_di_diadapter_ce, "remove", &_0, 65, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 

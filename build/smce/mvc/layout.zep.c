@@ -116,7 +116,7 @@ PHP_METHOD(Smce_Mvc_Layout, run) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("content"), PH_NOISY_CC);
 	zephir_array_fetch_string(&_1, _0, SL("array"), PH_NOISY | PH_READONLY, "smce/mvc/layout.zep", 70 TSRMLS_CC);
 	Z_SET_ISREF_P(_1);
-	ZEPHIR_CALL_FUNCTION(NULL, "extract", NULL, 90, _1);
+	ZEPHIR_CALL_FUNCTION(NULL, "extract", NULL, 107, _1);
 	Z_UNSET_ISREF_P(_1);
 	zephir_check_call_status();
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("contentDirectory"), PH_NOISY_CC);
@@ -124,7 +124,7 @@ PHP_METHOD(Smce_Mvc_Layout, run) {
 	zephir_array_fetch_string(&_4, _3, SL("view"), PH_NOISY | PH_READONLY, "smce/mvc/layout.zep", 72 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(contentFile);
 	ZEPHIR_CONCAT_VSVS(contentFile, _2, "/", _4, ".php");
-	ZEPHIR_CALL_FUNCTION(&_5, "is_file", NULL, 57, contentFile);
+	ZEPHIR_CALL_FUNCTION(&_5, "is_file", NULL, 30, contentFile);
 	zephir_check_call_status();
 	if (zephir_is_true(_5)) {
 		if (zephir_require_zval(contentFile TSRMLS_CC) == FAILURE) {
@@ -137,7 +137,7 @@ PHP_METHOD(Smce_Mvc_Layout, run) {
 		ZEPHIR_CONCAT_SV(_7, "Content Not Found ", contentFile);
 		ZEPHIR_INIT_VAR(_8);
 		ZVAL_LONG(_8, 404);
-		ZEPHIR_CALL_METHOD(NULL, _6, "__construct", NULL, 25, _8, _7);
+		ZEPHIR_CALL_METHOD(NULL, _6, "__construct", NULL, 43, _8, _7);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_6, "smce/mvc/layout.zep", 83 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

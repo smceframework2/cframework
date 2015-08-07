@@ -55,13 +55,13 @@ PHP_METHOD(Smce_Core_Smceframework, make) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 78);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 95);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "router", NULL, 79);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "router", NULL, 96);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "command", NULL, 80);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "command", NULL, 97);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_flush", NULL, 81);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_flush", NULL, 98);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -80,14 +80,14 @@ PHP_METHOD(Smce_Core_Smceframework, router) {
 
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_STRING(_1, "router", ZEPHIR_TEMP_PARAM_COPY);
-	ZEPHIR_CALL_CE_STATIC(&router, smce_core_di_ce, "resolve", &_0, 42, _1);
+	ZEPHIR_CALL_CE_STATIC(&router, smce_core_di_ce, "resolve", &_0, 60, _1);
 	zephir_check_temp_parameter(_1);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_FALSE(router)) {
 		ZEPHIR_INIT_NVAR(_1);
 		ZEPHIR_INIT_VAR(_3);
 		ZVAL_STRING(_3, "router", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_di_ce, "resolve", &_0, 42, _3);
+		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_di_ce, "resolve", &_0, 60, _3);
 		zephir_check_temp_parameter(_3);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(&_4, _2, "getcontrollername", NULL, 0);
@@ -99,7 +99,7 @@ PHP_METHOD(Smce_Core_Smceframework, router) {
 		ZEPHIR_INIT_NVAR(_3);
 		ZEPHIR_INIT_VAR(_7);
 		ZVAL_STRING(_7, "router", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_CE_STATIC(&_6, smce_core_di_ce, "resolve", &_0, 42, _7);
+		ZEPHIR_CALL_CE_STATIC(&_6, smce_core_di_ce, "resolve", &_0, 60, _7);
 		zephir_check_temp_parameter(_7);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(&_8, _6, "getactionname", NULL, 0);
@@ -115,7 +115,7 @@ PHP_METHOD(Smce_Core_Smceframework, router) {
 		ZVAL_LONG(_7, 404);
 		ZEPHIR_INIT_VAR(_9);
 		ZVAL_STRING(_9, "Set DI 'router'", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, 25, _7, _9);
+		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, 43, _7, _9);
 		zephir_check_temp_parameter(_9);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_3, "smce/core/smceframework.zep", 57 TSRMLS_CC);
@@ -137,7 +137,7 @@ PHP_METHOD(Smce_Core_Smceframework, command) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "iscontroller", NULL, 82);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "iscontroller", NULL, 99);
 	zephir_check_call_status();
 	if (!(zephir_is_true(_0))) {
 		ZEPHIR_INIT_VAR(_1);
@@ -146,7 +146,7 @@ PHP_METHOD(Smce_Core_Smceframework, command) {
 		ZVAL_LONG(_2, 404);
 		ZEPHIR_INIT_VAR(_3);
 		ZVAL_STRING(_3, "Controller Not Found", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 25, _2, _3);
+		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 43, _2, _3);
 		zephir_check_temp_parameter(_3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_1, "smce/core/smceframework.zep", 73 TSRMLS_CC);
@@ -191,7 +191,7 @@ PHP_METHOD(Smce_Core_Smceframework, controllerAction) {
 	_0 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("controller") TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("action") TSRMLS_CC);
 	if ((zephir_method_exists(_0, _1 TSRMLS_CC)  == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "runaction", NULL, 83);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "runaction", NULL, 100);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_INIT_VAR(_2);
@@ -200,7 +200,7 @@ PHP_METHOD(Smce_Core_Smceframework, controllerAction) {
 		ZVAL_LONG(_3, 404);
 		ZEPHIR_INIT_VAR(_4);
 		ZVAL_STRING(_4, "Page Not Found", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, 25, _3, _4);
+		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, 43, _3, _4);
 		zephir_check_temp_parameter(_4);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_2, "smce/core/smceframework.zep", 112 TSRMLS_CC);
@@ -225,7 +225,7 @@ PHP_METHOD(Smce_Core_Smceframework, runAction) {
 
 	_1 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("controller") TSRMLS_CC);
 	_2 = zephir_fetch_static_property_ce(smce_core_smceframework_ce, SL("action") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_disingleton_ce, "make", &_0, 84, _1, _2);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_disingleton_ce, "make", &_0, 101, _1, _2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

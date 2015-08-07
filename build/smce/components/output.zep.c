@@ -122,7 +122,7 @@ PHP_METHOD(Smce_Components_Output, putFile) {
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("header"), PH_NOISY_CC);
 	ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, 5, _1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "readfile", NULL, 26, file);
+	ZEPHIR_CALL_FUNCTION(NULL, "readfile", NULL, 44, file);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

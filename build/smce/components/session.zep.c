@@ -52,7 +52,7 @@ PHP_METHOD(Smce_Components_Session, setSecurity) {
 
 
 	ZEPHIR_INIT_VAR(_0);
-	ZEPHIR_CALL_FUNCTION(&_1, "sha1", NULL, 27, security);
+	ZEPHIR_CALL_FUNCTION(&_1, "sha1", NULL, 45, security);
 	zephir_check_call_status();
 	zephir_md5(_0, _1);
 	zephir_update_property_this(this_ptr, SL("security"), _0 TSRMLS_CC);
@@ -67,10 +67,10 @@ PHP_METHOD(Smce_Components_Session, register) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL, 28);
+	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL, 46);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_LONG(_0, 1)) {
-		ZEPHIR_CALL_FUNCTION(NULL, "session_start", NULL, 29);
+		ZEPHIR_CALL_FUNCTION(NULL, "session_start", NULL, 47);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -96,10 +96,10 @@ PHP_METHOD(Smce_Components_Session, set) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(security, _0);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "encrypt", NULL, 30, value);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "encrypt", NULL, 48, value);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_2);
-	ZEPHIR_CALL_FUNCTION(&_3, "sha1", NULL, 27, key);
+	ZEPHIR_CALL_FUNCTION(&_3, "sha1", NULL, 45, key);
 	zephir_check_call_status();
 	zephir_md5(_2, _3);
 	ZEPHIR_INIT_VAR(_4);
@@ -110,7 +110,7 @@ PHP_METHOD(Smce_Components_Session, set) {
 		ZEND_SET_SYMBOL(&EG(symbol_table), "_SESSION", _SESSION);
 	}
 	ZEPHIR_INIT_VAR(_7);
-	ZEPHIR_CALL_FUNCTION(&_8, "sha1", NULL, 27, key);
+	ZEPHIR_CALL_FUNCTION(&_8, "sha1", NULL, 45, key);
 	zephir_check_call_status();
 	zephir_md5(_7, _8);
 	ZEPHIR_INIT_VAR(_9);
@@ -143,20 +143,20 @@ PHP_METHOD(Smce_Components_Session, get) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(security, _0);
 	ZEPHIR_INIT_VAR(_1);
-	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 27, key);
+	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 45, key);
 	zephir_check_call_status();
 	zephir_md5(_1, _2);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, security, _1);
 	if (zephir_array_isset(_SESSION, _3)) {
 		ZEPHIR_INIT_VAR(_6);
-		ZEPHIR_CALL_FUNCTION(&_7, "sha1", NULL, 27, key);
+		ZEPHIR_CALL_FUNCTION(&_7, "sha1", NULL, 45, key);
 		zephir_check_call_status();
 		zephir_md5(_6, _7);
 		ZEPHIR_INIT_VAR(_8);
 		ZEPHIR_CONCAT_VV(_8, security, _6);
 		zephir_array_fetch(&_5, _SESSION, _8, PH_NOISY | PH_READONLY, "smce/components/session.zep", 78 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_4, this_ptr, "decrypt", NULL, 31, _5);
+		ZEPHIR_CALL_METHOD(&_4, this_ptr, "decrypt", NULL, 49, _5);
 		zephir_check_call_status();
 		zephir_fast_trim(return_value, _4, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 		RETURN_MM();
@@ -182,7 +182,7 @@ PHP_METHOD(Smce_Components_Session, reset) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
 	ZEPHIR_CONCAT_SV(_1, "SMCE_", _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 27, _1);
+	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 45, _1);
 	zephir_check_call_status();
 	zephir_md5(login, _2);
 	zephir_is_iterable(_SESSION, &_4, &_3, 1, 0, "smce/components/session.zep", 99);
@@ -222,14 +222,14 @@ PHP_METHOD(Smce_Components_Session, remove) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(security, _0);
 	ZEPHIR_INIT_VAR(_1);
-	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 27, key);
+	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 45, key);
 	zephir_check_call_status();
 	zephir_md5(_1, _2);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, security, _1);
 	if (zephir_array_isset(_SESSION, _3)) {
 		ZEPHIR_INIT_VAR(_4);
-		ZEPHIR_CALL_FUNCTION(&_5, "sha1", NULL, 27, key);
+		ZEPHIR_CALL_FUNCTION(&_5, "sha1", NULL, 45, key);
 		zephir_check_call_status();
 		zephir_md5(_4, _5);
 		ZEPHIR_INIT_VAR(_6);
@@ -261,14 +261,14 @@ PHP_METHOD(Smce_Components_Session, login) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
 	ZEPHIR_CONCAT_SV(_1, "SMCE_", _0);
-	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 27, _1);
+	ZEPHIR_CALL_FUNCTION(&_2, "sha1", NULL, 45, _1);
 	zephir_check_call_status();
 	zephir_md5(security2, _2);
 	ZEPHIR_SINIT_VAR(_3);
 	ZVAL_STRING(&_3, "session.gc_maxlifetime", 0);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 32, &_3, duration);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 50, &_3, duration);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "session_set_cookie_params", NULL, 33, duration);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_set_cookie_params", NULL, 51, duration);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_4);
 	ZVAL_BOOL(_4, 1);
@@ -301,7 +301,7 @@ PHP_METHOD(Smce_Components_Session, isSessionStart) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL, 28);
+	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL, 46);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_LONG(_0, 1)) {
 		RETURN_MM_BOOL(0);
@@ -329,7 +329,7 @@ PHP_METHOD(Smce_Components_Session, encrypt) {
 	ZVAL_STRING(&_2, "rijndael-256", 0);
 	ZEPHIR_SINIT_VAR(_3);
 	ZVAL_STRING(&_3, "cbc", 0);
-	ZEPHIR_RETURN_CALL_FUNCTION("mcrypt_encrypt", NULL, 34, &_2, _0, str, &_3, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("mcrypt_encrypt", NULL, 52, &_2, _0, str, &_3, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -353,7 +353,7 @@ PHP_METHOD(Smce_Components_Session, decrypt) {
 	ZVAL_STRING(&_2, "rijndael-256", 0);
 	ZEPHIR_SINIT_VAR(_3);
 	ZVAL_STRING(&_3, "cbc", 0);
-	ZEPHIR_RETURN_CALL_FUNCTION("mcrypt_decrypt", NULL, 35, &_2, _0, str, &_3, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("mcrypt_decrypt", NULL, 53, &_2, _0, str, &_3, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 

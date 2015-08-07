@@ -82,7 +82,7 @@ PHP_METHOD(Smce_Core_Loader, register) {
 		ZEPHIR_INIT_VAR(_2);
 		ZVAL_STRING(_2, "autoLoad", 1);
 		zephir_array_fast_append(_1, _2);
-		ZEPHIR_CALL_FUNCTION(NULL, "spl_autoload_register", NULL, 54, _1);
+		ZEPHIR_CALL_FUNCTION(NULL, "spl_autoload_register", NULL, 73, _1);
 		zephir_check_call_status();
 		zephir_update_property_this(this_ptr, SL("_registered"), (1) ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
 	}
@@ -116,12 +116,12 @@ PHP_METHOD(Smce_Core_Loader, autoLoad) {
 	zephir_get_strval(className, _0);
 	ZEPHIR_SINIT_VAR(_2);
 	ZVAL_LONG(&_2, '\\');
-	ZEPHIR_CALL_FUNCTION(&_3, "strrpos", &_4, 55, className, &_2);
+	ZEPHIR_CALL_FUNCTION(&_3, "strrpos", &_4, 74, className, &_2);
 	zephir_check_call_status();
 	if (zephir_is_true(_3)) {
 		ZEPHIR_SINIT_NVAR(_2);
 		ZVAL_LONG(&_2, '\\');
-		ZEPHIR_CALL_FUNCTION(&lastNsPos, "strrpos", &_4, 55, className, &_2);
+		ZEPHIR_CALL_FUNCTION(&lastNsPos, "strrpos", &_4, 74, className, &_2);
 		zephir_check_call_status();
 		ZEPHIR_SINIT_NVAR(_2);
 		ZVAL_LONG(&_2, 0);
@@ -171,7 +171,7 @@ PHP_METHOD(Smce_Core_Loader, autoLoad) {
 		}
 		ZEPHIR_INIT_LNVAR(_16);
 		ZEPHIR_CONCAT_VV(_16, value, fileName);
-		ZEPHIR_CALL_FUNCTION(&_17, "is_file", &_18, 56, _16);
+		ZEPHIR_CALL_FUNCTION(&_17, "is_file", &_18, 30, _16);
 		zephir_check_call_status();
 		if (zephir_is_true(_17)) {
 			ZEPHIR_INIT_LNVAR(_19);

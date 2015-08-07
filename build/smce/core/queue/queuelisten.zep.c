@@ -89,15 +89,15 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, __construct) {
 		ZVAL_STRING(&_0, "max_execution_time", 0);
 		ZEPHIR_SINIT_VAR(_1);
 		ZVAL_LONG(&_1, -1);
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 32, &_0, &_1);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 50, &_0, &_1);
 		zephir_check_call_status();
 		ZEPHIR_SINIT_NVAR(_0);
 		ZVAL_STRING(&_0, "memory_limit", 0);
 		ZEPHIR_SINIT_NVAR(_1);
 		ZVAL_LONG(&_1, -1);
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 32, &_0, &_1);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 50, &_0, &_1);
 		zephir_check_call_status();
-		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_queue_queueadapter_ce, "setadapter", &_3, 58, adapter);
+		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_queue_queueadapter_ce, "setadapter", &_3, 75, adapter);
 		zephir_check_call_status();
 		zephir_update_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter"), &adapter TSRMLS_CC);
 	} else {
@@ -128,14 +128,14 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, start) {
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_2);
 	ZVAL_LONG(_2, 1);
-	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 64, _1, _2);
+	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 81, _1, _2);
 	zephir_check_call_status();
 	while (1) {
 		if (!(1)) {
 			break;
 		}
 		_4 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-		ZEPHIR_CALL_SELF(&status, "getstatus", &_3, 65, _4);
+		ZEPHIR_CALL_SELF(&status, "getstatus", &_3, 82, _4);
 		zephir_check_call_status();
 		ZEPHIR_SINIT_NVAR(_5);
 		ZVAL_LONG(&_5, 0);
@@ -154,19 +154,19 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, start) {
 			zephir_substr(_2, status, 2 , zephir_get_intval(&_8), 0);
 			ZEPHIR_SINIT_NVAR(sleepInt);
 			ZVAL_LONG(&sleepInt, zephir_get_intval(_2));
-			ZEPHIR_CALL_FUNCTION(NULL, "sleep", &_9, 66, &sleepInt);
+			ZEPHIR_CALL_FUNCTION(NULL, "sleep", &_9, 83, &sleepInt);
 			zephir_check_call_status();
 		}
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "on", &_10, 67);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "on", &_10, 84);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(_11);
 		zephir_time(_11);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "transactions", &_12, 68, _11);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "transactions", &_12, 85, _11);
 		zephir_check_call_status();
 		_14 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(_15);
 		zephir_time(_15);
-		ZEPHIR_CALL_SELF(NULL, "onpoint", &_13, 69, _14, _15);
+		ZEPHIR_CALL_SELF(NULL, "onpoint", &_13, 86, _14, _15);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -182,7 +182,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, on) {
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&on, this_ptr, "geton", NULL, 70, _0);
+	ZEPHIR_CALL_METHOD(&on, this_ptr, "geton", NULL, 87, _0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_1);
 	zephir_time(_1);
@@ -190,16 +190,16 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, on) {
 		_3 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_4);
 		ZVAL_LONG(_4, 1);
-		ZEPHIR_CALL_SELF(NULL, "changestatus", &_2, 64, _3, _4);
+		ZEPHIR_CALL_SELF(NULL, "changestatus", &_2, 81, _3, _4);
 		zephir_check_call_status();
 		_5 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "seton", NULL, 71, _5);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "seton", NULL, 88, _5);
 		zephir_check_call_status();
 	} else if (ZEPHIR_IS_EMPTY(on)) {
 		_3 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(_4);
 		ZVAL_LONG(_4, 1);
-		ZEPHIR_CALL_SELF(NULL, "changestatus", &_2, 64, _3, _4);
+		ZEPHIR_CALL_SELF(NULL, "changestatus", &_2, 81, _3, _4);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -223,7 +223,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, setOn) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_4);
 	ZEPHIR_CONCAT_SV(_4, "QueueOn.", queKey);
@@ -231,7 +231,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, setOn) {
 	zephir_time(_5);
 	ZEPHIR_INIT_VAR(_6);
 	ZVAL_LONG(_6, 3600);
-	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 73, _4, _5, _6);
+	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 90, _4, _5, _6);
 	zephir_check_call_status();
 	if (zephir_is_true(_2)) {
 		RETURN_MM_BOOL(1);
@@ -256,11 +256,11 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, getOn) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_SV(_3, "QueueOn.", queKey);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 74, _3);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 91, _3);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -286,7 +286,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(&arr, smce_core_queue_queueadapter_ce, "get", &_0, 61, _1);
+	ZEPHIR_CALL_CE_STATIC(&arr, smce_core_queue_queueadapter_ce, "get", &_0, 78, _1);
 	zephir_check_call_status();
 	if (Z_TYPE_P(arr) == IS_ARRAY) {
 		zephir_is_iterable(arr, &_3, &_2, 0, 0, "smce/core/queue/queuelisten.zep", 213);
@@ -299,7 +299,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 			_6 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 			ZEPHIR_INIT_NVAR(_7);
 			zephir_time(_7);
-			ZEPHIR_CALL_SELF(NULL, "onpoint", &_5, 69, _6, _7);
+			ZEPHIR_CALL_SELF(NULL, "onpoint", &_5, 86, _6, _7);
 			zephir_check_call_status();
 			zephir_array_fetch_string(&_8, value, SL("time"), PH_NOISY | PH_READONLY, "smce/core/queue/queuelisten.zep", 195 TSRMLS_CC);
 			if (ZEPHIR_GE(time, _8)) {
@@ -309,7 +309,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 					_10 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 					ZEPHIR_INIT_NVAR(_11);
 					zephir_time(_11);
-					ZEPHIR_CALL_SELF(NULL, "lasttransactiontime", &_9, 75, _10, _11);
+					ZEPHIR_CALL_SELF(NULL, "lasttransactiontime", &_9, 92, _10, _11);
 					zephir_check_call_status();
 					ZEPHIR_CALL_METHOD(NULL, cs, "fire", NULL, 0);
 					zephir_check_call_status();
@@ -338,7 +338,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, stop) {
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_2);
 	ZVAL_LONG(_2, 2);
-	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 64, _1, _2);
+	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 81, _1, _2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -370,7 +370,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, sleep) {
 	ZVAL_LONG(&_2, duration);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_SV(_3, "3:", &_2);
-	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 64, _1, _3);
+	ZEPHIR_CALL_SELF(NULL, "changestatus", &_0, 81, _1, _3);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -395,7 +395,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, isQue) {
 	array_init(arr);
 
 
-	ZEPHIR_CALL_CE_STATIC(&arr, smce_core_queue_queueadapter_ce, "get", &_0, 61, queKey);
+	ZEPHIR_CALL_CE_STATIC(&arr, smce_core_queue_queueadapter_ce, "get", &_0, 78, queKey);
 	zephir_check_call_status();
 	if (zephir_fast_count_int(arr TSRMLS_CC) > 1) {
 		RETURN_MM_BOOL(1);
@@ -422,13 +422,13 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, onPoint) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_4);
 	ZEPHIR_CONCAT_SV(_4, "QueueOnPoint.", queKey);
 	ZEPHIR_INIT_VAR(_5);
 	ZVAL_LONG(_5, 600);
-	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 73, _4, time, _5);
+	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 90, _4, time, _5);
 	zephir_check_call_status();
 	if (zephir_is_true(_2)) {
 		RETURN_MM_BOOL(1);
@@ -453,11 +453,11 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, getOnPoint) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_SV(_3, "QueueOnPoint.", queKey);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 74, _3);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 91, _3);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -480,13 +480,13 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, lastTransactionTime) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_4);
 	ZEPHIR_CONCAT_SV(_4, "QueueLastTransactionTime.", queKey);
 	ZEPHIR_INIT_VAR(_5);
 	ZVAL_LONG(_5, ((3600 * 24) * 30));
-	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 73, _4, time, _5);
+	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 90, _4, time, _5);
 	zephir_check_call_status();
 	if (zephir_is_true(_2)) {
 		RETURN_MM_BOOL(1);
@@ -507,13 +507,13 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, getLastTransactionTime) {
 	ZEPHIR_MM_GROW();
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(_3);
 	zephir_read_static_property_ce(&_3, smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_4);
 	ZEPHIR_CONCAT_SV(_4, "QueueLastTransactionTime.", _3);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 74, _4);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 91, _4);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -536,13 +536,13 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, changeStatus) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_4);
 	ZEPHIR_CONCAT_SV(_4, "QueueStatus.", queKey);
 	ZEPHIR_INIT_VAR(_5);
 	ZVAL_LONG(_5, (3600 * 24));
-	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 73, _4, status, _5);
+	ZEPHIR_CALL_CE_STATIC(&_2, smce_driver_adapter_ce, "set", &_3, 90, _4, status, _5);
 	zephir_check_call_status();
 	if (zephir_is_true(_2)) {
 		RETURN_MM_BOOL(1);
@@ -567,11 +567,11 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, getStatus) {
 
 
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("adapter") TSRMLS_CC);
-	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 72, _1);
+	ZEPHIR_CALL_CE_STATIC(NULL, smce_driver_adapter_ce, "setadapter", &_0, 89, _1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_SV(_3, "QueueStatus.", queKey);
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 74, _3);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_driver_adapter_ce, "get", &_2, 91, _3);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -600,7 +600,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, status) {
 	add_index_stringl(arr, 3, SL("Sleep"), 1);
 	onlineMin = 300;
 	_1 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-	ZEPHIR_CALL_SELF(&status, "getstatus", &_0, 65, _1);
+	ZEPHIR_CALL_SELF(&status, "getstatus", &_0, 82, _1);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_2);
 	ZVAL_LONG(&_2, 0);
@@ -616,7 +616,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, status) {
 	}
 	if (ZEPHIR_IS_LONG(statusInt, 1)) {
 		_6 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-		ZEPHIR_CALL_SELF(&_4, "getonpoint", &_5, 76, _6);
+		ZEPHIR_CALL_SELF(&_4, "getonpoint", &_5, 93, _6);
 		zephir_check_call_status();
 		onPointTime = zephir_get_intval(_4);
 		ZEPHIR_INIT_VAR(_7);
@@ -648,11 +648,11 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, getAll) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 59);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_queue_queueadapter_ce, "isadapter", &_1, 76);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		_3 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
-		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "get", &_2, 61, _3);
+		ZEPHIR_RETURN_CALL_CE_STATIC(smce_core_queue_queueadapter_ce, "get", &_2, 78, _3);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

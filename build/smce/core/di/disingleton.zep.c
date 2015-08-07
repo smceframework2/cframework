@@ -68,7 +68,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, __construct) {
 		object_init_ex(_1, zend_exception_get_default(TSRMLS_C));
 		ZEPHIR_INIT_VAR(_2);
 		ZEPHIR_CONCAT_VS(_2, key, " is not recycled class");
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 48, _2);
+		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 66, _2);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_1, "smce/core/di/disingleton.zep", 33 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -99,7 +99,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, resolveWhen) {
 	ZEPHIR_INIT_VAR(_2);
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("cs"), PH_NOISY_CC);
 	zephir_get_class(_2, _3, 0 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(NULL, "class_alias", NULL, 49, _2, key);
+	ZEPHIR_CALL_FUNCTION(NULL, "class_alias", NULL, 67, _2, key);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -194,7 +194,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, controllerConstructorParamerters) {
 
 	ZEPHIR_INIT_VAR(_0);
 	object_init_ex(_0, zephir_get_internal_ce(SS("reflectionclass") TSRMLS_CC));
-	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 50, controller);
+	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 68, controller);
 	zephir_check_call_status();
 	zephir_update_static_property_ce(smce_core_di_disingleton_ce, SL("reflection"), &_0 TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_core_di_disingleton_ce, SL("reflection") TSRMLS_CC);
@@ -231,7 +231,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, controllerConstructorParamerters) {
 				object_init_ex(_0, zend_exception_get_default(TSRMLS_C));
 				ZEPHIR_INIT_LNVAR(_14);
 				ZEPHIR_CONCAT_VS(_14, value, " class not found");
-				ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, 48, _14);
+				ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, 66, _14);
 				zephir_check_call_status();
 				zephir_throw_exception_debug(_0, "smce/core/di/disingleton.zep", 129 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
@@ -261,7 +261,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, controllerMethodParamerters) {
 
 	ZEPHIR_INIT_VAR(_0);
 	object_init_ex(_0, zephir_get_internal_ce(SS("reflectionclass") TSRMLS_CC));
-	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 50, controller);
+	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, 68, controller);
 	zephir_check_call_status();
 	zephir_update_static_property_ce(smce_core_di_disingleton_ce, SL("reflection"), &_0 TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_core_di_disingleton_ce, SL("reflection") TSRMLS_CC);
@@ -298,7 +298,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, controllerMethodParamerters) {
 				object_init_ex(_0, zend_exception_get_default(TSRMLS_C));
 				ZEPHIR_INIT_LNVAR(_14);
 				ZEPHIR_CONCAT_VS(_14, value, " class not found");
-				ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, 48, _14);
+				ZEPHIR_CALL_METHOD(NULL, _0, "__construct", &_15, 66, _14);
 				zephir_check_call_status();
 				zephir_throw_exception_debug(_0, "smce/core/di/disingleton.zep", 167 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
@@ -323,7 +323,7 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, make) {
 
 
 
-	ZEPHIR_CALL_SELF(&constructorParamerter, "controllerconstructorparamerters", &_0, 51, controller);
+	ZEPHIR_CALL_SELF(&constructorParamerter, "controllerconstructorparamerters", &_0, 69, controller);
 	zephir_check_call_status();
 	_1 = !ZEPHIR_IS_FALSE(constructorParamerter);
 	if (_1) {
@@ -340,21 +340,21 @@ PHP_METHOD(Smce_Core_Di_DiSingleton, make) {
 		zephir_check_call_status();
 		zephir_update_static_property_ce(smce_core_di_disingleton_ce, SL("istance"), &_3 TSRMLS_CC);
 	}
-	ZEPHIR_CALL_SELF(&actionParamerter, "controllermethodparamerters", &_4, 52, controller, action);
+	ZEPHIR_CALL_SELF(&actionParamerter, "controllermethodparamerters", &_4, 70, controller, action);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(refMethod);
 	object_init_ex(refMethod, zephir_get_internal_ce(SS("reflectionmethod") TSRMLS_CC));
-	ZEPHIR_CALL_METHOD(NULL, refMethod, "__construct", NULL, 53, controller, action);
+	ZEPHIR_CALL_METHOD(NULL, refMethod, "__construct", NULL, 71, controller, action);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_FALSE(actionParamerter)) {
 		_2 = zephir_fetch_static_property_ce(smce_core_di_disingleton_ce, SL("istance") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_5);
 		array_init(_5);
-		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, 54, _2, _5);
+		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, 72, _2, _5);
 		zephir_check_call_status();
 	} else {
 		_2 = zephir_fetch_static_property_ce(smce_core_di_disingleton_ce, SL("istance") TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, 54, _2, actionParamerter);
+		ZEPHIR_CALL_METHOD(NULL, refMethod, "invokeargs", NULL, 72, _2, actionParamerter);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

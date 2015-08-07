@@ -83,9 +83,9 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 			ZEPHIR_INIT_VAR(_8);
 			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 42, key);
+			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 60, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 43, _9);
+			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 61, _9);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(_12);
 			ZVAL_BOOL(_12, 0);
@@ -98,9 +98,9 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 			ZEPHIR_INIT_LNVAR(_8);
 			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 42, key);
+			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 60, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 43, _9);
+			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 61, _9);
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, 0, _8, _11, duration);
 			zephir_check_call_status();
@@ -132,7 +132,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 	ZEPHIR_CONCAT_VV(_3, _2, key);
 	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 44, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 62, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 

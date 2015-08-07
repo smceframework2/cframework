@@ -57,7 +57,7 @@ PHP_METHOD(Smce_Http_HttpException, __construct) {
 	ZVAL_LONG(_0, httpCode);
 	zephir_update_property_this(this_ptr, SL("httpCode"), _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("httpCode"), PH_NOISY_CC);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", NULL, 85, _0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", NULL, 102, _0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -304,7 +304,7 @@ PHP_METHOD(Smce_Http_HttpException, http_response_code) {
 		ZEPHIR_CONCAT_SV(_1, "Unknown http status code ", &_0);
 		ZEPHIR_SINIT_VAR(_2);
 		ZVAL_LONG(&_2, 256);
-		ZEPHIR_CALL_FUNCTION(NULL, "trigger_error", NULL, 86, _1, &_2);
+		ZEPHIR_CALL_FUNCTION(NULL, "trigger_error", NULL, 103, _1, &_2);
 		zephir_check_call_status();
 	} while(0);
 

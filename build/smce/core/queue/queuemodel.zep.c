@@ -137,7 +137,7 @@ PHP_METHOD(Smce_Core_Queue_QueueModel, register) {
 		_5 = zephir_fetch_nproperty_this(this_ptr, SL("class"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_6);
 		ZVAL_LONG(_6, duration);
-		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_queue_queueadapter_ce, "set", &_3, 77, _0, _4, _5, _6, time);
+		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_queue_queueadapter_ce, "set", &_3, 94, _0, _4, _5, _6, time);
 		zephir_check_call_status();
 		if (zephir_is_true(_2)) {
 			RETURN_MM_BOOL(1);

@@ -41,7 +41,7 @@ PHP_METHOD(Smce_Sm, app) {
 	if (Z_TYPE_P(_0) == IS_NULL) {
 		ZEPHIR_INIT_VAR(_1);
 		object_init_ex(_1, smce_app_ce);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 96);
+		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, 113);
 		zephir_check_call_status();
 		zephir_update_static_property_ce(smce_sm_ce, SL("app"), &_1 TSRMLS_CC);
 	}
@@ -70,7 +70,7 @@ PHP_METHOD(Smce_Sm, t) {
 	}
 
 
-	ZEPHIR_RETURN_CALL_CE_STATIC(smce_components_i18n_ce, "t", &_0, 97, str, arr);
+	ZEPHIR_RETURN_CALL_CE_STATIC(smce_components_i18n_ce, "t", &_0, 114, str, arr);
 	zephir_check_call_status();
 	RETURN_MM();
 

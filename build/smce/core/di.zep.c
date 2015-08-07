@@ -60,7 +60,7 @@ PHP_METHOD(Smce_Core_Di, __construct) {
 
 
 	if (Z_TYPE_P(adapter) != IS_NULL) {
-		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_diadapter_ce, "setadapter", &_0, 36, adapter);
+		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_diadapter_ce, "setadapter", &_0, 54, adapter);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -91,11 +91,11 @@ PHP_METHOD(Smce_Core_Di, bind) {
 	ZEPHIR_INIT_VAR(_1);
 	zephir_fast_strtolower(_1, key);
 	zephir_update_static_property_array_multi_ce(smce_core_di_ce, SL("dis"), &_0 TSRMLS_CC, SL("z"), 1, _1);
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_2, 37);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_2, 55);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		object_init_ex(return_value, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 38, key);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 56, key);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -120,14 +120,14 @@ PHP_METHOD(Smce_Core_Di, resolve) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 37);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 55);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 38, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 39);
+		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 57);
 		zephir_check_call_status();
 		if (!(ZEPHIR_IS_EMPTY(get))) {
 			RETURN_CCTOR(get);
@@ -173,7 +173,7 @@ PHP_METHOD(Smce_Core_Di, singleton) {
 	object_init_ex(return_value, smce_core_di_disingleton_ce);
 	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 40, key, _0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 58, key, _0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -213,14 +213,14 @@ PHP_METHOD(Smce_Core_Di, remove) {
 		zephir_array_unset(&_2, _3, PH_SEPARATE);
 		bl = 1;
 	}
-	ZEPHIR_CALL_CE_STATIC(&_4, smce_core_di_diadapter_ce, "isadapter", &_5, 37);
+	ZEPHIR_CALL_CE_STATIC(&_4, smce_core_di_diadapter_ce, "isadapter", &_5, 55);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_4)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 38, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_6, diCache, "remove", NULL, 41);
+		ZEPHIR_CALL_METHOD(&_6, diCache, "remove", NULL, 59);
 		zephir_check_call_status();
 		if (zephir_is_true(_6)) {
 			bl = 1;
@@ -256,14 +256,14 @@ PHP_METHOD(Smce_Core_Di, has) {
 	}
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 37);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 55);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 38, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 39);
+		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 57);
 		zephir_check_call_status();
 		if (!(ZEPHIR_IS_EMPTY(get))) {
 			RETURN_MM_BOOL(1);
@@ -308,9 +308,9 @@ PHP_METHOD(Smce_Core_Di, reset) {
 		if (ZEPHIR_IS_TRUE(_5)) {
 			ZEPHIR_INIT_NVAR(diCache);
 			object_init_ex(diCache, smce_core_di_dicache_ce);
-			ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", &_7, 38, key);
+			ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", &_7, 56, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, diCache, "remove", &_8, 41);
+			ZEPHIR_CALL_METHOD(NULL, diCache, "remove", &_8, 59);
 			zephir_check_call_status();
 		}
 	}
