@@ -297,7 +297,7 @@ PHP_METHOD(Smce_Components_I18n, search) {
 				ZEPHIR_INIT_NVAR(out);
 				ZEPHIR_INIT_NVAR(_15);
 				ZEPHIR_SINIT_NVAR(_19);
-				ZVAL_STRING(&_19, "#Sm::t\\([\"|\\'](.*?)[\"|\\']#", 0);
+				ZVAL_STRING(&_19, "#Sm::t\\(\"(.*?)\"[ ,|, |,|\\)]#", 0);
 				zephir_preg_match(_15, &_19, file, out, 1, 0 , 0  TSRMLS_CC);
 				zephir_array_fetch_long(&_20, out, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 160 TSRMLS_CC);
 				if (zephir_fast_count_int(_20 TSRMLS_CC) > 0) {
