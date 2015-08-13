@@ -81,7 +81,7 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 	zephir_read_property(&_2, _0, SL("ip"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(ip, _2);
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("rules"), PH_NOISY_CC);
-	zephir_is_iterable(_3, &_5, &_4, 0, 0, "smce/mvc/acl.zep", 82);
+	zephir_is_iterable(_3, &_5, &_4, 0, 0, "smce/mvc/acl.zep", 81);
 	for (
 	  ; zephir_hash_get_current_data_ex(_5, (void**) &_6, &_4) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_5, &_4)
@@ -97,13 +97,13 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 			_9 = zephir_array_isset_string(value, SS("ip"));
 			if (_9) {
 				zephir_array_fetch_string(&_10, value, SL("ip"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 60 TSRMLS_CC);
-				_9 = zephir_fast_in_array(ip, _10 TSRMLS_CC) == 1;
+				_9 = !(zephir_fast_in_array(ip, _10 TSRMLS_CC)) == 1;
 			}
 			if (_9) {
 				ZEPHIR_INIT_NVAR(_11);
 				object_init_ex(_11, smce_http_httpexception_ce);
 				ZEPHIR_INIT_NVAR(_12);
-				ZVAL_LONG(_12, 404);
+				ZVAL_LONG(_12, 403);
 				ZEPHIR_INIT_NVAR(_13);
 				ZVAL_STRING(_13, "You do not have authority to allow", ZEPHIR_TEMP_PARAM_COPY);
 				ZEPHIR_CALL_METHOD(NULL, _11, "__construct", &_14, 43, _12, _13);
@@ -115,20 +115,20 @@ PHP_METHOD(Smce_Mvc_Acl, run) {
 			}
 			_15 = zephir_array_isset_string(value, SS("expression"));
 			if (_15) {
-				zephir_array_fetch_string(&_17, value, SL("expression"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 70 TSRMLS_CC);
+				zephir_array_fetch_string(&_17, value, SL("expression"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 69 TSRMLS_CC);
 				ZEPHIR_CALL_METHOD(&_16, this_ptr, "expressioncontrol", &_18, 105, _17);
 				zephir_check_call_status();
 				_15 = !ZEPHIR_IS_TRUE(_16);
 			}
 			if (_15) {
-				zephir_array_fetch_string(&_19, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 72 TSRMLS_CC);
+				zephir_array_fetch_string(&_19, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 71 TSRMLS_CC);
 				ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 106, _19);
 				zephir_check_call_status();
 			}
 		}
 	}
 	if (control == 0) {
-		zephir_array_fetch_string(&_8, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 84 TSRMLS_CC);
+		zephir_array_fetch_string(&_8, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/mvc/acl.zep", 83 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", &_20, 106, _8);
 		zephir_check_call_status();
 	}
@@ -166,7 +166,7 @@ PHP_METHOD(Smce_Mvc_Acl, redirect) {
 	ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, 43, _5, _6);
 	zephir_check_temp_parameter(_6);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_4, "smce/mvc/acl.zep", 99 TSRMLS_CC);
+	zephir_throw_exception_debug(_4, "smce/mvc/acl.zep", 98 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 	zephir_exit_empty();
