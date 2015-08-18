@@ -20,7 +20,6 @@
 #include <Zend/zend_exceptions.h>
 #include <Zend/zend_interfaces.h>
 
-#include "kernel/globals.h"
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
@@ -143,9 +142,6 @@ static void php_zephir_init_globals(zend_smce_globals *zephir_globals TSRMLS_DC)
 	/* Recursive Lock */
 	zephir_globals->recursive_lock = 0;
 
-	/* Static cache */
-	memset(zephir_globals->scache, '\0', sizeof(zephir_fcall_cache_entry*) * ZEPHIR_MAX_CACHE_SLOTS);
-
 	zephir_globals->test.my_setting_1 = 1;
 	zephir_globals->test.my_setting_2 = 100;
 	zephir_globals->test.my_setting_3 = 7.5;
@@ -164,7 +160,6 @@ static PHP_RINIT_FUNCTION(smce)
 	//zephir_init_interned_strings(TSRMLS_C);
 
 	zephir_initialize_memory(zephir_globals_ptr TSRMLS_CC);
-
 
 	return SUCCESS;
 }
@@ -214,18 +209,12 @@ static PHP_GSHUTDOWN_FUNCTION(smce)
 
 }
 
-
-zend_function_entry php_smce_functions[] = {
-ZEND_FE_END
-
-};
-
 zend_module_entry smce_module_entry = {
 	STANDARD_MODULE_HEADER_EX,
 	NULL,
 	NULL,
 	PHP_SMCE_EXTNAME,
-	php_smce_functions,
+	NULL,
 	PHP_MINIT(smce),
 #ifndef ZEPHIR_RELEASE
 	PHP_MSHUTDOWN(smce),

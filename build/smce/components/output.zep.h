@@ -31,5 +31,5 @@ ZEPHIR_INIT_FUNCS(smce_components_output_method_entry) {
 	PHP_ME(Smce_Components_Output, put, arginfo_smce_components_output_put, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Output, putFile, arginfo_smce_components_output_putfile, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Output, getHeader, NULL, ZEND_ACC_PUBLIC)
-	PHP_FE_END
+  PHP_FE_END
 };

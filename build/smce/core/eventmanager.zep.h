@@ -59,5 +59,5 @@ ZEPHIR_INIT_FUNCS(smce_core_eventmanager_method_entry) {
 	PHP_ME(Smce_Core_EventManager, getKeys, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_EventManager, getAll, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_EventManager, getCount, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

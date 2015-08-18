@@ -17,5 +17,5 @@ ZEPHIR_INIT_FUNCS(smce_core_smceframework_method_entry) {
 	PHP_ME(Smce_Core_Smceframework, isController, NULL, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Core_Smceframework, controllerAction, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Smceframework, runAction, NULL, ZEND_ACC_PRIVATE)
-	PHP_FE_END
+  PHP_FE_END
 };

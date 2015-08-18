@@ -50,5 +50,5 @@ ZEPHIR_INIT_FUNCS(smce_core_di_disingleton_method_entry) {
 	PHP_ME(Smce_Core_Di_DiSingleton, controllerConstructorParamerters, arginfo_smce_core_di_disingleton_controllerconstructorparamerters, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_DiSingleton, controllerMethodParamerters, arginfo_smce_core_di_disingleton_controllermethodparamerters, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_DiSingleton, make, arginfo_smce_core_di_disingleton_make, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

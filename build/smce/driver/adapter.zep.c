@@ -86,7 +86,7 @@ PHP_METHOD(Smce_Driver_Adapter, set) {
 		ZVAL_BOOL(_5, 0);
 		ZEPHIR_INIT_VAR(_6);
 		ZVAL_LONG(_6, duration);
-		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, 0, _4, str, _5, _6);
+		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, _4, str, _5, _6);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
@@ -97,7 +97,7 @@ PHP_METHOD(Smce_Driver_Adapter, set) {
 		ZEPHIR_CONCAT_VV(_4, _3, key);
 		ZEPHIR_INIT_NVAR(_5);
 		ZVAL_LONG(_5, duration);
-		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, 0, _4, str, _5);
+		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, _4, str, _5);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}
@@ -126,7 +126,7 @@ PHP_METHOD(Smce_Driver_Adapter, get) {
 	zephir_read_static_property_ce(&_1, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_2);
 	ZEPHIR_CONCAT_VV(_2, _1, key);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, 0, _2);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -154,7 +154,7 @@ PHP_METHOD(Smce_Driver_Adapter, remove) {
 		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, 0, _4);
+		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, _4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
@@ -163,7 +163,7 @@ PHP_METHOD(Smce_Driver_Adapter, remove) {
 		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_LNVAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, 0, _4);
+		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, _4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}

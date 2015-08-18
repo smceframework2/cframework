@@ -61,5 +61,5 @@ ZEPHIR_INIT_FUNCS(smce_driver_redis_method_entry) {
 	PHP_ME(Smce_Driver_Redis, lrange, arginfo_smce_driver_redis_lrange, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Redis, hdel, arginfo_smce_driver_redis_hdel, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Redis, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-	PHP_FE_END
+  PHP_FE_END
 };

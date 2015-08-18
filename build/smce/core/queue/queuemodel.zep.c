@@ -15,7 +15,6 @@
 #include "kernel/object.h"
 #include "kernel/operators.h"
 #include "kernel/memory.h"
-#include "kernel/time.h"
 #include "kernel/fcall.h"
 #include "kernel/exception.h"
 
@@ -111,7 +110,7 @@ PHP_METHOD(Smce_Core_Queue_QueueModel, addMinutes) {
  */
 PHP_METHOD(Smce_Core_Queue_QueueModel, register) {
 
-	zephir_fcall_cache_entry *_3 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
 	zval *duration_param = NULL, *time = NULL, *_0, *_1, *_2 = NULL, *_4, *_5, *_6;
 	int duration, ZEPHIR_LAST_CALL_STATUS;
 
@@ -126,8 +125,8 @@ PHP_METHOD(Smce_Core_Queue_QueueModel, register) {
 
 
 	if (duration != 0) {
-		ZEPHIR_INIT_VAR(time);
-		zephir_time(time);
+		ZEPHIR_CALL_FUNCTION(&time, "time", NULL);
+		zephir_check_call_status();
 		_0 = zephir_fetch_nproperty_this(this_ptr, SL("minute"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_1);
 		zephir_add_function_ex(_1, time, _0 TSRMLS_CC);
@@ -137,7 +136,7 @@ PHP_METHOD(Smce_Core_Queue_QueueModel, register) {
 		_5 = zephir_fetch_nproperty_this(this_ptr, SL("class"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_6);
 		ZVAL_LONG(_6, duration);
-		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_queue_queueadapter_ce, "set", &_3, 94, _0, _4, _5, _6, time);
+		ZEPHIR_CALL_CE_STATIC(&_2, smce_core_queue_queueadapter_ce, "set", &_3, _0, _4, _5, _6, time);
 		zephir_check_call_status();
 		if (zephir_is_true(_2)) {
 			RETURN_MM_BOOL(1);

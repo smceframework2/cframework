@@ -2,14 +2,8 @@ ARG_ENABLE("smce", "enable smce", "no");
 
 if (PHP_SMCE != "no") {
   EXTENSION("smce", "smce.c", null, "-I"+configure_module_dirname);
-  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c math.c concat.c variables.c filter.c iterator.c exit.c time.c", "smce");
-  ADD_SOURCES(configure_module_dirname + "/kernel/extended", "array.c fcall.c", "smce");
-  /* PCRE is always included on WIN32 */
-  AC_DEFINE("ZEPHIR_USE_PHP_PCRE", 1, "Whether PHP pcre extension is present at compile time");
-  if (PHP_JSON != "no") {
-    ADD_EXTENSION_DEP("smce", "json");
-    AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
-  }
+  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c concat.c variables.c filter.c iterator.c exit.c", "smce");
+  ADD_SOURCES(configure_module_dirname + "/kernel/extended", "array.c", "smce");
   
   ADD_SOURCES(configure_module_dirname + "/smce", "app.zep.c sm.zep.c", "smce");
 	ADD_SOURCES(configure_module_dirname + "/smce/components", "collection.zep.c i18n.zep.c output.zep.c session.zep.c", "smce");

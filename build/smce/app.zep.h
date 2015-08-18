@@ -26,5 +26,5 @@ ZEPHIR_INIT_FUNCS(smce_app_method_entry) {
 	PHP_ME(Smce_App, redirect, arginfo_smce_app_redirect, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_App, isAjax, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_App, baseUrl, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

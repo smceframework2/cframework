@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/var/www/zephir/smce/ext/modules'
+libdir='/var/www/git/cframework/build/modules'

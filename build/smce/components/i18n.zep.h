@@ -77,5 +77,5 @@ ZEPHIR_INIT_FUNCS(smce_components_i18n_method_entry) {
 	PHP_ME(Smce_Components_I18n, addArr2, arginfo_smce_components_i18n_addarr2, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Components_I18n, writeFile, arginfo_smce_components_i18n_writefile, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Components_I18n, is, NULL, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

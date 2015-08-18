@@ -25,5 +25,5 @@ ZEPHIR_INIT_FUNCS(smce_core_queue_queuemodel_method_entry) {
 	PHP_ME(Smce_Core_Queue_QueueModel, __construct, arginfo_smce_core_queue_queuemodel___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Smce_Core_Queue_QueueModel, addMinutes, arginfo_smce_core_queue_queuemodel_addminutes, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Queue_QueueModel, register, arginfo_smce_core_queue_queuemodel_register, ZEND_ACC_PUBLIC)
-	PHP_FE_END
+  PHP_FE_END
 };

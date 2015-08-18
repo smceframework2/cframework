@@ -38,5 +38,5 @@ ZEPHIR_INIT_FUNCS(smce_core_queue_method_entry) {
 	PHP_ME(Smce_Core_Queue, resolve, arginfo_smce_core_queue_resolve, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Queue, remove, arginfo_smce_core_queue_remove, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Queue, removeQue, arginfo_smce_core_queue_removeque, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

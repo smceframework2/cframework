@@ -51,5 +51,5 @@ ZEPHIR_INIT_FUNCS(smce_core_di_method_entry) {
 	PHP_ME(Smce_Core_Di, getKeys, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, getAll, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di, getCount, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

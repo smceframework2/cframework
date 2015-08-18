@@ -19,5 +19,5 @@ ZEPHIR_INIT_FUNCS(smce_core_loader_method_entry) {
 	PHP_ME(Smce_Core_Loader, setDir, arginfo_smce_core_loader_setdir, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Loader, register, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Loader, autoLoad, arginfo_smce_core_loader_autoload, ZEND_ACC_PUBLIC)
-	PHP_FE_END
+  PHP_FE_END
 };

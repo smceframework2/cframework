@@ -32,5 +32,5 @@ ZEPHIR_INIT_FUNCS(smce_core_di_diadapter_method_entry) {
 	PHP_ME(Smce_Core_Di_DiAdapter, remove, arginfo_smce_core_di_diadapter_remove, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_DiAdapter, setAdapter, arginfo_smce_core_di_diadapter_setadapter, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Core_Di_DiAdapter, isAdapter, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-	PHP_FE_END
+  PHP_FE_END
 };

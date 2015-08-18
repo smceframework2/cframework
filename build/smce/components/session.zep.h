@@ -57,5 +57,5 @@ ZEPHIR_INIT_FUNCS(smce_components_session_method_entry) {
 	PHP_ME(Smce_Components_Session, isSessionStart, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Components_Session, encrypt, arginfo_smce_components_session_encrypt, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Components_Session, decrypt, arginfo_smce_components_session_decrypt, ZEND_ACC_PRIVATE)
-	PHP_FE_END
+  PHP_FE_END
 };

@@ -58,9 +58,9 @@ ZEPHIR_INIT_CLASS(Smce_Core_Di_DiAdapter) {
  */
 PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 
-	zephir_fcall_cache_entry *_10 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_10 = NULL, *_12 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key, *duration, *_0, *_1 = NULL, *_2, *_3, *_4, *_5, *_6, *_7 = NULL, *_8 = NULL, *_9 = NULL, *_11 = NULL, *_12;
+	zval *key, *duration, *_0, *_1 = NULL, *_2, *_3, *_4, *_5, *_6, *_7 = NULL, *_8 = NULL, *_9 = NULL, *_11 = NULL, *_13;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &key, &duration);
@@ -72,7 +72,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 	zephir_read_static_property_ce(&_2, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, _2, key);
-	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
+	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, _3);
 	zephir_check_call_status();
 	if (!(zephir_is_true(_1))) {
 		_4 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
@@ -83,13 +83,13 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 			ZEPHIR_INIT_VAR(_8);
 			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 60, key);
+			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 61, _9);
+			ZEPHIR_CALL_FUNCTION(&_11, "serialize", &_12, _9);
 			zephir_check_call_status();
-			ZEPHIR_INIT_VAR(_12);
-			ZVAL_BOOL(_12, 0);
-			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, 0, _8, _11, _12, duration);
+			ZEPHIR_INIT_VAR(_13);
+			ZVAL_BOOL(_13, 0);
+			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, _8, _11, _13, duration);
 			zephir_check_call_status();
 			RETURN_MM_BOOL(1);
 		} else if (ZEPHIR_IS_STRING(_5, "Redis")) {
@@ -98,11 +98,11 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 			ZEPHIR_INIT_LNVAR(_8);
 			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, 60, key);
+			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", NULL, 61, _9);
+			ZEPHIR_CALL_FUNCTION(&_11, "serialize", &_12, _9);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, 0, _8, _11, duration);
+			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, _8, _11, duration);
 			zephir_check_call_status();
 			RETURN_MM_BOOL(1);
 		}
@@ -117,6 +117,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
  */
 PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 
+	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *key, *_0, *_1 = NULL, *_2, *_3;
 
@@ -130,9 +131,9 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 	zephir_read_static_property_ce(&_2, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, _2, key);
-	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
+	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, _3);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 62, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", &_4, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -160,7 +161,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, remove) {
 		zephir_read_static_property_ce(&_3, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, 0, _4);
+		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, _4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
@@ -169,7 +170,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, remove) {
 		zephir_read_static_property_ce(&_3, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 		ZEPHIR_INIT_LNVAR(_4);
 		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, 0, _4);
+		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, _4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}

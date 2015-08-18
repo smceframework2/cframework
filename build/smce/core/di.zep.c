@@ -15,7 +15,9 @@
 #include "kernel/operators.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "Zend/zend_closures.h"
 #include "kernel/object.h"
+#include "kernel/exception.h"
 #include "kernel/string.h"
 #include "kernel/array.h"
 #include "kernel/hash.h"
@@ -48,7 +50,7 @@ ZEPHIR_INIT_CLASS(Smce_Core_Di) {
 PHP_METHOD(Smce_Core_Di, __construct) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_0 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL;
 	zval *adapter = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -60,7 +62,7 @@ PHP_METHOD(Smce_Core_Di, __construct) {
 
 
 	if (Z_TYPE_P(adapter) != IS_NULL) {
-		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_diadapter_ce, "setadapter", &_0, 54, adapter);
+		ZEPHIR_CALL_CE_STATIC(NULL, smce_core_di_diadapter_ce, "setadapter", &_0, adapter);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -75,7 +77,7 @@ PHP_METHOD(Smce_Core_Di, __construct) {
  */
 PHP_METHOD(Smce_Core_Di, bind) {
 
-	zephir_fcall_cache_entry *_2 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *key_param = NULL, *class, *_0 = NULL, *_1;
 	zval *key = NULL;
@@ -86,16 +88,20 @@ PHP_METHOD(Smce_Core_Di, bind) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL, 0);
+	if (!(zephir_instance_of_ev(class, zend_ce_closure TSRMLS_CC))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'class' must be an instance of 'Closure'", "", 0);
+		return;
+	}
+	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_1);
 	zephir_fast_strtolower(_1, key);
 	zephir_update_static_property_array_multi_ce(smce_core_di_ce, SL("dis"), &_0 TSRMLS_CC, SL("z"), 1, _1);
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_2, 55);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_2);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		object_init_ex(return_value, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 56, key);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, key);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -110,7 +116,7 @@ PHP_METHOD(Smce_Core_Di, bind) {
 PHP_METHOD(Smce_Core_Di, resolve) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_1 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	zval *key_param = NULL, *_0 = NULL, *diCache, *get = NULL, *_2, *_3, *_4, *_5, *_6;
 	zval *key = NULL;
 
@@ -120,14 +126,14 @@ PHP_METHOD(Smce_Core_Di, resolve) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 55);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 57);
+		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL);
 		zephir_check_call_status();
 		if (!(ZEPHIR_IS_EMPTY(get))) {
 			RETURN_CCTOR(get);
@@ -165,15 +171,19 @@ PHP_METHOD(Smce_Core_Di, singleton) {
 	zephir_get_strval(key, key_param);
 
 
-	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL, 0);
+	if (!(zephir_instance_of_ev(class, zend_ce_closure TSRMLS_CC))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'class' must be an instance of 'Closure'", "", 0);
+		return;
+	}
+	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_1);
 	zephir_fast_strtolower(_1, key);
 	zephir_update_static_property_array_multi_ce(smce_core_di_ce, SL("dis"), &_0 TSRMLS_CC, SL("z"), 1, _1);
 	object_init_ex(return_value, smce_core_di_disingleton_ce);
-	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL, 0);
+	ZEPHIR_CALL_ZVAL_FUNCTION(&_0, class, NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 58, key, _0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, key, _0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -187,7 +197,7 @@ PHP_METHOD(Smce_Core_Di, singleton) {
 PHP_METHOD(Smce_Core_Di, remove) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_5 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL;
 	zend_bool bl = 0;
 	zval *key_param = NULL, *_0, *_1, *_2, *_3, *_4 = NULL, *diCache, *_6 = NULL;
 	zval *key = NULL;
@@ -213,14 +223,14 @@ PHP_METHOD(Smce_Core_Di, remove) {
 		zephir_array_unset(&_2, _3, PH_SEPARATE);
 		bl = 1;
 	}
-	ZEPHIR_CALL_CE_STATIC(&_4, smce_core_di_diadapter_ce, "isadapter", &_5, 55);
+	ZEPHIR_CALL_CE_STATIC(&_4, smce_core_di_diadapter_ce, "isadapter", &_5);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_4)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_6, diCache, "remove", NULL, 59);
+		ZEPHIR_CALL_METHOD(&_6, diCache, "remove", NULL);
 		zephir_check_call_status();
 		if (zephir_is_true(_6)) {
 			bl = 1;
@@ -241,7 +251,7 @@ PHP_METHOD(Smce_Core_Di, remove) {
 PHP_METHOD(Smce_Core_Di, has) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_1 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	zval *key_param = NULL, *_0 = NULL, *diCache, *get = NULL, *_2, *_3;
 	zval *key = NULL;
 
@@ -256,14 +266,14 @@ PHP_METHOD(Smce_Core_Di, has) {
 	}
 
 
-	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1, 55);
+	ZEPHIR_CALL_CE_STATIC(&_0, smce_core_di_diadapter_ce, "isadapter", &_1);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE(_0)) {
 		ZEPHIR_INIT_VAR(diCache);
 		object_init_ex(diCache, smce_core_di_dicache_ce);
-		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, 56, key);
+		ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", NULL, key);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL, 57);
+		ZEPHIR_CALL_METHOD(&get, diCache, "get", NULL);
 		zephir_check_call_status();
 		if (!(ZEPHIR_IS_EMPTY(get))) {
 			RETURN_MM_BOOL(1);
@@ -303,14 +313,14 @@ PHP_METHOD(Smce_Core_Di, reset) {
 		ZEPHIR_GET_HVALUE(value, _3);
 		_4 = zephir_fetch_static_property_ce(smce_core_di_ce, SL("dis") TSRMLS_CC);
 		zephir_array_unset(&_4, key, PH_SEPARATE);
-		ZEPHIR_CALL_CE_STATIC(&_5, smce_core_di_diadapter_ce, "isadapter", &_6, 0);
+		ZEPHIR_CALL_CE_STATIC(&_5, smce_core_di_diadapter_ce, "isadapter", &_6);
 		zephir_check_call_status();
 		if (ZEPHIR_IS_TRUE(_5)) {
 			ZEPHIR_INIT_NVAR(diCache);
 			object_init_ex(diCache, smce_core_di_dicache_ce);
-			ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", &_7, 56, key);
+			ZEPHIR_CALL_METHOD(NULL, diCache, "__construct", &_7, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, diCache, "remove", &_8, 59);
+			ZEPHIR_CALL_METHOD(NULL, diCache, "remove", &_8);
 			zephir_check_call_status();
 		}
 	}
