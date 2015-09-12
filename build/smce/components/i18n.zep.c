@@ -128,13 +128,13 @@ PHP_METHOD(Smce_Components_I18n, setLang) {
 
 PHP_METHOD(Smce_Components_I18n, t) {
 
-	HashTable *_6, *_11;
-	HashPosition _5, _10;
+	HashTable *_7, *_12;
+	HashPosition _6, _11;
 	zend_bool _2;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL;
 	zval *arr = NULL;
-	zval *str_param = NULL, *arr_param = NULL, *at, *at2, *key = NULL, *value = NULL, *str2 = NULL, *_1, *_3, *_4, **_7, *_8, *_9, **_12;
+	zval *str_param = NULL, *arr_param = NULL, *key = NULL, *value = NULL, *str2 = NULL, *_1, *_3, *_4, *_5, **_8, *_9 = NULL, *_10, **_13;
 	zval *str = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -147,10 +147,6 @@ PHP_METHOD(Smce_Components_I18n, t) {
 	} else {
 		zephir_get_arrval(arr, arr_param);
 	}
-	ZEPHIR_INIT_VAR(at);
-	array_init(at);
-	ZEPHIR_INIT_VAR(at2);
-	array_init(at2);
 
 
 	ZEPHIR_CALL_SELF(NULL, "is", &_0);
@@ -165,40 +161,40 @@ PHP_METHOD(Smce_Components_I18n, t) {
 	}
 	if (_2) {
 		if (zephir_fast_count_int(arr TSRMLS_CC) > 0) {
-			zephir_is_iterable(arr, &_6, &_5, 0, 0, "smce/components/i18n.zep", 78);
+			_5 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("langArr") TSRMLS_CC);
+			ZEPHIR_OBS_VAR(str2);
+			zephir_array_fetch(&str2, _5, str, PH_NOISY, "smce/components/i18n.zep", 72 TSRMLS_CC);
+			zephir_is_iterable(arr, &_7, &_6, 0, 0, "smce/components/i18n.zep", 88);
 			for (
-			  ; zephir_hash_get_current_data_ex(_6, (void**) &_7, &_5) == SUCCESS
-			  ; zephir_hash_move_forward_ex(_6, &_5)
+			  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
+			  ; zephir_hash_move_forward_ex(_7, &_6)
 			) {
-				ZEPHIR_GET_HMKEY(key, _6, _5);
-				ZEPHIR_GET_HVALUE(value, _7);
-				zephir_array_append(&at, key, PH_SEPARATE, "smce/components/i18n.zep", 73);
-				zephir_array_append(&at2, value, PH_SEPARATE, "smce/components/i18n.zep", 74);
+				ZEPHIR_GET_HMKEY(key, _7, _6);
+				ZEPHIR_GET_HVALUE(value, _8);
+				ZEPHIR_INIT_NVAR(_9);
+				zephir_fast_str_replace(_9, key, value, str2 TSRMLS_CC);
+				ZEPHIR_CPY_WRT(str2, _9);
 			}
-			ZEPHIR_INIT_VAR(str2);
-			_8 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("langArr") TSRMLS_CC);
-			zephir_array_fetch(&_9, _8, str, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 78 TSRMLS_CC);
-			zephir_fast_str_replace(str2, at, at2, _9 TSRMLS_CC);
 			RETURN_CCTOR(str2);
 		} else {
-			_8 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("langArr") TSRMLS_CC);
-			zephir_array_fetch(&_9, _8, str, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 83 TSRMLS_CC);
-			RETURN_CTOR(_9);
+			_5 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("langArr") TSRMLS_CC);
+			zephir_array_fetch(&_10, _5, str, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 91 TSRMLS_CC);
+			RETURN_CTOR(_10);
 		}
 	} else {
 		if (zephir_fast_count_int(arr TSRMLS_CC) > 0) {
-			zephir_is_iterable(arr, &_11, &_10, 0, 0, "smce/components/i18n.zep", 99);
+			ZEPHIR_CPY_WRT(str2, str);
+			zephir_is_iterable(arr, &_12, &_11, 0, 0, "smce/components/i18n.zep", 119);
 			for (
-			  ; zephir_hash_get_current_data_ex(_11, (void**) &_12, &_10) == SUCCESS
-			  ; zephir_hash_move_forward_ex(_11, &_10)
+			  ; zephir_hash_get_current_data_ex(_12, (void**) &_13, &_11) == SUCCESS
+			  ; zephir_hash_move_forward_ex(_12, &_11)
 			) {
-				ZEPHIR_GET_HMKEY(key, _11, _10);
-				ZEPHIR_GET_HVALUE(value, _12);
-				zephir_array_append(&at, key, PH_SEPARATE, "smce/components/i18n.zep", 94);
-				zephir_array_append(&at2, value, PH_SEPARATE, "smce/components/i18n.zep", 95);
+				ZEPHIR_GET_HMKEY(key, _12, _11);
+				ZEPHIR_GET_HVALUE(value, _13);
+				ZEPHIR_INIT_NVAR(_9);
+				zephir_fast_str_replace(_9, key, value, str2 TSRMLS_CC);
+				ZEPHIR_CPY_WRT(str2, _9);
 			}
-			ZEPHIR_INIT_NVAR(str2);
-			zephir_fast_str_replace(str2, at, at2, str TSRMLS_CC);
 			RETURN_CCTOR(str2);
 		} else {
 			RETURN_CTOR(str);
@@ -249,7 +245,7 @@ PHP_METHOD(Smce_Components_I18n, search) {
 		ZEPHIR_CALL_FUNCTION(&_5, "iterator_to_array", NULL, rii);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(rii, _5);
-		zephir_is_iterable(rii, &_7, &_6, 0, 0, "smce/components/i18n.zep", 151);
+		zephir_is_iterable(rii, &_7, &_6, 0, 0, "smce/components/i18n.zep", 170);
 		for (
 		  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_7, &_6)
@@ -286,7 +282,7 @@ PHP_METHOD(Smce_Components_I18n, search) {
 			}
 		}
 		if (zephir_fast_count_int(filelist TSRMLS_CC) > 0) {
-			zephir_is_iterable(filelist, &_17, &_16, 0, 0, "smce/components/i18n.zep", 169);
+			zephir_is_iterable(filelist, &_17, &_16, 0, 0, "smce/components/i18n.zep", 188);
 			for (
 			  ; zephir_hash_get_current_data_ex(_17, (void**) &_18, &_16) == SUCCESS
 			  ; zephir_hash_move_forward_ex(_17, &_16)
@@ -302,16 +298,16 @@ PHP_METHOD(Smce_Components_I18n, search) {
 				zephir_check_temp_parameter(_15);
 				Z_UNSET_ISREF_P(out);
 				zephir_check_call_status();
-				zephir_array_fetch_long(&_20, out, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 160 TSRMLS_CC);
+				zephir_array_fetch_long(&_20, out, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 179 TSRMLS_CC);
 				if (zephir_fast_count_int(_20 TSRMLS_CC) > 0) {
-					zephir_array_fetch_long(&_21, out, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 163 TSRMLS_CC);
-					zephir_is_iterable(_21, &_23, &_22, 0, 0, "smce/components/i18n.zep", 167);
+					zephir_array_fetch_long(&_21, out, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 182 TSRMLS_CC);
+					zephir_is_iterable(_21, &_23, &_22, 0, 0, "smce/components/i18n.zep", 186);
 					for (
 					  ; zephir_hash_get_current_data_ex(_23, (void**) &_24, &_22) == SUCCESS
 					  ; zephir_hash_move_forward_ex(_23, &_22)
 					) {
 						ZEPHIR_GET_HVALUE(value, _24);
-						zephir_array_append(&strings, value, PH_SEPARATE, "smce/components/i18n.zep", 164);
+						zephir_array_append(&strings, value, PH_SEPARATE, "smce/components/i18n.zep", 183);
 					}
 				}
 			}
@@ -347,7 +343,7 @@ PHP_METHOD(Smce_Components_I18n, search_replace) {
 	ZEPHIR_CALL_METHOD(&strings, this_ptr, "search", NULL);
 	zephir_check_call_status();
 	_0 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("lang_list") TSRMLS_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/components/i18n.zep", 222);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/components/i18n.zep", 241);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -450,7 +446,7 @@ PHP_METHOD(Smce_Components_I18n, out) {
 		ZEPHIR_CALL_FUNCTION(NULL, "chmod", &_10, _9, &_6);
 		zephir_check_call_status();
 	}
-	zephir_is_iterable(arr, &_12, &_11, 0, 0, "smce/components/i18n.zep", 263);
+	zephir_is_iterable(arr, &_12, &_11, 0, 0, "smce/components/i18n.zep", 282);
 	for (
 	  ; zephir_hash_get_current_data_ex(_12, (void**) &_13, &_11) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_12, &_11)
@@ -466,7 +462,7 @@ PHP_METHOD(Smce_Components_I18n, out) {
 		ZEPHIR_CALL_FUNCTION(&file, "fopen", &_14, file_x, &_6);
 		zephir_check_call_status();
 		if (zephir_is_true(file)) {
-			zephir_is_iterable(value, &_16, &_15, 0, 0, "smce/components/i18n.zep", 256);
+			zephir_is_iterable(value, &_16, &_15, 0, 0, "smce/components/i18n.zep", 275);
 			for (
 			  ; zephir_hash_get_current_data_ex(_16, (void**) &_17, &_15) == SUCCESS
 			  ; zephir_hash_move_forward_ex(_16, &_15)
@@ -516,7 +512,7 @@ PHP_METHOD(Smce_Components_I18n, in_replace) {
 	zephir_check_call_status();
 	if (zephir_is_true(_2)) {
 		_4 = zephir_fetch_static_property_ce(smce_components_i18n_ce, SL("lang_list") TSRMLS_CC);
-		zephir_is_iterable(_4, &_6, &_5, 0, 0, "smce/components/i18n.zep", 337);
+		zephir_is_iterable(_4, &_6, &_5, 0, 0, "smce/components/i18n.zep", 356);
 		for (
 		  ; zephir_hash_get_current_data_ex(_6, (void**) &_7, &_5) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_6, &_5)
@@ -550,14 +546,14 @@ PHP_METHOD(Smce_Components_I18n, in_replace) {
 						}
 						if (_13) {
 							ZEPHIR_INIT_NVAR(_14);
-							zephir_array_fetch_long(&_15, ex, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 290 TSRMLS_CC);
+							zephir_array_fetch_long(&_15, ex, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 309 TSRMLS_CC);
 							zephir_fast_trim(_14, _15, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 							if (!(ZEPHIR_IS_EMPTY(_14))) {
 								ZEPHIR_INIT_NVAR(_16);
-								zephir_array_fetch_long(&_17, ex, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 292 TSRMLS_CC);
+								zephir_array_fetch_long(&_17, ex, 1, PH_NOISY | PH_READONLY, "smce/components/i18n.zep", 311 TSRMLS_CC);
 								zephir_fast_trim(_16, _17, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 								ZEPHIR_OBS_NVAR(_18);
-								zephir_array_fetch_long(&_18, ex, 0, PH_NOISY, "smce/components/i18n.zep", 292 TSRMLS_CC);
+								zephir_array_fetch_long(&_18, ex, 0, PH_NOISY, "smce/components/i18n.zep", 311 TSRMLS_CC);
 								zephir_array_update_zval(&readArr, _18, &_16, PH_COPY | PH_SEPARATE);
 							}
 						} else {
@@ -614,7 +610,7 @@ PHP_METHOD(Smce_Components_I18n, uniqueArr) {
 	array_init(arr2);
 
 
-	zephir_is_iterable(arr, &_1, &_0, 0, 0, "smce/components/i18n.zep", 354);
+	zephir_is_iterable(arr, &_1, &_0, 0, 0, "smce/components/i18n.zep", 373);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -641,7 +637,7 @@ PHP_METHOD(Smce_Components_I18n, addArr) {
 	ZEPHIR_SEPARATE_PARAM(arr);
 
 
-	zephir_is_iterable(arr2, &_1, &_0, 0, 0, "smce/components/i18n.zep", 370);
+	zephir_is_iterable(arr2, &_1, &_0, 0, 0, "smce/components/i18n.zep", 389);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -671,7 +667,7 @@ PHP_METHOD(Smce_Components_I18n, addArr2) {
 	ZEPHIR_SEPARATE_PARAM(arr);
 
 
-	zephir_is_iterable(arr2, &_1, &_0, 0, 0, "smce/components/i18n.zep", 386);
+	zephir_is_iterable(arr2, &_1, &_0, 0, 0, "smce/components/i18n.zep", 405);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -729,7 +725,7 @@ PHP_METHOD(Smce_Components_I18n, writeFile) {
 		ZEPHIR_SINIT_VAR(_9);
 		ZVAL_STRING(&_9, "\n", 0);
 		zephir_fwrite(NULL, file, &_9 TSRMLS_CC);
-		zephir_is_iterable(arr, &_11, &_10, 0, 0, "smce/components/i18n.zep", 427);
+		zephir_is_iterable(arr, &_11, &_10, 0, 0, "smce/components/i18n.zep", 446);
 		for (
 		  ; zephir_hash_get_current_data_ex(_11, (void**) &_12, &_10) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_11, &_10)
@@ -789,7 +785,7 @@ PHP_METHOD(Smce_Components_I18n, is) {
 		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", &_4, _2, _3);
 		zephir_check_temp_parameter(_3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_1, "smce/components/i18n.zep", 447 TSRMLS_CC);
+		zephir_throw_exception_debug(_1, "smce/components/i18n.zep", 466 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -805,7 +801,7 @@ PHP_METHOD(Smce_Components_I18n, is) {
 		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", &_4, _2, _3);
 		zephir_check_temp_parameter(_3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_1, "smce/components/i18n.zep", 454 TSRMLS_CC);
+		zephir_throw_exception_debug(_1, "smce/components/i18n.zep", 473 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

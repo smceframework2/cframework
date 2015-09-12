@@ -85,20 +85,20 @@ PHP_METHOD(Smce_Core_Queue_QueueModel, __construct) {
 PHP_METHOD(Smce_Core_Queue_QueueModel, addMinutes) {
 
 	zval *minute_param = NULL, *_0, *_1;
-	int minute;
+	double minute;
 
 	zephir_fetch_params(0, 0, 1, &minute_param);
 
 	if (!minute_param) {
-		minute = 0;
+		minute = (double) 0;
 	} else {
-		minute = zephir_get_intval(minute_param);
+		minute = zephir_get_doubleval(minute_param);
 	}
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("minute"), PH_NOISY_CC);
 	ZEPHIR_INIT_ZVAL_NREF(_1);
-	ZVAL_LONG(_1, (zephir_get_numberval(_0) + ((minute * 60))));
+	ZVAL_LONG(_1, (zephir_get_numberval(_0) + (int) ((minute * (double) 60))));
 	zephir_update_property_this(this_ptr, SL("minute"), _1 TSRMLS_CC);
 	RETURN_THISW();
 
