@@ -277,7 +277,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 	HashPosition _2;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_5 = NULL, *_10 = NULL;
-	zval *time, *arr = NULL, *key = NULL, *value = NULL, *cs = NULL, *_1, **_4, *_6, *_7 = NULL, *_9, *_11, *_12 = NULL, *_14;
+	zval *time, *arr = NULL, *key = NULL, *value = NULL, *cs = NULL, *e = NULL, *_1, **_4, *_6, *_7 = NULL, *_9, *_11, *_12 = NULL, *_14;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &time);
@@ -290,7 +290,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 	ZEPHIR_CALL_CE_STATIC(&arr, smce_core_queue_queueadapter_ce, "get", &_0, _1);
 	zephir_check_call_status();
 	if (Z_TYPE_P(arr) == IS_ARRAY) {
-		zephir_is_iterable(arr, &_3, &_2, 0, 0, "smce/core/queue/queuelisten.zep", 213);
+		zephir_is_iterable(arr, &_3, &_2, 0, 0, "smce/core/queue/queuelisten.zep", 219);
 		for (
 		  ; zephir_hash_get_current_data_ex(_3, (void**) &_4, &_2) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_3, &_2)
@@ -312,8 +312,20 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 					zephir_check_call_status();
 					ZEPHIR_CALL_SELF(NULL, "lasttransactiontime", &_10, _11, _12);
 					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(NULL, cs, "fire", NULL);
-					zephir_check_call_status();
+
+					/* try_start_1: */
+
+						ZEPHIR_CALL_METHOD(NULL, cs, "fire", NULL);
+						zephir_check_call_status_or_jump(try_end_1);
+
+					try_end_1:
+
+					if (EG(exception)) {
+						ZEPHIR_CPY_WRT(e, EG(exception));
+						if (zephir_instance_of_ev(e, zend_exception_get_default(TSRMLS_C) TSRMLS_CC)) {
+							zend_clear_exception(TSRMLS_C);
+						}
+					}
 					_14 = zephir_fetch_static_property_ce(smce_core_queue_queuelisten_ce, SL("queKey") TSRMLS_CC);
 					ZEPHIR_CALL_CE_STATIC(NULL, smce_core_queue_queueadapter_ce, "remove", &_13, _14, key);
 					zephir_check_call_status();
@@ -631,7 +643,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, status) {
 	array_init_size(reArr, 3);
 	zephir_array_update_string(&reArr, SL("status"), &que, PH_COPY | PH_SEPARATE);
 	ZEPHIR_OBS_VAR(_9);
-	zephir_array_fetch(&_9, arr, que, PH_NOISY, "smce/core/queue/queuelisten.zep", 415 TSRMLS_CC);
+	zephir_array_fetch(&_9, arr, que, PH_NOISY, "smce/core/queue/queuelisten.zep", 421 TSRMLS_CC);
 	zephir_array_update_string(&reArr, SL("msg"), &_9, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(reArr);
 
