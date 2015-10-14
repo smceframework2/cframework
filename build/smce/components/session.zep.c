@@ -63,14 +63,26 @@ PHP_METHOD(Smce_Components_Session, setSecurity) {
 
 PHP_METHOD(Smce_Components_Session, register) {
 
+	zephir_fcall_cache_entry *_3 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0 = NULL;
+	zval *_0 = NULL, *_1, *_2, _4;
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_CALL_FUNCTION(&_0, "session_status", NULL);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_LONG(_0, 1)) {
+		_1 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
+		if (Z_TYPE_P(_1) != IS_NULL) {
+			_2 = zephir_fetch_nproperty_this(this_ptr, SL("security"), PH_NOISY_CC);
+			ZEPHIR_CALL_FUNCTION(NULL, "session_name", &_3, _2);
+			zephir_check_call_status();
+		} else {
+			ZEPHIR_SINIT_VAR(_4);
+			ZVAL_STRING(&_4, "smceframework", 0);
+			ZEPHIR_CALL_FUNCTION(NULL, "session_name", &_3, &_4);
+			zephir_check_call_status();
+		}
 		ZEPHIR_CALL_FUNCTION(NULL, "session_start", NULL);
 		zephir_check_call_status();
 	}
@@ -117,7 +129,7 @@ PHP_METHOD(Smce_Components_Session, set) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_12);
 	ZEPHIR_CONCAT_VV(_12, security, _11);
-	zephir_array_fetch(&_9, _SESSION, _12, PH_NOISY | PH_READONLY, "smce/components/session.zep", 54 TSRMLS_CC);
+	zephir_array_fetch(&_9, _SESSION, _12, PH_NOISY | PH_READONLY, "smce/components/session.zep", 61 TSRMLS_CC);
 	if (zephir_is_true(_9)) {
 		RETURN_MM_BOOL(1);
 	} else {
@@ -158,7 +170,7 @@ PHP_METHOD(Smce_Components_Session, get) {
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(_10);
 		ZEPHIR_CONCAT_VV(_10, security, _9);
-		zephir_array_fetch(&_7, _SESSION, _10, PH_NOISY | PH_READONLY, "smce/components/session.zep", 78 TSRMLS_CC);
+		zephir_array_fetch(&_7, _SESSION, _10, PH_NOISY | PH_READONLY, "smce/components/session.zep", 85 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_6, this_ptr, "decrypt", &_11, _7);
 		zephir_check_call_status();
 		zephir_fast_trim(return_value, _6, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
@@ -189,7 +201,7 @@ PHP_METHOD(Smce_Components_Session, reset) {
 	ZEPHIR_CALL_FUNCTION(&login, "md5", &_4, _2);
 	zephir_check_call_status();
 	zephir_get_global(&_SESSION, SS("_SESSION") TSRMLS_CC);
-	zephir_is_iterable(_SESSION, &_6, &_5, 1, 0, "smce/components/session.zep", 99);
+	zephir_is_iterable(_SESSION, &_6, &_5, 1, 0, "smce/components/session.zep", 106);
 	for (
 	  ; zephir_hash_get_current_data_ex(_6, (void**) &_7, &_5) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_6, &_5)
