@@ -20,6 +20,7 @@
 #include "kernel/string.h"
 #include "kernel/array.h"
 #include "kernel/concat.h"
+#include "kernel/exit.h"
 
 ZEPHIR_INIT_CLASS(Smce_App) {
 
@@ -211,6 +212,8 @@ PHP_METHOD(Smce_App, redirect) {
 		ZEPHIR_CALL_FUNCTION(NULL, "header", &_2, _1);
 		zephir_check_call_status();
 	}
+	zephir_exit_empty();
+	ZEPHIR_MM_RESTORE();
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -226,13 +229,13 @@ PHP_METHOD(Smce_App, isAjax) {
 	_0 = zephir_array_isset_string(_SERVER, SS("HTTP_X_REQUESTED_WITH"));
 	if (_0) {
 		ZEPHIR_OBS_VAR(_1);
-		zephir_array_fetch_string(&_1, _SERVER, SL("HTTP_X_REQUESTED_WITH"), PH_NOISY, "smce/app.zep", 93 TSRMLS_CC);
+		zephir_array_fetch_string(&_1, _SERVER, SL("HTTP_X_REQUESTED_WITH"), PH_NOISY, "smce/app.zep", 95 TSRMLS_CC);
 		_0 = !ZEPHIR_IS_EMPTY(_1);
 	}
 	_2 = _0;
 	if (_2) {
 		ZEPHIR_INIT_VAR(_3);
-		zephir_array_fetch_string(&_4, _SERVER, SL("HTTP_X_REQUESTED_WITH"), PH_NOISY | PH_READONLY, "smce/app.zep", 93 TSRMLS_CC);
+		zephir_array_fetch_string(&_4, _SERVER, SL("HTTP_X_REQUESTED_WITH"), PH_NOISY | PH_READONLY, "smce/app.zep", 95 TSRMLS_CC);
 		zephir_fast_strtolower(_3, _4);
 		_2 = ZEPHIR_IS_STRING(_3, "xmlhttprequest");
 	}
@@ -249,7 +252,7 @@ PHP_METHOD(Smce_App, baseUrl) {
 
 
 	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
-	zephir_array_fetch_string(&_0, _SERVER, SL("SCRIPT_NAME"), PH_NOISY | PH_READONLY, "smce/app.zep", 105 TSRMLS_CC);
+	zephir_array_fetch_string(&_0, _SERVER, SL("SCRIPT_NAME"), PH_NOISY | PH_READONLY, "smce/app.zep", 107 TSRMLS_CC);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_STRING(&_1, "/index.php", 0);
 	ZEPHIR_SINIT_VAR(_2);
