@@ -276,8 +276,8 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 	HashTable *_3;
 	HashPosition _2;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_5 = NULL, *_10 = NULL;
-	zval *time, *arr = NULL, *key = NULL, *value = NULL, *cs = NULL, *e = NULL, *_1, **_4, *_6, *_7 = NULL, *_9, *_11, *_12 = NULL, *_14;
+	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_5 = NULL, *_10 = NULL, *_16 = NULL;
+	zval *time, *arr = NULL, *key = NULL, *value = NULL, *cs = NULL, *e = NULL, *_1, **_4, *_6, *_7 = NULL, *_9, *_11, *_12 = NULL, *_14, _15;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &time);
@@ -332,6 +332,11 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, transactions) {
 				}
 			}
 		}
+	} else {
+		ZEPHIR_SINIT_VAR(_15);
+		ZVAL_LONG(&_15, 5);
+		ZEPHIR_CALL_FUNCTION(NULL, "sleep", &_16, &_15);
+		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
 
@@ -643,7 +648,7 @@ PHP_METHOD(Smce_Core_Queue_QueueListen, status) {
 	array_init_size(reArr, 3);
 	zephir_array_update_string(&reArr, SL("status"), &que, PH_COPY | PH_SEPARATE);
 	ZEPHIR_OBS_VAR(_9);
-	zephir_array_fetch(&_9, arr, que, PH_NOISY, "smce/core/queue/queuelisten.zep", 421 TSRMLS_CC);
+	zephir_array_fetch(&_9, arr, que, PH_NOISY, "smce/core/queue/queuelisten.zep", 423 TSRMLS_CC);
 	zephir_array_update_string(&reArr, SL("msg"), &_9, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(reArr);
 
