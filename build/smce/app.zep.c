@@ -246,13 +246,49 @@ PHP_METHOD(Smce_App, isAjax) {
 
 }
 
+PHP_METHOD(Smce_App, isPost) {
+
+	zend_bool _0;
+	zval *_SERVER, *_1;
+
+
+	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
+	_0 = zephir_array_isset_string(_SERVER, SS("REQUEST_METHOD"));
+	if (_0) {
+		zephir_array_fetch_string(&_1, _SERVER, SL("REQUEST_METHOD"), PH_NOISY | PH_READONLY, "smce/app.zep", 106 TSRMLS_CC);
+		_0 = ZEPHIR_IS_STRING_IDENTICAL(_1, "POST");
+	}
+	if (_0) {
+		RETURN_BOOL(1);
+	}
+
+}
+
+PHP_METHOD(Smce_App, isGet) {
+
+	zend_bool _0;
+	zval *_SERVER, *_1;
+
+
+	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
+	_0 = zephir_array_isset_string(_SERVER, SS("REQUEST_METHOD"));
+	if (_0) {
+		zephir_array_fetch_string(&_1, _SERVER, SL("REQUEST_METHOD"), PH_NOISY | PH_READONLY, "smce/app.zep", 117 TSRMLS_CC);
+		_0 = ZEPHIR_IS_STRING_IDENTICAL(_1, "GET");
+	}
+	if (_0) {
+		RETURN_BOOL(1);
+	}
+
+}
+
 PHP_METHOD(Smce_App, baseUrl) {
 
 	zval *_SERVER, *_0, _1, _2;
 
 
 	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
-	zephir_array_fetch_string(&_0, _SERVER, SL("SCRIPT_NAME"), PH_NOISY | PH_READONLY, "smce/app.zep", 107 TSRMLS_CC);
+	zephir_array_fetch_string(&_0, _SERVER, SL("SCRIPT_NAME"), PH_NOISY | PH_READONLY, "smce/app.zep", 129 TSRMLS_CC);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_STRING(&_1, "/index.php", 0);
 	ZEPHIR_SINIT_VAR(_2);
