@@ -242,7 +242,9 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, remove) {
 	zephir_array_fetch(&_5, arr, key, PH_NOISY | PH_READONLY, "smce/core/queue/queueadapter.zep", 143 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(duration);
 	zephir_array_fetch_string(&duration, _5, SL("duration"), PH_NOISY, "smce/core/queue/queueadapter.zep", 143 TSRMLS_CC);
-	zephir_array_unset(&arr, key, PH_SEPARATE);
+	if (zephir_array_isset(arr, key)) {
+		zephir_array_unset(&arr, key, PH_SEPARATE);
+	}
 	ZEPHIR_CALL_SELF(NULL, "replace", NULL, queKey, key, arr, duration);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -340,7 +342,7 @@ PHP_METHOD(Smce_Core_Queue_QueueAdapter, setAdapter) {
 		ZVAL_STRING(_11, "ReQueues", 1);
 		zephir_update_static_property_ce(smce_core_queue_queueadapter_ce, SL("adapterName"), &_11 TSRMLS_CC);
 	} else if (Z_TYPE_P(_10) == IS_NULL) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "only Memcache and ReQueues", "smce/core/queue/queueadapter.zep", 196);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "only Memcache and ReQueues", "smce/core/queue/queueadapter.zep", 201);
 		return;
 	}
 	zephir_update_static_property_ce(smce_core_queue_queueadapter_ce, SL("adapter"), &adapter TSRMLS_CC);
