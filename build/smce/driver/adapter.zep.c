@@ -64,7 +64,7 @@ ZEPHIR_INIT_CLASS(Smce_Driver_Adapter) {
 PHP_METHOD(Smce_Driver_Adapter, set) {
 
 	int duration, ZEPHIR_LAST_CALL_STATUS;
-	zval *key_param = NULL, *str, *duration_param = NULL, *_0, *_1, *_2, *_3 = NULL, *_4 = NULL, *_5 = NULL, *_6;
+	zval *key_param = NULL, *str, *duration_param = NULL, *_0, *_1, *_2$$3, *_3$$3, *_4$$3, *_5$$3, *_6$$3, *_7$$4, *_8$$4, *_9$$4, *_10$$4;
 	zval *key = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -77,27 +77,27 @@ PHP_METHOD(Smce_Driver_Adapter, set) {
 	_0 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapterName") TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapterName") TSRMLS_CC);
 	if (ZEPHIR_IS_STRING(_0, "Memcache")) {
-		_2 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_VAR(_3);
-		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_INIT_VAR(_5);
-		ZVAL_BOOL(_5, 0);
-		ZEPHIR_INIT_VAR(_6);
-		ZVAL_LONG(_6, duration);
-		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, _4, str, _5, _6);
+		_2$$3 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_3$$3);
+		zephir_read_static_property_ce(&_3$$3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_4$$3);
+		ZEPHIR_CONCAT_VV(_4$$3, _3$$3, key);
+		ZEPHIR_INIT_VAR(_5$$3);
+		ZVAL_BOOL(_5$$3, 0);
+		ZEPHIR_INIT_VAR(_6$$3);
+		ZVAL_LONG(_6$$3, duration);
+		ZEPHIR_CALL_METHOD(NULL, _2$$3, "set", NULL, 0, _4$$3, str, _5$$3, _6$$3);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
-		_2 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_NVAR(_3);
-		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_LNVAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_INIT_NVAR(_5);
-		ZVAL_LONG(_5, duration);
-		ZEPHIR_CALL_METHOD(NULL, _2, "set", NULL, _4, str, _5);
+		_7$$4 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_8$$4);
+		zephir_read_static_property_ce(&_8$$4, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_9$$4);
+		ZEPHIR_CONCAT_VV(_9$$4, _8$$4, key);
+		ZEPHIR_INIT_VAR(_10$$4);
+		ZVAL_LONG(_10$$4, duration);
+		ZEPHIR_CALL_METHOD(NULL, _7$$4, "set", NULL, 0, _9$$4, str, _10$$4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}
@@ -126,7 +126,7 @@ PHP_METHOD(Smce_Driver_Adapter, get) {
 	zephir_read_static_property_ce(&_1, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_2);
 	ZEPHIR_CONCAT_VV(_2, _1, key);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, _2);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, 0, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -139,7 +139,7 @@ PHP_METHOD(Smce_Driver_Adapter, get) {
 PHP_METHOD(Smce_Driver_Adapter, remove) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key, *_0, *_1, *_2, *_3 = NULL, *_4 = NULL;
+	zval *key, *_0, *_1, *_2$$3, *_3$$3, *_4$$3, *_5$$4, *_6$$4, *_7$$4;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &key);
@@ -149,21 +149,21 @@ PHP_METHOD(Smce_Driver_Adapter, remove) {
 	_0 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapterName") TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapterName") TSRMLS_CC);
 	if (ZEPHIR_IS_STRING(_0, "Memcache")) {
-		_2 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_VAR(_3);
-		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, _4);
+		_2$$3 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_3$$3);
+		zephir_read_static_property_ce(&_3$$3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_4$$3);
+		ZEPHIR_CONCAT_VV(_4$$3, _3$$3, key);
+		ZEPHIR_CALL_METHOD(NULL, _2$$3, "delete", NULL, 0, _4$$3);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
-		_2 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_NVAR(_3);
-		zephir_read_static_property_ce(&_3, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_LNVAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, _4);
+		_5$$4 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_6$$4);
+		zephir_read_static_property_ce(&_6$$4, smce_driver_adapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_7$$4);
+		ZEPHIR_CONCAT_VV(_7$$4, _6$$4, key);
+		ZEPHIR_CALL_METHOD(NULL, _5$$4, "hdel", NULL, 0, _7$$4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}
@@ -180,7 +180,7 @@ PHP_METHOD(Smce_Driver_Adapter, remove) {
 PHP_METHOD(Smce_Driver_Adapter, setAdapter) {
 
 	zend_bool _1, _6;
-	zval *adapter, *_0, *_2, _3, *_4, *_5, *_7, _8, *_9, *_10, *_11 = NULL;
+	zval *adapter, *_0, *_2, _3, *_4, *_5, *_7, _8, *_9, *_10, *_11$$3, *_12$$4;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &adapter);
@@ -211,15 +211,15 @@ PHP_METHOD(Smce_Driver_Adapter, setAdapter) {
 	}
 	_10 = zephir_fetch_static_property_ce(smce_driver_adapter_ce, SL("adapterName") TSRMLS_CC);
 	if (_1) {
-		ZEPHIR_INIT_ZVAL_NREF(_11);
-		ZEPHIR_INIT_VAR(_11);
-		ZVAL_STRING(_11, "Memcache", 1);
-		zephir_update_static_property_ce(smce_driver_adapter_ce, SL("adapterName"), &_11 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_11$$3);
+		ZEPHIR_INIT_VAR(_11$$3);
+		ZVAL_STRING(_11$$3, "Memcache", 1);
+		zephir_update_static_property_ce(smce_driver_adapter_ce, SL("adapterName"), &_11$$3 TSRMLS_CC);
 	} else if (_6) {
-		ZEPHIR_INIT_ZVAL_NREF(_11);
-		ZEPHIR_INIT_NVAR(_11);
-		ZVAL_STRING(_11, "Redis", 1);
-		zephir_update_static_property_ce(smce_driver_adapter_ce, SL("adapterName"), &_11 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_12$$4);
+		ZEPHIR_INIT_VAR(_12$$4);
+		ZVAL_STRING(_12$$4, "Redis", 1);
+		zephir_update_static_property_ce(smce_driver_adapter_ce, SL("adapterName"), &_12$$4 TSRMLS_CC);
 	} else if (Z_TYPE_P(_10) == IS_NULL) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "only Memcache and Redis", "smce/driver/adapter.zep", 124);
 		return;

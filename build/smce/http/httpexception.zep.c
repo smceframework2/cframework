@@ -41,7 +41,6 @@ ZEPHIR_INIT_CLASS(Smce_Http_HttpException) {
 
 PHP_METHOD(Smce_Http_HttpException, __construct) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	zval *msg = NULL;
 	zval *httpCode_param = NULL, *msg_param = NULL, *_0;
 	int httpCode, ZEPHIR_LAST_CALL_STATUS;
@@ -58,7 +57,7 @@ PHP_METHOD(Smce_Http_HttpException, __construct) {
 	ZVAL_LONG(_0, httpCode);
 	zephir_update_property_this(this_ptr, SL("httpCode"), _0 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("httpCode"), PH_NOISY_CC);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", &_1, _0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "http_response_code", NULL, 1, _0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -66,6 +65,7 @@ PHP_METHOD(Smce_Http_HttpException, __construct) {
 
 PHP_METHOD(Smce_Http_HttpException, getMsg) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "msg");
 
@@ -73,6 +73,7 @@ PHP_METHOD(Smce_Http_HttpException, getMsg) {
 
 PHP_METHOD(Smce_Http_HttpException, getHttpCode) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "httpCode");
 
@@ -80,12 +81,12 @@ PHP_METHOD(Smce_Http_HttpException, getHttpCode) {
 
 PHP_METHOD(Smce_Http_HttpException, htppError) {
 
-	zval *httpError, *_0 = NULL;
+	zval *httpError = NULL, *_0 = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(httpError);
-	array_init_size(httpError, 3);
+	zephir_create_array(httpError, 2, 0 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(_0);
 	zephir_read_property_this(&_0, this_ptr, SL("httpCode"), PH_NOISY_CC);
 	zephir_array_update_string(&httpError, SL("code"), &_0, PH_COPY | PH_SEPARATE);
@@ -98,12 +99,12 @@ PHP_METHOD(Smce_Http_HttpException, htppError) {
 
 PHP_METHOD(Smce_Http_HttpException, http_response_code) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_5 = NULL;
-	zval *_1;
-	zval *code_param = NULL, *text = NULL, *protocol = NULL, _0 = zval_used_for_init, _2, *_SERVER, *_4;
+	zval *_1$$40;
+	zval *code_param = NULL, *_SERVER, *text = NULL, *protocol = NULL, _3, *_4, _0$$40, _2$$40;
 	int code, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
+	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
 	zephir_fetch_params(1, 0, 1, &code_param);
 
 	if (!code_param) {
@@ -299,17 +300,16 @@ PHP_METHOD(Smce_Http_HttpException, http_response_code) {
 			ZVAL_STRING(text, "HTTP Version not supported", 1);
 			break;
 		}
-		ZEPHIR_SINIT_VAR(_0);
-		ZVAL_LONG(&_0, code);
-		ZEPHIR_INIT_VAR(_1);
-		ZEPHIR_CONCAT_SV(_1, "Unknown http status code ", &_0);
-		ZEPHIR_SINIT_VAR(_2);
-		ZVAL_LONG(&_2, 256);
-		ZEPHIR_CALL_FUNCTION(NULL, "trigger_error", &_3, _1, &_2);
+		ZEPHIR_SINIT_VAR(_0$$40);
+		ZVAL_LONG(&_0$$40, code);
+		ZEPHIR_INIT_VAR(_1$$40);
+		ZEPHIR_CONCAT_SV(_1$$40, "Unknown http status code ", &_0$$40);
+		ZEPHIR_SINIT_VAR(_2$$40);
+		ZVAL_LONG(&_2$$40, 256);
+		ZEPHIR_CALL_FUNCTION(NULL, "trigger_error", NULL, 2, _1$$40, &_2$$40);
 		zephir_check_call_status();
 	} while(0);
 
-	zephir_get_global(&_SERVER, SS("_SERVER") TSRMLS_CC);
 	if (zephir_array_isset_string(_SERVER, SS("SERVER_PROTOCOL"))) {
 		ZEPHIR_OBS_VAR(protocol);
 		zephir_array_fetch_string(&protocol, _SERVER, SL("SERVER_PROTOCOL"), PH_NOISY, "smce/http/httpexception.zep", 95 TSRMLS_CC);
@@ -317,11 +317,11 @@ PHP_METHOD(Smce_Http_HttpException, http_response_code) {
 		ZEPHIR_INIT_NVAR(protocol);
 		ZVAL_STRING(protocol, "HTTP/1.0", 1);
 	}
-	ZEPHIR_SINIT_NVAR(_0);
-	ZVAL_LONG(&_0, code);
+	ZEPHIR_SINIT_VAR(_3);
+	ZVAL_LONG(&_3, code);
 	ZEPHIR_INIT_VAR(_4);
-	ZEPHIR_CONCAT_VSVSV(_4, protocol, " ", &_0, " ", text);
-	ZEPHIR_CALL_FUNCTION(NULL, "header", &_5, _4);
+	ZEPHIR_CONCAT_VSVSV(_4, protocol, " ", &_3, " ", text);
+	ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 3, _4);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

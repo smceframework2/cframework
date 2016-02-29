@@ -11,7 +11,7 @@ SHLIB_DL_SUFFIX_NAME = so
 ZEND_EXT_TYPE = zend_extension
 RE2C = re2c
 AWK = nawk
-shared_objects_smce = smce.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/extended/array.lo kernel/string.lo kernel/fcall.lo kernel/require.lo kernel/file.lo kernel/operators.lo kernel/concat.lo kernel/variables.lo kernel/filter.lo kernel/iterator.lo kernel/exit.lo smce/app.lo smce/components/collection.lo smce/components/i18n.lo smce/components/output.lo smce/components/session.lo smce/core/di.lo smce/core/di/diadapter.lo smce/core/di/dicache.lo smce/core/di/disingleton.lo smce/core/eventmanager.lo smce/core/loader.lo smce/core/queue.lo smce/core/queue/queueadapter.lo smce/core/queue/queuelisten.lo smce/core/queue/queuemodel.lo smce/core/smceframework.lo smce/driver/adapter.lo smce/driver/memcache.lo smce/driver/redis.lo smce/http/httpexception.lo smce/http/response.lo smce/mvc/acl.lo smce/mvc/layout.lo smce/mvc/router.lo smce/mvc/router/exception.lo smce/mvc/router/route.lo smce/mvc/template.lo smce/mvc/url.lo smce/sm.lo
+shared_objects_smce = smce.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/extended/array.lo kernel/string.lo kernel/fcall.lo kernel/extended/fcall.lo kernel/require.lo kernel/file.lo kernel/operators.lo kernel/math.lo kernel/concat.lo kernel/variables.lo kernel/filter.lo kernel/iterator.lo kernel/time.lo kernel/exit.lo smce/http/httpexception.lo smce/app.lo smce/components/collection.lo smce/components/i18n.lo smce/components/output.lo smce/components/session.lo smce/core/di.lo smce/core/di/diadapter.lo smce/core/di/dicache.lo smce/core/di/disingleton.lo smce/core/eventmanager.lo smce/core/loader.lo smce/core/queue.lo smce/core/queue/queueadapter.lo smce/core/queue/queuelisten.lo smce/core/queue/queuemodel.lo smce/core/smceframework.lo smce/driver/adapter.lo smce/driver/memcache.lo smce/driver/redis.lo smce/http/response.lo smce/mvc/acl.lo smce/mvc/layout.lo smce/mvc/router.lo smce/mvc/router/exception.lo smce/mvc/router/route.lo smce/mvc/template.lo smce/mvc/url.lo smce/sm.lo
 PHP_PECL_EXTENSION = smce
 SMCE_SHARED_LIBADD =
 PHP_MODULES = $(phplibdir)/smce.la
@@ -201,12 +201,16 @@ kernel/string.lo: /var/www/zephir/smce/ext/kernel/string.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/string.c -o kernel/string.lo 
 kernel/fcall.lo: /var/www/zephir/smce/ext/kernel/fcall.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/fcall.c -o kernel/fcall.lo 
+kernel/extended/fcall.lo: /var/www/zephir/smce/ext/kernel/extended/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/extended/fcall.c -o kernel/extended/fcall.lo 
 kernel/require.lo: /var/www/zephir/smce/ext/kernel/require.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/require.c -o kernel/require.lo 
 kernel/file.lo: /var/www/zephir/smce/ext/kernel/file.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/file.c -o kernel/file.lo 
 kernel/operators.lo: /var/www/zephir/smce/ext/kernel/operators.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/operators.c -o kernel/operators.lo 
+kernel/math.lo: /var/www/zephir/smce/ext/kernel/math.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/math.c -o kernel/math.lo 
 kernel/concat.lo: /var/www/zephir/smce/ext/kernel/concat.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/concat.c -o kernel/concat.lo 
 kernel/variables.lo: /var/www/zephir/smce/ext/kernel/variables.c
@@ -215,8 +219,12 @@ kernel/filter.lo: /var/www/zephir/smce/ext/kernel/filter.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/filter.c -o kernel/filter.lo 
 kernel/iterator.lo: /var/www/zephir/smce/ext/kernel/iterator.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/iterator.c -o kernel/iterator.lo 
+kernel/time.lo: /var/www/zephir/smce/ext/kernel/time.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/time.c -o kernel/time.lo 
 kernel/exit.lo: /var/www/zephir/smce/ext/kernel/exit.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/exit.c -o kernel/exit.lo 
+smce/http/httpexception.lo: /var/www/zephir/smce/ext/smce/http/httpexception.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/httpexception.zep.c -o smce/http/httpexception.lo 
 smce/app.lo: /var/www/zephir/smce/ext/smce/app.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/app.zep.c -o smce/app.lo 
 smce/components/collection.lo: /var/www/zephir/smce/ext/smce/components/collection.zep.c
@@ -255,8 +263,6 @@ smce/driver/memcache.lo: /var/www/zephir/smce/ext/smce/driver/memcache.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/driver/memcache.zep.c -o smce/driver/memcache.lo 
 smce/driver/redis.lo: /var/www/zephir/smce/ext/smce/driver/redis.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/driver/redis.zep.c -o smce/driver/redis.lo 
-smce/http/httpexception.lo: /var/www/zephir/smce/ext/smce/http/httpexception.zep.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/httpexception.zep.c -o smce/http/httpexception.lo 
 smce/http/response.lo: /var/www/zephir/smce/ext/smce/http/response.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/response.zep.c -o smce/http/response.lo 
 smce/mvc/acl.lo: /var/www/zephir/smce/ext/smce/mvc/acl.zep.c

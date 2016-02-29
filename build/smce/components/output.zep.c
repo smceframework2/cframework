@@ -74,8 +74,8 @@ PHP_METHOD(Smce_Components_Output, setFileName) {
 PHP_METHOD(Smce_Components_Output, put) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
-	zval *data, *_0, *_1, *_2;
+	zephir_fcall_cache_entry *_3 = NULL;
+	zval *data, *_0, *_4, *_1$$3, *_2$$3;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &data);
@@ -85,14 +85,14 @@ PHP_METHOD(Smce_Components_Output, put) {
 	ZEPHIR_OBS_VAR(_0);
 	zephir_read_property_this(&_0, this_ptr, SL("fileName"), PH_NOISY_CC);
 	if (!(ZEPHIR_IS_EMPTY(_0))) {
-		_1 = zephir_fetch_nproperty_this(this_ptr, SL("fileName"), PH_NOISY_CC);
-		ZEPHIR_INIT_VAR(_2);
-		ZEPHIR_CONCAT_SV(_2, "Content-disposition: attachment; filename=", _1);
-		ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, _2);
+		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("fileName"), PH_NOISY_CC);
+		ZEPHIR_INIT_VAR(_2$$3);
+		ZEPHIR_CONCAT_SV(_2$$3, "Content-disposition: attachment; filename=", _1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, 3, _2$$3);
 		zephir_check_call_status();
 	}
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("header"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, _1);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("header"), PH_NOISY_CC);
+	ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, 3, _4);
 	zephir_check_call_status();
 	zend_print_zval(data, 0);
 	ZEPHIR_MM_RESTORE();
@@ -102,8 +102,8 @@ PHP_METHOD(Smce_Components_Output, put) {
 PHP_METHOD(Smce_Components_Output, putFile) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_4 = NULL;
-	zval *file, *_0, *_1, *_2;
+	zephir_fcall_cache_entry *_3 = NULL;
+	zval *file, *_0, *_4, *_1$$3, *_2$$3;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &file);
@@ -113,16 +113,16 @@ PHP_METHOD(Smce_Components_Output, putFile) {
 	ZEPHIR_OBS_VAR(_0);
 	zephir_read_property_this(&_0, this_ptr, SL("fileName"), PH_NOISY_CC);
 	if (!(ZEPHIR_IS_EMPTY(_0))) {
-		_1 = zephir_fetch_nproperty_this(this_ptr, SL("fileName"), PH_NOISY_CC);
-		ZEPHIR_INIT_VAR(_2);
-		ZEPHIR_CONCAT_SV(_2, "Content-disposition: attachment; filename=", _1);
-		ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, _2);
+		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("fileName"), PH_NOISY_CC);
+		ZEPHIR_INIT_VAR(_2$$3);
+		ZEPHIR_CONCAT_SV(_2$$3, "Content-disposition: attachment; filename=", _1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, 3, _2$$3);
 		zephir_check_call_status();
 	}
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("header"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, _1);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("header"), PH_NOISY_CC);
+	ZEPHIR_CALL_FUNCTION(NULL, "header", &_3, 3, _4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "readfile", &_4, file);
+	ZEPHIR_CALL_FUNCTION(NULL, "readfile", NULL, 46, file);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -130,6 +130,7 @@ PHP_METHOD(Smce_Components_Output, putFile) {
 
 PHP_METHOD(Smce_Components_Output, getHeader) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "header");
 

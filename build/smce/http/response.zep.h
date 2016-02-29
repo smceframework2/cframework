@@ -12,5 +12,5 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(smce_http_response_method_entry) {
 	PHP_ME(Smce_Http_Response, __construct, arginfo_smce_http_response___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

@@ -19,5 +19,5 @@ ZEPHIR_INIT_FUNCS(smce_mvc_url_method_entry) {
 	PHP_ME(Smce_Mvc_Url, setBaseUrl, arginfo_smce_mvc_url_setbaseurl, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Url, getBaseUrl, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Url, get, arginfo_smce_mvc_url_get, ZEND_ACC_PUBLIC)
-  PHP_FE_END
+	PHP_FE_END
 };

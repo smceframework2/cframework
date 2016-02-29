@@ -13,7 +13,7 @@ PHP_METHOD(Smce_Driver_Redis, delete);
 PHP_METHOD(Smce_Driver_Redis, lpush);
 PHP_METHOD(Smce_Driver_Redis, lrange);
 PHP_METHOD(Smce_Driver_Redis, hdel);
-PHP_METHOD(Smce_Driver_Redis, __construct);
+static zend_object_value zephir_init_properties_Smce_Driver_Redis(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_driver_redis_setconfig, 0, 0, 1)
 	ZEND_ARG_INFO(0, config)
@@ -60,6 +60,5 @@ ZEPHIR_INIT_FUNCS(smce_driver_redis_method_entry) {
 	PHP_ME(Smce_Driver_Redis, lpush, arginfo_smce_driver_redis_lpush, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Redis, lrange, arginfo_smce_driver_redis_lrange, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Redis, hdel, arginfo_smce_driver_redis_hdel, ZEND_ACC_PUBLIC)
-	PHP_ME(Smce_Driver_Redis, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

@@ -16,5 +16,5 @@ ZEPHIR_INIT_FUNCS(smce_sm_method_entry) {
 	PHP_ME(Smce_Sm, app, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Sm, theme, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Sm, t, arginfo_smce_sm_t, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-  PHP_FE_END
+	PHP_FE_END
 };

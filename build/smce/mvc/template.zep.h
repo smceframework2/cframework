@@ -14,7 +14,7 @@ PHP_METHOD(Smce_Mvc_Template, getViewDirectory);
 PHP_METHOD(Smce_Mvc_Template, run);
 PHP_METHOD(Smce_Mvc_Template, adjustmentLayout);
 PHP_METHOD(Smce_Mvc_Template, adjustmentView);
-PHP_METHOD(Smce_Mvc_Template, __construct);
+static zend_object_value zephir_init_properties_Smce_Mvc_Template(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_mvc_template_setlayout, 0, 0, 0)
 	ZEND_ARG_INFO(0, layout)
@@ -53,6 +53,5 @@ ZEPHIR_INIT_FUNCS(smce_mvc_template_method_entry) {
 	PHP_ME(Smce_Mvc_Template, run, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Mvc_Template, adjustmentLayout, arginfo_smce_mvc_template_adjustmentlayout, ZEND_ACC_PRIVATE)
 	PHP_ME(Smce_Mvc_Template, adjustmentView, arginfo_smce_mvc_template_adjustmentview, ZEND_ACC_PRIVATE)
-	PHP_ME(Smce_Mvc_Template, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

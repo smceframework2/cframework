@@ -22,12 +22,16 @@ kernel/string.lo: /var/www/zephir/smce/ext/kernel/string.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/string.c -o kernel/string.lo 
 kernel/fcall.lo: /var/www/zephir/smce/ext/kernel/fcall.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/fcall.c -o kernel/fcall.lo 
+kernel/extended/fcall.lo: /var/www/zephir/smce/ext/kernel/extended/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/extended/fcall.c -o kernel/extended/fcall.lo 
 kernel/require.lo: /var/www/zephir/smce/ext/kernel/require.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/require.c -o kernel/require.lo 
 kernel/file.lo: /var/www/zephir/smce/ext/kernel/file.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/file.c -o kernel/file.lo 
 kernel/operators.lo: /var/www/zephir/smce/ext/kernel/operators.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/operators.c -o kernel/operators.lo 
+kernel/math.lo: /var/www/zephir/smce/ext/kernel/math.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/math.c -o kernel/math.lo 
 kernel/concat.lo: /var/www/zephir/smce/ext/kernel/concat.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/concat.c -o kernel/concat.lo 
 kernel/variables.lo: /var/www/zephir/smce/ext/kernel/variables.c
@@ -36,8 +40,12 @@ kernel/filter.lo: /var/www/zephir/smce/ext/kernel/filter.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/filter.c -o kernel/filter.lo 
 kernel/iterator.lo: /var/www/zephir/smce/ext/kernel/iterator.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/iterator.c -o kernel/iterator.lo 
+kernel/time.lo: /var/www/zephir/smce/ext/kernel/time.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/time.c -o kernel/time.lo 
 kernel/exit.lo: /var/www/zephir/smce/ext/kernel/exit.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/kernel/exit.c -o kernel/exit.lo 
+smce/http/httpexception.lo: /var/www/zephir/smce/ext/smce/http/httpexception.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/httpexception.zep.c -o smce/http/httpexception.lo 
 smce/app.lo: /var/www/zephir/smce/ext/smce/app.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/app.zep.c -o smce/app.lo 
 smce/components/collection.lo: /var/www/zephir/smce/ext/smce/components/collection.zep.c
@@ -76,8 +84,6 @@ smce/driver/memcache.lo: /var/www/zephir/smce/ext/smce/driver/memcache.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/driver/memcache.zep.c -o smce/driver/memcache.lo 
 smce/driver/redis.lo: /var/www/zephir/smce/ext/smce/driver/redis.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/driver/redis.zep.c -o smce/driver/redis.lo 
-smce/http/httpexception.lo: /var/www/zephir/smce/ext/smce/http/httpexception.zep.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/httpexception.zep.c -o smce/http/httpexception.lo 
 smce/http/response.lo: /var/www/zephir/smce/ext/smce/http/response.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/var/www/zephir/smce/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /var/www/zephir/smce/ext/smce/http/response.zep.c -o smce/http/response.lo 
 smce/mvc/acl.lo: /var/www/zephir/smce/ext/smce/mvc/acl.zep.c

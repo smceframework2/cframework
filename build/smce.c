@@ -20,6 +20,7 @@
 #include <Zend/zend_exceptions.h>
 #include <Zend/zend_interfaces.h>
 
+#include "kernel/globals.h"
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
@@ -58,6 +59,13 @@ zend_class_entry *smce_sm_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(smce)
 
+PHP_INI_BEGIN()
+	STD_PHP_INI_BOOLEAN("smce.test.my_setting_1", "1", PHP_INI_ALL, OnUpdateBool, test.my_setting_1, zend_smce_globals, smce_globals)
+	
+	
+	STD_PHP_INI_BOOLEAN("test.my_setting_1", "1", PHP_INI_ALL, OnUpdateBool, my_setting_1, zend_smce_globals, smce_globals)
+PHP_INI_END()
+
 static PHP_MINIT_FUNCTION(smce)
 {
 #if PHP_VERSION_ID < 50500
@@ -75,7 +83,7 @@ static PHP_MINIT_FUNCTION(smce)
 
 	setlocale(LC_ALL, "C");
 #endif
-
+	REGISTER_INI_ENTRIES();
 	ZEPHIR_INIT(Smce_Http_HttpException);
 	ZEPHIR_INIT(Smce_App);
 	ZEPHIR_INIT(Smce_Components_Collection);
@@ -118,7 +126,7 @@ static PHP_MSHUTDOWN_FUNCTION(smce)
 {
 
 	zephir_deinitialize_memory(TSRMLS_C);
-
+	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 #endif
@@ -126,40 +134,44 @@ static PHP_MSHUTDOWN_FUNCTION(smce)
 /**
  * Initialize globals on each request or each thread started
  */
-static void php_zephir_init_globals(zend_smce_globals *zephir_globals TSRMLS_DC)
+static void php_zephir_init_globals(zend_smce_globals *smce_globals TSRMLS_DC)
 {
-	zephir_globals->initialized = 0;
+	smce_globals->initialized = 0;
 
 	/* Memory options */
-	zephir_globals->active_memory = NULL;
+	smce_globals->active_memory = NULL;
 
 	/* Virtual Symbol Tables */
-	zephir_globals->active_symbol_table = NULL;
+	smce_globals->active_symbol_table = NULL;
 
 	/* Cache Enabled */
-	zephir_globals->cache_enabled = 1;
+	smce_globals->cache_enabled = 1;
 
 	/* Recursive Lock */
-	zephir_globals->recursive_lock = 0;
+	smce_globals->recursive_lock = 0;
 
-	zephir_globals->test.my_setting_1 = 1;
-	zephir_globals->test.my_setting_2 = 100;
-	zephir_globals->test.my_setting_3 = 7.5;
-	zephir_globals->my_setting_1 = 1;
-	zephir_globals->my_setting_2 = 10;
-	zephir_globals->my_setting_3 = 15.2;
+	/* Static cache */
+	memset(smce_globals->scache, '\0', sizeof(zephir_fcall_cache_entry*) * ZEPHIR_MAX_CACHE_SLOTS);
+
+
+	smce_globals->test.my_setting_2 = 100;
+	smce_globals->test.my_setting_3 = 7.5;
+	smce_globals->my_setting_1 = 1;
+	smce_globals->my_setting_2 = 10;
+	smce_globals->my_setting_3 = 15.2;
 
 }
 
 static PHP_RINIT_FUNCTION(smce)
 {
 
-	zend_smce_globals *zephir_globals_ptr = ZEPHIR_VGLOBAL;
+	zend_smce_globals *smce_globals_ptr = ZEPHIR_VGLOBAL;
 
-	php_zephir_init_globals(zephir_globals_ptr TSRMLS_CC);
+	php_zephir_init_globals(smce_globals_ptr TSRMLS_CC);
 	//zephir_init_interned_strings(TSRMLS_C);
 
-	zephir_initialize_memory(zephir_globals_ptr TSRMLS_CC);
+	zephir_initialize_memory(smce_globals_ptr TSRMLS_CC);
+
 
 	return SUCCESS;
 }
@@ -183,9 +195,9 @@ static PHP_MINFO_FUNCTION(smce)
 	php_info_print_table_header(2, PHP_SMCE_NAME, "enabled");
 	php_info_print_table_row(2, "Author", PHP_SMCE_AUTHOR);
 	php_info_print_table_row(2, "Version", PHP_SMCE_VERSION);
+	php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__ );
 	php_info_print_table_row(2, "Powered by Zephir", "Version " PHP_SMCE_ZEPVERSION);
 	php_info_print_table_end();
-
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Directive", "Value");
 	php_info_print_table_row(2, "setting1", "value1");
@@ -197,6 +209,7 @@ static PHP_MINFO_FUNCTION(smce)
 	php_info_print_table_row(2, "setting4", "value4");
 	php_info_print_table_end();
 
+	DISPLAY_INI_ENTRIES();
 }
 
 static PHP_GINIT_FUNCTION(smce)
@@ -209,12 +222,18 @@ static PHP_GSHUTDOWN_FUNCTION(smce)
 
 }
 
+
+zend_function_entry php_smce_functions[] = {
+ZEND_FE_END
+
+};
+
 zend_module_entry smce_module_entry = {
 	STANDARD_MODULE_HEADER_EX,
 	NULL,
 	NULL,
 	PHP_SMCE_EXTNAME,
-	NULL,
+	php_smce_functions,
 	PHP_MINIT(smce),
 #ifndef ZEPHIR_RELEASE
 	PHP_MSHUTDOWN(smce),

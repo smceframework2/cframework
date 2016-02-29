@@ -4,6 +4,7 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
+#include "smce/http/httpexception.zep.h"
 #include "smce/app.zep.h"
 #include "smce/components/collection.zep.h"
 #include "smce/components/i18n.zep.h"
@@ -23,7 +24,6 @@
 #include "smce/driver/adapter.zep.h"
 #include "smce/driver/memcache.zep.h"
 #include "smce/driver/redis.zep.h"
-#include "smce/http/httpexception.zep.h"
 #include "smce/http/response.zep.h"
 #include "smce/mvc/acl.zep.h"
 #include "smce/mvc/layout.zep.h"

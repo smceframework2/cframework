@@ -22,6 +22,14 @@
 #include "kernel/exception.h"
 #include "kernel/require.h"
 
+
+/**
+ *
+ * @author Samed Ceylan
+ * @link http://www.samedceylan.com/
+ * @copyright 2015 SmceFramework 2
+ * @github https://github.com/smceframework2
+ */
 ZEPHIR_INIT_CLASS(Smce_Mvc_Template) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Mvc, Template, smce, mvc_template, smce_mvc_template_method_entry, 0);
@@ -56,6 +64,7 @@ ZEPHIR_INIT_CLASS(Smce_Mvc_Template) {
 	 */
 	zend_declare_property_string(smce_mvc_template_ce, SL("content"), "", ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	smce_mvc_template_ce->create_object = zephir_init_properties_Smce_Mvc_Template;
 	return SUCCESS;
 
 }
@@ -116,6 +125,7 @@ PHP_METHOD(Smce_Mvc_Template, setLayoutDirectory) {
  */
 PHP_METHOD(Smce_Mvc_Template, getLayout) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "layout");
 
@@ -127,6 +137,7 @@ PHP_METHOD(Smce_Mvc_Template, getLayout) {
  */
 PHP_METHOD(Smce_Mvc_Template, getLayoutDirectory) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "layoutDirectory");
 
@@ -198,6 +209,7 @@ PHP_METHOD(Smce_Mvc_Template, setViewDirectory) {
  */
 PHP_METHOD(Smce_Mvc_Template, getView) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "view");
 
@@ -209,6 +221,7 @@ PHP_METHOD(Smce_Mvc_Template, getView) {
  */
 PHP_METHOD(Smce_Mvc_Template, getViewDirectory) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "viewDirectory");
 
@@ -220,10 +233,9 @@ PHP_METHOD(Smce_Mvc_Template, getViewDirectory) {
  */
 PHP_METHOD(Smce_Mvc_Template, run) {
 
-	zephir_fcall_cache_entry *_9 = NULL;
-	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL, *_10 = NULL;
+	zval *viewFile = NULL, *layoutFile = NULL, *_0, *_1, *_2, *_3, *_4, *_5$$4, *_6$$4, *_7$$4, *_9$$6, *_10$$6, *_11$$6;
+	zephir_fcall_cache_entry *_8 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *viewFile, *layoutFile, *_0, *_1, *_2, *_3, *_4, *_6 = NULL, *_7 = NULL, *_8 = NULL;
 
 	ZEPHIR_MM_GROW();
 
@@ -237,34 +249,34 @@ PHP_METHOD(Smce_Mvc_Template, run) {
 	ZEPHIR_INIT_VAR(viewFile);
 	ZEPHIR_CONCAT_VSVS(viewFile, _2, "/", _4, ".php");
 	if ((zephir_file_exists(viewFile TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "adjustmentview", &_5, viewFile);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "adjustmentview", NULL, 107, viewFile);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_INIT_VAR(_6);
-		object_init_ex(_6, smce_http_httpexception_ce);
-		ZEPHIR_INIT_VAR(_7);
-		ZEPHIR_CONCAT_SV(_7, "View Not Found ", viewFile);
-		ZEPHIR_INIT_VAR(_8);
-		ZVAL_LONG(_8, 404);
-		ZEPHIR_CALL_METHOD(NULL, _6, "__construct", &_9, _8, _7);
+		ZEPHIR_INIT_VAR(_5$$4);
+		object_init_ex(_5$$4, smce_http_httpexception_ce);
+		ZEPHIR_INIT_VAR(_6$$4);
+		ZEPHIR_CONCAT_SV(_6$$4, "View Not Found ", viewFile);
+		ZEPHIR_INIT_VAR(_7$$4);
+		ZVAL_LONG(_7$$4, 404);
+		ZEPHIR_CALL_METHOD(NULL, _5$$4, "__construct", &_8, 45, _7$$4, _6$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_6, "smce/mvc/template.zep", 169 TSRMLS_CC);
+		zephir_throw_exception_debug(_5$$4, "smce/mvc/template.zep", 169 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	if ((zephir_file_exists(layoutFile TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "adjustmentlayout", &_10, layoutFile);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "adjustmentlayout", NULL, 108, layoutFile);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_INIT_NVAR(_6);
-		object_init_ex(_6, smce_http_httpexception_ce);
-		ZEPHIR_INIT_LNVAR(_7);
-		ZEPHIR_CONCAT_SV(_7, "Layout Not Found ", layoutFile);
-		ZEPHIR_INIT_NVAR(_8);
-		ZVAL_LONG(_8, 404);
-		ZEPHIR_CALL_METHOD(NULL, _6, "__construct", &_9, _8, _7);
+		ZEPHIR_INIT_VAR(_9$$6);
+		object_init_ex(_9$$6, smce_http_httpexception_ce);
+		ZEPHIR_INIT_VAR(_10$$6);
+		ZEPHIR_CONCAT_SV(_10$$6, "Layout Not Found ", layoutFile);
+		ZEPHIR_INIT_VAR(_11$$6);
+		ZVAL_LONG(_11$$6, 404);
+		ZEPHIR_CALL_METHOD(NULL, _9$$6, "__construct", &_8, 45, _11$$6, _10$$6);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_6, "smce/mvc/template.zep", 183 TSRMLS_CC);
+		zephir_throw_exception_debug(_9$$6, "smce/mvc/template.zep", 183 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -278,9 +290,8 @@ PHP_METHOD(Smce_Mvc_Template, run) {
  */
 PHP_METHOD(Smce_Mvc_Template, adjustmentLayout) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 	zval *layoutFile_param = NULL, *_1;
 	zval *layoutFile = NULL;
 
@@ -291,13 +302,13 @@ PHP_METHOD(Smce_Mvc_Template, adjustmentLayout) {
 
 
 	ZEPHIR_INIT_VAR(_0);
-	array_init_size(_0, 2);
+	zephir_create_array(_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(_1);
 	zephir_read_property_this(&_1, this_ptr, SL("content"), PH_NOISY_CC);
 	zephir_array_update_string(&_0, SL("content"), &_1, PH_COPY | PH_SEPARATE);
-	Z_SET_ISREF_P(_0);
-	ZEPHIR_CALL_FUNCTION(NULL, "extract", &_2, _0);
-	Z_UNSET_ISREF_P(_0);
+	ZEPHIR_MAKE_REF(_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "extract", NULL, 105, _0);
+	ZEPHIR_UNREF(_0);
 	zephir_check_call_status();
 	if (zephir_require_zval(layoutFile TSRMLS_CC) == FAILURE) {
 		RETURN_MM_NULL();
@@ -313,8 +324,7 @@ PHP_METHOD(Smce_Mvc_Template, adjustmentLayout) {
 PHP_METHOD(Smce_Mvc_Template, adjustmentView) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_0 = NULL, *_3 = NULL, *_5 = NULL, *_6 = NULL;
-	zval *viewFile_param = NULL, *_1, *_2, *_4 = NULL;
+	zval *viewFile_param = NULL, *_0, *_1, *_2 = NULL;
 	zval *viewFile = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -323,39 +333,50 @@ PHP_METHOD(Smce_Mvc_Template, adjustmentView) {
 	zephir_get_strval(viewFile, viewFile_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 95);
 	zephir_check_call_status();
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("view"), PH_NOISY_CC);
-	zephir_array_fetch_string(&_2, _1, SL("array"), PH_NOISY | PH_READONLY, "smce/mvc/template.zep", 212 TSRMLS_CC);
-	Z_SET_ISREF_P(_2);
-	ZEPHIR_CALL_FUNCTION(NULL, "extract", &_3, _2);
-	Z_UNSET_ISREF_P(_2);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("view"), PH_NOISY_CC);
+	zephir_array_fetch_string(&_1, _0, SL("array"), PH_NOISY | PH_READONLY, "smce/mvc/template.zep", 212 TSRMLS_CC);
+	ZEPHIR_MAKE_REF(_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "extract", NULL, 105, _1);
+	ZEPHIR_UNREF(_1);
 	zephir_check_call_status();
 	if (zephir_require_zval(viewFile TSRMLS_CC) == FAILURE) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_FUNCTION(&_4, "ob_get_contents", &_5);
+	ZEPHIR_CALL_FUNCTION(&_2, "ob_get_contents", NULL, 109);
 	zephir_check_call_status();
-	zephir_update_property_this(this_ptr, SL("content"), _4 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", &_6);
+	zephir_update_property_this(this_ptr, SL("content"), _2 TSRMLS_CC);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 110);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
 }
 
-PHP_METHOD(Smce_Mvc_Template, __construct) {
+static zend_object_value zephir_init_properties_Smce_Mvc_Template(zend_class_entry *class_type TSRMLS_DC) {
 
-	zval *_0, *_1;
+		zval *_0, *_2, *_1$$3, *_3$$4;
 
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(_0);
-	array_init(_0);
-	zephir_update_property_this(this_ptr, SL("error"), _0 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(_1);
-	array_init(_1);
-	zephir_update_property_this(this_ptr, SL("view"), _1 TSRMLS_CC);
-	ZEPHIR_MM_RESTORE();
+		ZEPHIR_MM_GROW();
+	
+	{
+		zval *this_ptr = NULL;
+		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
+		_0 = zephir_fetch_nproperty_this(this_ptr, SL("error"), PH_NOISY_CC);
+		if (Z_TYPE_P(_0) == IS_NULL) {
+			ZEPHIR_INIT_VAR(_1$$3);
+			array_init(_1$$3);
+			zephir_update_property_this(this_ptr, SL("error"), _1$$3 TSRMLS_CC);
+		}
+		_2 = zephir_fetch_nproperty_this(this_ptr, SL("view"), PH_NOISY_CC);
+		if (Z_TYPE_P(_2) == IS_NULL) {
+			ZEPHIR_INIT_VAR(_3$$4);
+			array_init(_3$$4);
+			zephir_update_property_this(this_ptr, SL("view"), _3$$4 TSRMLS_CC);
+		}
+		ZEPHIR_MM_RESTORE();
+		return Z_OBJVAL_P(this_ptr);
+	}
 
 }
 

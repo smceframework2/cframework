@@ -23,7 +23,7 @@ PHP_METHOD(Smce_Driver_Memcache, increment);
 PHP_METHOD(Smce_Driver_Memcache, pconnect);
 PHP_METHOD(Smce_Driver_Memcache, replace);
 PHP_METHOD(Smce_Driver_Memcache, setCompressThreshold);
-PHP_METHOD(Smce_Driver_Memcache, __construct);
+static zend_object_value zephir_init_properties_Smce_Driver_Memcache(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_driver_memcache_setconfig, 0, 0, 1)
 	ZEND_ARG_INFO(0, config)
@@ -109,6 +109,5 @@ ZEPHIR_INIT_FUNCS(smce_driver_memcache_method_entry) {
 	PHP_ME(Smce_Driver_Memcache, pconnect, arginfo_smce_driver_memcache_pconnect, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Memcache, replace, arginfo_smce_driver_memcache_replace, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Driver_Memcache, setCompressThreshold, arginfo_smce_driver_memcache_setcompressthreshold, ZEND_ACC_PUBLIC)
-	PHP_ME(Smce_Driver_Memcache, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-  PHP_FE_END
+	PHP_FE_END
 };

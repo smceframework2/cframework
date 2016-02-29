@@ -4035,7 +4035,8 @@ if test "$PHP_SMCE" = "yes"; then
 
 $as_echo "#define HAVE_SMCE 1" >>confdefs.h
 
-	smce_sources="smce.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/exit.c smce/app.zep.c
+	smce_sources="smce.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/extended/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c smce/http/httpexception.zep.c
+	smce/app.zep.c
 	smce/components/collection.zep.c
 	smce/components/i18n.zep.c
 	smce/components/output.zep.c
@@ -4054,7 +4055,6 @@ $as_echo "#define HAVE_SMCE 1" >>confdefs.h
 	smce/driver/adapter.zep.c
 	smce/driver/memcache.zep.c
 	smce/driver/redis.zep.c
-	smce/http/httpexception.zep.c
 	smce/http/response.zep.c
 	smce/mvc/acl.zep.c
 	smce/mvc/layout.zep.c

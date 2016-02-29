@@ -14,7 +14,7 @@
 #define PHP_SMCE_VERSION     "1.0.0"
 #define PHP_SMCE_EXTNAME     "smce"
 #define PHP_SMCE_AUTHOR      "Zephir Team and contributors"
-#define PHP_SMCE_ZEPVERSION  "0.5.9a"
+#define PHP_SMCE_ZEPVERSION  "0.9.2a-dev"
 #define PHP_SMCE_DESCRIPTION "Description test for<br/>Test Extension"
 
 typedef struct _zephir_struct_test { 
@@ -39,6 +39,8 @@ ZEND_BEGIN_MODULE_GLOBALS(smce)
 
 	/** Function cache */
 	HashTable *fcache;
+
+	zephir_fcall_cache_entry *scache[ZEPHIR_MAX_CACHE_SLOTS];
 
 	/* Cache enabled */
 	unsigned int cache_enabled;

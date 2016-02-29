@@ -20,6 +20,14 @@
 #include "kernel/fcall.h"
 #include "kernel/concat.h"
 
+
+/**
+ *
+ * @author Samed Ceylan
+ * @link http://www.samedceylan.com/
+ * @copyright 2015 SmceFramework 2
+ * @github https://github.com/smceframework2
+ */
 ZEPHIR_INIT_CLASS(Smce_Driver_Memcache) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Driver, Memcache, smce, driver_memcache, smce_driver_memcache_method_entry, 0);
@@ -34,23 +42,19 @@ ZEPHIR_INIT_CLASS(Smce_Driver_Memcache) {
 	 */
 	zend_declare_property_null(smce_driver_memcache_ce, SL("memcache"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	smce_driver_memcache_ce->create_object = zephir_init_properties_Smce_Driver_Memcache;
 	return SUCCESS;
 
 }
 
-/*
- * @return memcache connect
- */
 PHP_METHOD(Smce_Driver_Memcache, getMemcache) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "memcache");
 
 }
 
-/*
- * @return array
- */
 PHP_METHOD(Smce_Driver_Memcache, setConfig) {
 
 	zval *config;
@@ -63,11 +67,9 @@ PHP_METHOD(Smce_Driver_Memcache, setConfig) {
 
 }
 
-/*
- * @return memcache getconfig
- */
 PHP_METHOD(Smce_Driver_Memcache, getConfig) {
 
+	
 
 	RETURN_MEMBER(this_ptr, "config");
 
@@ -78,9 +80,9 @@ PHP_METHOD(Smce_Driver_Memcache, getConfig) {
  */
 PHP_METHOD(Smce_Driver_Memcache, connect) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zend_bool _2;
-	zval *_0, *_1, *_3, *_4, *_5, *_6, *_7 = NULL, *_8, *_9, *_10, *_11, *_12, *_13, *_14, *_15, *_16, *_17;
+	zval *_0, *_1, *_3, *_4, *_5, *_6, *_7 = NULL, *_8, *_9, *_10, *_11, *_12$$5, *_13$$5, *_14$$5, *_15$$5, *_16$$5, *_17$$5;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
@@ -96,7 +98,7 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 		_3 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 		ZEPHIR_OBS_VAR(_4);
 		zephir_array_fetch_string(&_4, _3, SL("port"), PH_NOISY, "smce/driver/memcache.zep", 64 TSRMLS_CC);
-		_2 = !ZEPHIR_IS_EMPTY(_4);
+		_2 = !(ZEPHIR_IS_EMPTY(_4));
 	}
 	if (_2) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "MemCache server configuration must have \"host\" and \"port\" not empty", "smce/driver/memcache.zep", 67);
@@ -105,7 +107,7 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 	ZEPHIR_INIT_VAR(_5);
 	object_init_ex(_5, zephir_get_internal_ce(SS("memcache") TSRMLS_CC));
 	if (zephir_has_constructor(_5 TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL);
+		ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
 	zephir_update_property_this(this_ptr, SL("memcache"), _5 TSRMLS_CC);
@@ -114,20 +116,20 @@ PHP_METHOD(Smce_Driver_Memcache, connect) {
 	zephir_array_fetch_string(&_9, _8, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 74 TSRMLS_CC);
 	_10 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
 	zephir_array_fetch_string(&_11, _10, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 74 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_7, _6, "connect", NULL, _9, _11);
+	ZEPHIR_CALL_METHOD(&_7, _6, "connect", NULL, 0, _9, _11);
 	zephir_check_call_status();
 	if (!zephir_is_true(_7)) {
-		ZEPHIR_INIT_VAR(_12);
-		object_init_ex(_12, zend_exception_get_default(TSRMLS_C));
-		_13 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-		zephir_array_fetch_string(&_14, _13, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
-		_15 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-		zephir_array_fetch_string(&_16, _15, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_17);
-		ZEPHIR_CONCAT_SVSV(_17, "Failed on connecting to memcache server at ", _14, ":", _16);
-		ZEPHIR_CALL_METHOD(NULL, _12, "__construct", NULL, _17);
+		ZEPHIR_INIT_VAR(_12$$5);
+		object_init_ex(_12$$5, zend_exception_get_default(TSRMLS_C));
+		_13$$5 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
+		zephir_array_fetch_string(&_14$$5, _13$$5, SL("host"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
+		_15$$5 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
+		zephir_array_fetch_string(&_16$$5, _15$$5, SL("port"), PH_NOISY | PH_READONLY, "smce/driver/memcache.zep", 76 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_17$$5);
+		ZEPHIR_CONCAT_SVSV(_17$$5, "Failed on connecting to memcache server at ", _14$$5, ":", _16$$5);
+		ZEPHIR_CALL_METHOD(NULL, _12$$5, "__construct", NULL, 66, _17$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_12, "smce/driver/memcache.zep", 76 TSRMLS_CC);
+		zephir_throw_exception_debug(_12$$5, "smce/driver/memcache.zep", 76 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -153,7 +155,7 @@ PHP_METHOD(Smce_Driver_Memcache, get) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, key);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "get", NULL, 0, key);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -171,7 +173,7 @@ PHP_METHOD(Smce_Driver_Memcache, set) {
 
 	int duration, ZEPHIR_LAST_CALL_STATUS;
 	zend_bool bolen;
-	zval *key_param = NULL, *value_param = NULL, *bolen_param = NULL, *duration_param = NULL, *_0, *_1;
+	zval *key_param = NULL, *value_param = NULL, *bolen_param = NULL, *duration_param = NULL, *_0, *_1, *_2;
 	zval *key = NULL, *value = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -185,8 +187,14 @@ PHP_METHOD(Smce_Driver_Memcache, set) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
-	ZVAL_LONG(_1, duration);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "set", NULL, key, value, (bolen ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false)), _1);
+	if (bolen) {
+		ZVAL_BOOL(_1, 1);
+	} else {
+		ZVAL_BOOL(_1, 0);
+	}
+	ZEPHIR_INIT_VAR(_2);
+	ZVAL_LONG(_2, duration);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "set", NULL, 0, key, value, _1, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -204,7 +212,7 @@ PHP_METHOD(Smce_Driver_Memcache, add) {
 
 	int duration, ZEPHIR_LAST_CALL_STATUS;
 	zend_bool bolen;
-	zval *key_param = NULL, *value_param = NULL, *bolen_param = NULL, *duration_param = NULL, *_0, *_1;
+	zval *key_param = NULL, *value_param = NULL, *bolen_param = NULL, *duration_param = NULL, *_0, *_1, *_2;
 	zval *key = NULL, *value = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -222,8 +230,14 @@ PHP_METHOD(Smce_Driver_Memcache, add) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
-	ZVAL_LONG(_1, duration);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "add", NULL, key, value, (bolen ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false)), _1);
+	if (bolen) {
+		ZVAL_BOOL(_1, 1);
+	} else {
+		ZVAL_BOOL(_1, 0);
+	}
+	ZEPHIR_INIT_VAR(_2);
+	ZVAL_LONG(_2, duration);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "add", NULL, 0, key, value, _1, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -246,7 +260,7 @@ PHP_METHOD(Smce_Driver_Memcache, addServer) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "addserver", NULL, host, port);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "addserver", NULL, 0, host, port);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -260,13 +274,13 @@ PHP_METHOD(Smce_Driver_Memcache, addServer) {
  */
 PHP_METHOD(Smce_Driver_Memcache, close) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "close", NULL);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "close", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -292,7 +306,7 @@ PHP_METHOD(Smce_Driver_Memcache, decrement) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_LONG(_1, item);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "decrement", NULL, key, _1);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "decrement", NULL, 0, key, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -316,7 +330,7 @@ PHP_METHOD(Smce_Driver_Memcache, delete) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "delete", NULL, key);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "delete", NULL, 0, key);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -328,13 +342,13 @@ PHP_METHOD(Smce_Driver_Memcache, delete) {
  */
 PHP_METHOD(Smce_Driver_Memcache, flush) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "flush", NULL);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "flush", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -346,13 +360,13 @@ PHP_METHOD(Smce_Driver_Memcache, flush) {
  */
 PHP_METHOD(Smce_Driver_Memcache, getExtendedStats) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "getextendedstats", NULL);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "getextendedstats", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -377,7 +391,7 @@ PHP_METHOD(Smce_Driver_Memcache, getServerStatus) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "getserverstatus", NULL, host, port);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "getserverstatus", NULL, 0, host, port);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -389,13 +403,13 @@ PHP_METHOD(Smce_Driver_Memcache, getServerStatus) {
  */
 PHP_METHOD(Smce_Driver_Memcache, getStats) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "getstats", NULL);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "getstats", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -408,13 +422,13 @@ PHP_METHOD(Smce_Driver_Memcache, getStats) {
  */
 PHP_METHOD(Smce_Driver_Memcache, getVersion) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
 	zval *_0;
+	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "getversion", NULL);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "getversion", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -442,7 +456,7 @@ PHP_METHOD(Smce_Driver_Memcache, increment) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_LONG(_1, item);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "increment", NULL, key, _1);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "increment", NULL, 0, key, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -467,7 +481,7 @@ PHP_METHOD(Smce_Driver_Memcache, pconnect) {
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "pconnect", NULL, host, port);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "pconnect", NULL, 0, host, port);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -485,7 +499,7 @@ PHP_METHOD(Smce_Driver_Memcache, replace) {
 
 	int duration, ZEPHIR_LAST_CALL_STATUS;
 	zend_bool bol;
-	zval *key_param = NULL, *value_param = NULL, *bol_param = NULL, *duration_param = NULL, *_0, *_1;
+	zval *key_param = NULL, *value_param = NULL, *bol_param = NULL, *duration_param = NULL, *_0, *_1, *_2;
 	zval *key = NULL, *value = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -499,8 +513,14 @@ PHP_METHOD(Smce_Driver_Memcache, replace) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("memcache"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(_1);
-	ZVAL_LONG(_1, duration);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "replace", NULL, key, value, (bol ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false)), _1);
+	if (bol) {
+		ZVAL_BOOL(_1, 1);
+	} else {
+		ZVAL_BOOL(_1, 0);
+	}
+	ZEPHIR_INIT_VAR(_2);
+	ZVAL_LONG(_2, duration);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "replace", NULL, 0, key, value, _1, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -530,22 +550,30 @@ PHP_METHOD(Smce_Driver_Memcache, setCompressThreshold) {
 	ZVAL_LONG(_1, i);
 	ZEPHIR_INIT_VAR(_2);
 	ZVAL_DOUBLE(_2, d);
-	ZEPHIR_RETURN_CALL_METHOD(_0, "setcompressthreshold", NULL, _1, _2);
+	ZEPHIR_RETURN_CALL_METHOD(_0, "setcompressthreshold", NULL, 0, _1, _2);
 	zephir_check_call_status();
 	RETURN_MM();
 
 }
 
-PHP_METHOD(Smce_Driver_Memcache, __construct) {
+static zend_object_value zephir_init_properties_Smce_Driver_Memcache(zend_class_entry *class_type TSRMLS_DC) {
 
-	zval *_0;
+		zval *_0, *_1$$3;
 
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(_0);
-	array_init(_0);
-	zephir_update_property_this(this_ptr, SL("config"), _0 TSRMLS_CC);
-	ZEPHIR_MM_RESTORE();
+		ZEPHIR_MM_GROW();
+	
+	{
+		zval *this_ptr = NULL;
+		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
+		_0 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
+		if (Z_TYPE_P(_0) == IS_NULL) {
+			ZEPHIR_INIT_VAR(_1$$3);
+			array_init(_1$$3);
+			zephir_update_property_this(this_ptr, SL("config"), _1$$3 TSRMLS_CC);
+		}
+		ZEPHIR_MM_RESTORE();
+		return Z_OBJVAL_P(this_ptr);
+	}
 
 }
 

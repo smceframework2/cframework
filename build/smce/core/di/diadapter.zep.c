@@ -58,9 +58,9 @@ ZEPHIR_INIT_CLASS(Smce_Core_Di_DiAdapter) {
  */
 PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_10 = NULL, *_12 = NULL;
+	zephir_fcall_cache_entry *_10 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key, *duration, *_0, *_1 = NULL, *_2, *_3, *_4, *_5, *_6, *_7 = NULL, *_8 = NULL, *_9 = NULL, *_11 = NULL, *_13;
+	zval *key, *duration, *_0, *_1 = NULL, *_2, *_3, *_4$$3, *_5$$3, *_6$$4, *_7$$4, *_8$$4, *_9$$4 = NULL, *_11$$4 = NULL, *_12$$4, *_13$$5, *_14$$5, *_15$$5, *_16$$5 = NULL, *_17$$5 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &key, &duration);
@@ -72,37 +72,37 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
 	zephir_read_static_property_ce(&_2, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, _2, key);
-	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, _3);
+	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
 	zephir_check_call_status();
 	if (!(zephir_is_true(_1))) {
-		_4 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
-		_5 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
-		if (ZEPHIR_IS_STRING(_4, "Memcache")) {
-			_6 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
-			ZEPHIR_OBS_VAR(_7);
-			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
-			ZEPHIR_INIT_VAR(_8);
-			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, key);
+		_4$$3 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
+		_5$$3 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
+		if (ZEPHIR_IS_STRING(_4$$3, "Memcache")) {
+			_6$$4 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
+			ZEPHIR_OBS_VAR(_7$$4);
+			zephir_read_static_property_ce(&_7$$4, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
+			ZEPHIR_INIT_VAR(_8$$4);
+			ZEPHIR_CONCAT_VV(_8$$4, _7$$4, key);
+			ZEPHIR_CALL_CE_STATIC(&_9$$4, smce_core_di_ce, "resolve", &_10, 60, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", &_12, _9);
+			ZEPHIR_CALL_FUNCTION(&_11$$4, "serialize", NULL, 61, _9$$4);
 			zephir_check_call_status();
-			ZEPHIR_INIT_VAR(_13);
-			ZVAL_BOOL(_13, 0);
-			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, _8, _11, _13, duration);
+			ZEPHIR_INIT_VAR(_12$$4);
+			ZVAL_BOOL(_12$$4, 0);
+			ZEPHIR_CALL_METHOD(NULL, _6$$4, "set", NULL, 0, _8$$4, _11$$4, _12$$4, duration);
 			zephir_check_call_status();
 			RETURN_MM_BOOL(1);
-		} else if (ZEPHIR_IS_STRING(_5, "Redis")) {
-			_6 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
-			ZEPHIR_OBS_NVAR(_7);
-			zephir_read_static_property_ce(&_7, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
-			ZEPHIR_INIT_LNVAR(_8);
-			ZEPHIR_CONCAT_VV(_8, _7, key);
-			ZEPHIR_CALL_CE_STATIC(&_9, smce_core_di_ce, "resolve", &_10, key);
+		} else if (ZEPHIR_IS_STRING(_5$$3, "Redis")) {
+			_13$$5 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
+			ZEPHIR_OBS_VAR(_14$$5);
+			zephir_read_static_property_ce(&_14$$5, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
+			ZEPHIR_INIT_VAR(_15$$5);
+			ZEPHIR_CONCAT_VV(_15$$5, _14$$5, key);
+			ZEPHIR_CALL_CE_STATIC(&_16$$5, smce_core_di_ce, "resolve", &_10, 60, key);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_11, "serialize", &_12, _9);
+			ZEPHIR_CALL_FUNCTION(&_17$$5, "serialize", NULL, 61, _16$$5);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, _6, "set", NULL, _8, _11, duration);
+			ZEPHIR_CALL_METHOD(NULL, _13$$5, "set", NULL, 0, _15$$5, _17$$5, duration);
 			zephir_check_call_status();
 			RETURN_MM_BOOL(1);
 		}
@@ -117,7 +117,6 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, set) {
  */
 PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *key, *_0, *_1 = NULL, *_2, *_3;
 
@@ -131,9 +130,9 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 	zephir_read_static_property_ce(&_2, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZEPHIR_CONCAT_VV(_3, _2, key);
-	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, _3);
+	ZEPHIR_CALL_METHOD(&_1, _0, "get", NULL, 0, _3);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", &_4, _1);
+	ZEPHIR_RETURN_CALL_FUNCTION("unserialize", NULL, 62, _1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -146,7 +145,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, get) {
 PHP_METHOD(Smce_Core_Di_DiAdapter, remove) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *key, *_0, *_1, *_2, *_3 = NULL, *_4 = NULL;
+	zval *key, *_0, *_1, *_2$$3, *_3$$3, *_4$$3, *_5$$4, *_6$$4, *_7$$4;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &key);
@@ -156,21 +155,21 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, remove) {
 	_0 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
 	_1 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
 	if (ZEPHIR_IS_STRING(_0, "Memcache")) {
-		_2 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_VAR(_3);
-		zephir_read_static_property_ce(&_3, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_VAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "delete", NULL, _4);
+		_2$$3 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_3$$3);
+		zephir_read_static_property_ce(&_3$$3, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_4$$3);
+		ZEPHIR_CONCAT_VV(_4$$3, _3$$3, key);
+		ZEPHIR_CALL_METHOD(NULL, _2$$3, "delete", NULL, 0, _4$$3);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	} else if (ZEPHIR_IS_STRING(_1, "Redis")) {
-		_2 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
-		ZEPHIR_OBS_NVAR(_3);
-		zephir_read_static_property_ce(&_3, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
-		ZEPHIR_INIT_LNVAR(_4);
-		ZEPHIR_CONCAT_VV(_4, _3, key);
-		ZEPHIR_CALL_METHOD(NULL, _2, "hdel", NULL, _4);
+		_5$$4 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapter") TSRMLS_CC);
+		ZEPHIR_OBS_VAR(_6$$4);
+		zephir_read_static_property_ce(&_6$$4, smce_core_di_diadapter_ce, SL("prefix") TSRMLS_CC);
+		ZEPHIR_INIT_VAR(_7$$4);
+		ZEPHIR_CONCAT_VV(_7$$4, _6$$4, key);
+		ZEPHIR_CALL_METHOD(NULL, _5$$4, "hdel", NULL, 0, _7$$4);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}
@@ -187,7 +186,7 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, remove) {
 PHP_METHOD(Smce_Core_Di_DiAdapter, setAdapter) {
 
 	zend_bool _1, _6;
-	zval *adapter, *_0, *_2, _3, *_4, *_5, *_7, _8, *_9, *_10, *_11 = NULL;
+	zval *adapter, *_0, *_2, _3, *_4, *_5, *_7, _8, *_9, *_10, *_11$$3, *_12$$4;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &adapter);
@@ -218,15 +217,15 @@ PHP_METHOD(Smce_Core_Di_DiAdapter, setAdapter) {
 	}
 	_10 = zephir_fetch_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName") TSRMLS_CC);
 	if (_1) {
-		ZEPHIR_INIT_ZVAL_NREF(_11);
-		ZEPHIR_INIT_VAR(_11);
-		ZVAL_STRING(_11, "Memcache", 1);
-		zephir_update_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName"), &_11 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_11$$3);
+		ZEPHIR_INIT_VAR(_11$$3);
+		ZVAL_STRING(_11$$3, "Memcache", 1);
+		zephir_update_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName"), &_11$$3 TSRMLS_CC);
 	} else if (_6) {
-		ZEPHIR_INIT_ZVAL_NREF(_11);
-		ZEPHIR_INIT_NVAR(_11);
-		ZVAL_STRING(_11, "Redis", 1);
-		zephir_update_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName"), &_11 TSRMLS_CC);
+		ZEPHIR_INIT_ZVAL_NREF(_12$$4);
+		ZEPHIR_INIT_VAR(_12$$4);
+		ZVAL_STRING(_12$$4, "Redis", 1);
+		zephir_update_static_property_ce(smce_core_di_diadapter_ce, SL("adapterName"), &_12$$4 TSRMLS_CC);
 	} else if (Z_TYPE_P(_10) == IS_NULL) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "only Memcache and Redis", "smce/core/di/diadapter.zep", 121);
 		return;

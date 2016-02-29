@@ -33,5 +33,5 @@ ZEPHIR_INIT_FUNCS(smce_driver_adapter_method_entry) {
 	PHP_ME(Smce_Driver_Adapter, remove, arginfo_smce_driver_adapter_remove, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Driver_Adapter, setAdapter, arginfo_smce_driver_adapter_setadapter, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Smce_Driver_Adapter, isAdapter, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-  PHP_FE_END
+	PHP_FE_END
 };

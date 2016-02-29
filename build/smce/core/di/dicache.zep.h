@@ -22,5 +22,5 @@ ZEPHIR_INIT_FUNCS(smce_core_di_dicache_method_entry) {
 	PHP_ME(Smce_Core_Di_DiCache, cache, arginfo_smce_core_di_dicache_cache, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Di_DiCache, get, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Smce_Core_Di_DiCache, remove, NULL, ZEND_ACC_PUBLIC)
-  PHP_FE_END
+	PHP_FE_END
 };
